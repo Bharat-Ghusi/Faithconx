@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<style name="btnBaseStyle">
-    <item name="android:padding">@dimen/twentyDp</item>
+<style name="btnBaseStyle" >
     <item name="android:textSize">@dimen/fifteenSp</item>
     <item name="textAllCaps" >false</item>
     <item name="android:textAlignment">center</item>
+
 </style>
 
 
