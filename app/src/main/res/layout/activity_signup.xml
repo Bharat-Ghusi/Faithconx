@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ActivitySignup">
+    <!-- HORIZONTAL GUIDELINE-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/sixteenDp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/sixteenDp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRowOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRowTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+    <!-- VERTICAL GUIDELINE-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/sixteenDp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/sixteenDp" />
+    <!--ROW ONE-->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/close_icon"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twentyFiveDp"
+        android:fontFamily="@font/product_sans_bold"
+        android:text="@string/signup"
+        android:textColor="@color/eerieBlack"
+        android:textSize="@dimen/twentyFourSp"
+        app:layout_constraintStart_toStartOf="@id/btnClose"
+        app:layout_constraintTop_toBottomOf="@id/btnClose" />
+    <!-- GROUPING -->
+    <!--ROW TWO-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/firstNameInputLayout"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="@dimen/zeroDp"
+        android:hint="@string/first_name"
+        app:startIconDrawable="@drawable/profile"
+        app:layout_constraintBottom_toTopOf="@+id/emailInputLayout"
+        app:layout_constraintEnd_toStartOf="@+id/LastNameInputLayout"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="@id/guidelineRowOne">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/firstName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/LastNameInputLayout"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="@dimen/zeroDp"
+        android:hint="@string/last_name"
+        app:layout_constraintBottom_toTopOf="@+id/emailInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@+id/firstNameInputLayout"
+        app:layout_constraintTop_toTopOf="@id/firstNameInputLayout">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/LastName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailInputLayout"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="@dimen/zeroDp"
+        android:hint="@string/email"
+        app:startIconDrawable="@drawable/email"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPhoneNumberInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/firstNameInputLayout">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextPhoneNumberInputLayout"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="@dimen/zeroDp"
+        android:hint="@string/phone_number"
+        app:startIconDrawable="@drawable/smartphone_call"
+        app:prefixText="+91"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPasswordInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editTextPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:maxLength="10"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextPasswordInputLayout"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="@dimen/zeroDp"
+        android:hint="@string/password"
+        app:startIconDrawable="@drawable/password"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/editTextConfirmPasswordInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumberInputLayout">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextConfirmPasswordInputLayout"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="@dimen/zeroDp"
+        android:hint="@string/confirm_password"
+        app:startIconDrawable="@drawable/confirm_password"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/checkboxTermsAndCondition"
+        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordInputLayout">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editTextConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkboxTermsAndCondition"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="@dimen/zeroDp"
+        android:buttonTint="@color/american_yellow"
+        android:text="@string/termsAndCondition"
+        android:fontFamily="@font/product_sans_regular"
+        android:textSize="@dimen/fifteenSp"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
+        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPasswordInputLayout"/>
+    <!--ROW THREE-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLoginWithPhoneNumber"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/american_yellow"
+        android:drawableStart="@drawable/call_icon"
+        android:fontFamily="@font/product_sans_bold"
+        android:text="@string/login_with_google"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_round"
+        android:layout_marginTop="@dimen/tenDp"
+
+        android:padding="@dimen/fifteenDp"
+        android:textAppearance="@style/btnBaseStyle"
+
+        android:layout_marginStart="@dimen/fiveDp"
+        android:layout_marginEnd="@dimen/fiveDp"
+        app:layout_constraintTop_toTopOf="@id/guidelineRowTwo"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

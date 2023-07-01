@@ -2,6 +2,9 @@
 <resources>
 
 <style name="btnBaseStyle" >
+    <item name="paddingStart">@dimen/fifteenDp</item>
+    <item name="paddingEnd">@dimen/fifteenDp</item>
+
     <item name="android:textSize">@dimen/fifteenSp</item>
     <item name="textAllCaps" >false</item>
     <item name="android:textAlignment">center</item>

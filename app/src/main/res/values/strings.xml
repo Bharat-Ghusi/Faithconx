@@ -9,4 +9,15 @@
     <string name="login_with_google">Login With Google</string>
     <string name="don_t_have_an_account">Don’t have an account?</string>
     <string name="create_one">Create one.</string>
+    <string name="signup">SignUp</string>
+    <string name="first_name">First Name</string>
+    <string name="phone_number">Phone Number*</string>
+    <string name="last_name">Last Name*</string>
+    <string name="confirm_password">Confirm Password*</string>
+    <string name="termsAndCondition">I accept terms and conditions and privacy policies.</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="new_post">New Post</string>
+    <string name="chat">Chat</string>
+    <string name="profile">Profile</string>
 </resources>

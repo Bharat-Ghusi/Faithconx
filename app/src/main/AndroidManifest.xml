@@ -12,11 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Faithconx"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".view.ActivityLogin"-->
-<!--            android:exported="false" />-->
+
         <activity
-            android:name=".view.ActivityLogin"
+            android:name=".view.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -26,6 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.ActivityLogin"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.ActivitySignup"
+            android:exported="false" />
+
     </application>
 
 </manifest>
