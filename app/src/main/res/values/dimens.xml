@@ -15,4 +15,6 @@
     <dimen name="twentyFiveDp">25dp</dimen>
     <dimen name="fortyDp">40dp</dimen>
     <dimen name="twentyFourSp">24sp</dimen>
+    <dimen name="twelveSp">12sp</dimen>
+    <dimen name="thirtyDp">30dp</dimen>
 </resources>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "663307143855",
+    "project_id": "faithconx-3f3da",
+    "storage_bucket": "faithconx-3f3da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663307143855:android:437660a0e7a7b526c9e25a",
+        "android_client_info": {
+          "package_name": "com.example.faithconx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663307143855-evb2rf249prigfi1qp2iqcb72vhp9seq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.faithconx",
+            "certificate_hash": "929240c68fde529ae70b67de48a2d0f37a3a653c"
+          }
+        },
+        {
+          "client_id": "663307143855-phia8a1jds1op86ae2tt8a224pktotfl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlU5AAbIaqxBCuzrVaA104JycjZ4nIZwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663307143855-phia8a1jds1op86ae2tt8a224pktotfl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

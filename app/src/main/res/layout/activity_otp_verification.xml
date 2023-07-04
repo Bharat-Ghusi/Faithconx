@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ActivityOtpVerification"
+    android:layout_marginEnd="@dimen/sixteenDp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/sixteenDp"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageBrandLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/brandlogo_img"
+        android:layout_marginBottom="@dimen/fifteenDp"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editTextPhoneNumberInputLayout"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextPhoneNumberInputLayout"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_number"
+        app:startIconDrawable="@drawable/smartphone_call"
+
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintStart_toEndOf="@+id/ccp"
+        app:layout_constraintTop_toTopOf="@id/ccp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/ccp"
+        >
+        <EditText
+            android:id="@+id/editTextPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="@dimen/twentyFiveDp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--    Submit OTP-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnGetOtp"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/fiveDp"
+        android:layout_marginEnd="@dimen/fiveDp"
+        android:background="@drawable/btn_round"
+        android:backgroundTint="@color/coolGrey"
+        android:drawableLeft="@drawable/call_icon"
+        android:fontFamily="@font/poppins_medium"
+        android:onClick="onGetOtpClick"
+        android:padding="@dimen/twentyDp"
+        android:text="@string/get_otp"
+
+        android:textAppearance="@style/btnBaseStyle"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/editTextPhoneNumberInputLayout"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/ccp"
+        app:layout_constraintTop_toBottomOf="@id/editTextPhoneNumberInputLayout"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextOtpSubmitInputLayout"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_otp"
+        android:layout_marginTop="@dimen/twentyFiveDp"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/btnGetOtp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toStartOf="@id/btnSubmit"
+
+        >
+        <EditText
+            android:id="@+id/editTextOtpSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/twentyDp"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSubmit"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/coolGrey"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_round"
+        android:layout_marginTop="@dimen/tenDp"
+        android:onClick="onSubmitClick"
+        android:padding="@dimen/twentyDp"
+        android:textAppearance="@style/btnBaseStyle"
+
+        android:layout_marginStart="@dimen/fiveDp"
+        android:layout_marginEnd="@dimen/fiveDp"
+        app:layout_constraintStart_toEndOf="@+id/editTextOtpSubmitInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/editTextOtpSubmitInputLayout"
+        app:layout_constraintBottom_toBottomOf="@id/editTextOtpSubmitInputLayout"
+        />
+<!--    PROGRESS BAR-->
+
+<ProgressBar
+    android:id="@+id/otpProgressBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/fortyDp"
+    android:visibility="gone"
+    app:layout_constraintStart_toStartOf="@id/editTextOtpSubmitInputLayout"
+    app:layout_constraintTop_toBottomOf="@+id/editTextOtpSubmitInputLayout"
+    app:layout_constraintEnd_toEndOf="@+id/btnSubmit"/>
+
+<!--    GROUP-->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupGetOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="editTextPhoneNumberInputLayout,btnGetOtp,ccp"
+
+        />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupSubmitOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="editTextOtpSubmitInputLayout,btnSubmit"
+        android:visibility="gone"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

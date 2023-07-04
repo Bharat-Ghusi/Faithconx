@@ -20,4 +20,12 @@
     <string name="new_post">New Post</string>
     <string name="chat">Chat</string>
     <string name="profile">Profile</string>
+    <string name="church_of_atlanta">CHURCH OF ATLANTA</string>
+    <string name="should_we_all_pray_everyday">Should We All Pray Everyday</string>
+    <string name="loginWithPhoneNumber">Login With Phone Number</string>
+    <string name="enter_number">Enter Number</string>
+    <string name="submit">Submit</string>
+    <string name="enter_otp">Enter OTP.</string>
+    <string name="wrongOtpEntered">Wrong otp entered.</string>
+    <string name="get_otp">Get OTP.</string>
 </resources>

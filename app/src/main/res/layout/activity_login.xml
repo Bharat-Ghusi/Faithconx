@@ -228,11 +228,11 @@
         android:backgroundTint="@color/mediumSlateBLue"
         android:drawableLeft="@drawable/call_icon"
         android:fontFamily="@font/poppins_medium"
-        android:text="@string/login_with_google"
+        android:text="@string/loginWithPhoneNumber"
         android:textColor="@color/white"
         android:background="@drawable/btn_round"
         android:layout_marginTop="@dimen/tenDp"
-
+        android:onClick="onClickLoginWithPhoneNumber"
         android:padding="@dimen/twentyDp"
         android:textAppearance="@style/btnBaseStyle"
 

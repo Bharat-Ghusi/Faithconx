@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,25 +14,27 @@
         app:layout_constraintGuide_begin="@dimen/sixteenDp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/sixteenDp" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRowOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRowTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+
     <!-- VERTICAL GUIDELINE-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
@@ -41,15 +44,171 @@
         app:layout_constraintGuide_begin="@dimen/sixteenDp" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineColumnOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/sixteenDp" />
-    <!--  Horizontal BARRIER  -->
-   
 
-    <!-- LIST ONE   -->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/church_of_atlanta"
+        android:fontFamily="@font/gotham_rounded_medium"
+        android:textSize="@dimen/twelveSp"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/should_we_all_pray_everyday"
+        android:textSize="@dimen/fifteenSp"
+        android:fontFamily="@font/gotham_rounded_bold"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/textSubTitle"
+        app:layout_constraintStart_toStartOf="@id/textSubTitle"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineRowOne"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageProfileOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile1"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="@+id/guidelineRowOne"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineColumnOne"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageProfileTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile2"
+        app:layout_constraintEnd_toEndOf="@+id/imageProfileOne"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintBottom_toTopOf="@+id/imageProfileOne"
+        app:layout_constraintTop_toTopOf="@+id/imageProfileOne"
+
+
+        />
+
+
+<!--CHAT-->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textNameOne"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zeroDp"
+        android:text="LEiti Hsu"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@id/guidelineRowOne"
+        app:layout_constraintStart_toStartOf="@+id/guidelineColumnOne"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@+id/textNameTwo"
+        />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgSpeechOne"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zeroDp"
+        app:srcCompat="@drawable/speech_balloon_removebg_preview15x15"
+        app:layout_constraintVertical_bias="0"
+        app:flow_horizontalBias="0"
+        app:layout_constraintTop_toTopOf="@+id/textNameOne"
+        app:layout_constraintStart_toEndOf="@id/textNameOne"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@id/imgSpeechOne" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textNameTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zeroDp"
+        android:text="LEiti Hsu"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/textNameOne"
+        app:layout_constraintStart_toStartOf="@+id/textNameOne"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@id/imgSpeechThree"
+        />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgSpeechTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zeroDp"
+        app:srcCompat="@drawable/speech_balloon_removebg_preview15x15"
+        app:layout_constraintVertical_bias="0"
+        app:flow_horizontalBias="0"
+        app:layout_constraintTop_toBottomOf="@+id/imgSpeechOne"
+        app:layout_constraintStart_toEndOf="@id/textNameTwo"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@id/imgSpeechThree" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textNameThree"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zeroDp"
+        android:text="LEiti Hsu"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/textNameTwo"
+        app:layout_constraintStart_toStartOf="@+id/textNameOne"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
+        />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgSpeechThree"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zeroDp"
+        app:srcCompat="@drawable/speech_balloon_removebg_preview15x15"
+        app:layout_constraintVertical_bias="0"
+        app:flow_horizontalBias="0"
+        app:layout_constraintTop_toBottomOf="@+id/imgSpeechTwo"
+        app:layout_constraintStart_toEndOf="@id/textNameThree"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@+id/imgSpeechFour" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textNameFour"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zeroDp"
+        android:text="LEiti Hsu"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/textNameThree"
+        app:layout_constraintStart_toStartOf="@+id/textNameOne"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
+        />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgSpeechFour"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zeroDp"
+        app:srcCompat="@drawable/speech_balloon_removebg_preview15x15"
+        app:layout_constraintVertical_bias="0"
+        app:flow_horizontalBias="0"
+        app:layout_constraintTop_toBottomOf="@id/imgSpeechThree"
+        app:layout_constraintStart_toEndOf="@id/textNameThree"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
