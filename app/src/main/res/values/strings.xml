@@ -28,4 +28,6 @@
     <string name="enter_otp">Enter OTP.</string>
     <string name="wrongOtpEntered">Wrong otp entered.</string>
     <string name="get_otp">Get OTP.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

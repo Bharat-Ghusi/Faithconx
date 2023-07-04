@@ -3,211 +3,242 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+   android:layout_margin="@dimen/sixteenDp">
 
     <!-- HORIZONTAL GUIDELINE-->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/sixteenDp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRowOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRowTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
 
 
     <!-- VERTICAL GUIDELINE-->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/sixteenDp" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineColumnOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.21" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/sixteenDp" />
-
+    <!-- ROW ONE-->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textSubTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
-        android:text="@string/church_of_atlanta"
+        android:text="CHURCH OF ATLANTA"
         android:fontFamily="@font/gotham_rounded_medium"
         android:textSize="@dimen/twelveSp"
-        android:textColor="@color/black"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toTopOf="@id/guidelineTop"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
         />
 
+    <!--  IMAGE VIEW-->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/should_we_all_pray_everyday"
-        android:textSize="@dimen/fifteenSp"
+        android:layout_marginTop="@dimen/tenDp"
+        android:text="Should We All Pray Everyday"
         android:fontFamily="@font/gotham_rounded_bold"
+        android:textSize="@dimen/fifteenSp"
         android:textColor="@color/black"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textSubTitle"
+        app:layout_constraintTop_toBottomOf="@id/textSubTitle" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgChurch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/church"
+        android:layout_marginStart="@dimen/tenDp"
+        android:layout_marginTop="@dimen/tenDp"
+
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textSubTitle"
-        app:layout_constraintStart_toStartOf="@id/textSubTitle"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineRowOne"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageProfileOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/profile1"
-        app:layout_constraintVertical_bias="0.35"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toTopOf="@+id/guidelineRowOne"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintEnd_toEndOf="@id/guidelineColumnOne"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
+        app:layout_constraintStart_toEndOf="@id/textTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/textTitle"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageProfileTwo"
+        android:id="@+id/imgProfileOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/profile2"
-        app:layout_constraintEnd_toEndOf="@+id/imageProfileOne"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintBottom_toTopOf="@+id/imageProfileOne"
-        app:layout_constraintTop_toTopOf="@+id/imageProfileOne"
-
-
+        app:srcCompat="@drawable/profile1"
+        android:layout_marginTop="@dimen/twentyFiveDp"
+        android:layout_marginStart="@dimen/sixteenDp"
+        app:layout_constraintTop_toBottomOf="@id/textTitle"
+        app:layout_constraintStart_toStartOf="parent"
         />
-
-
-<!--CHAT-->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgProfileTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/profile2"
+        app:layout_constraintEnd_toStartOf="@+id/imgProfileOne"
+        app:layout_constraintStart_toStartOf="@+id/imgProfileOne"
+        app:layout_constraintBottom_toTopOf="@+id/imgProfileOne"
+        app:layout_constraintTop_toTopOf="@+id/imgProfileOne"
+        />
+<!--    CHAT-->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textNameOne"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/zeroDp"
-        android:text="LEiti Hsu"
+        android:layout_height="wrap_content"
+        android:text="Leiti Hsu"
+        android:textAppearance="@style/styleChatText"
+        android:layout_marginTop="@dimen/fiveDp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintTop_toTopOf="@id/guidelineRowOne"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
         app:layout_constraintStart_toStartOf="@+id/guidelineColumnOne"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/textNameTwo"
         />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgSpeechOne"
+        android:id="@+id/imgChatOne"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/zeroDp"
+        android:layout_height="wrap_content"
         app:srcCompat="@drawable/speech_balloon_removebg_preview15x15"
-        app:layout_constraintVertical_bias="0"
-        app:flow_horizontalBias="0"
+        android:layout_marginStart="@dimen/sixteenDp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textNameOne"
-        app:layout_constraintStart_toEndOf="@id/textNameOne"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
-        app:layout_constraintBottom_toTopOf="@id/imgSpeechOne" />
-
+        app:layout_constraintStart_toEndOf="@+id/textNameOne"
+        app:layout_constraintBottom_toBottomOf="@+id/textNameOne" />
+<!--    ROW TWO-->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textNameTwo"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/zeroDp"
-        android:text="LEiti Hsu"
+        android:layout_height="wrap_content"
+        android:text="Noelle Chesnut Whitmore"
+        android:textAppearance="@style/styleChatText"
+        android:layout_marginTop="@dimen/fiveDp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/textNameOne"
+        app:layout_constraintTop_toBottomOf="@+id/textNameOne"
         app:layout_constraintStart_toStartOf="@+id/textNameOne"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintBottom_toTopOf="@id/imgSpeechThree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textNameThree"
         />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgSpeechTwo"
+        android:id="@+id/imgChatTwo"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/zeroDp"
+        android:layout_height="wrap_content"
         app:srcCompat="@drawable/speech_balloon_removebg_preview15x15"
-        app:layout_constraintVertical_bias="0"
-        app:flow_horizontalBias="0"
-        app:layout_constraintTop_toBottomOf="@+id/imgSpeechOne"
-        app:layout_constraintStart_toEndOf="@id/textNameTwo"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
-        app:layout_constraintBottom_toTopOf="@id/imgSpeechThree" />
-
+        android:layout_marginStart="@dimen/sixteenDp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textNameTwo"
+        app:layout_constraintStart_toEndOf="@+id/textNameTwo"
+        app:layout_constraintBottom_toBottomOf="@+id/textNameTwo" />
+    <!--    ROW TWO-->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textNameThree"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/zeroDp"
-        android:text="LEiti Hsu"
+        android:layout_height="wrap_content"
+        android:text="Drue Kataoka"
+        android:layout_marginTop="@dimen/fiveDp"
+        android:textAppearance="@style/styleChatText"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/textNameTwo"
-        app:layout_constraintStart_toStartOf="@+id/textNameOne"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
+        app:layout_constraintTop_toBottomOf="@+id/textNameTwo"
+        app:layout_constraintStart_toStartOf="@+id/textNameTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textNameFour"
         />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgSpeechThree"
+        android:id="@+id/imgChatThree"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/zeroDp"
+        android:layout_height="wrap_content"
         app:srcCompat="@drawable/speech_balloon_removebg_preview15x15"
-        app:layout_constraintVertical_bias="0"
-        app:flow_horizontalBias="0"
-        app:layout_constraintTop_toBottomOf="@+id/imgSpeechTwo"
-        app:layout_constraintStart_toEndOf="@id/textNameThree"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
-        app:layout_constraintBottom_toTopOf="@+id/imgSpeechFour" />
+        android:textAppearance="@style/styleChatText"
+        android:layout_marginStart="@dimen/sixteenDp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textNameThree"
+        app:layout_constraintStart_toEndOf="@+id/textNameThree"
+        app:layout_constraintBottom_toBottomOf="@+id/textNameThree" />
 
+    <!--    ROW TWO-->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textNameFour"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/zeroDp"
-        android:text="LEiti Hsu"
+        android:layout_height="wrap_content"
+        android:text="Bomani X"
+        android:layout_marginTop="@dimen/fiveDp"
+        android:textAppearance="@style/styleChatText"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0"
         app:layout_constraintTop_toBottomOf="@+id/textNameThree"
-        app:layout_constraintStart_toStartOf="@+id/textNameOne"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
+        app:layout_constraintStart_toStartOf="@+id/textNameTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imgGroup"
         />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgSpeechFour"
+        android:id="@+id/imgChatFour"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/zeroDp"
+        android:layout_height="wrap_content"
         app:srcCompat="@drawable/speech_balloon_removebg_preview15x15"
-        app:layout_constraintVertical_bias="0"
-        app:flow_horizontalBias="0"
-        app:layout_constraintTop_toBottomOf="@id/imgSpeechThree"
-        app:layout_constraintStart_toEndOf="@id/textNameThree"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo" />
+        android:layout_marginStart="@dimen/sixteenDp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textNameFour"
+        app:layout_constraintStart_toEndOf="@+id/textNameFour"
+        app:layout_constraintBottom_toBottomOf="@+id/textNameFour" />
+
+<!--    BASE LINE-->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/group"
+        android:layout_marginStart="@dimen/tenDp"
+        android:layout_marginTop="@dimen/tenDp"
+
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/guidelineColumnOne"
+        app:layout_constraintTop_toBottomOf="@id/textNameFour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textConnectionCount"
+        android:text="546"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/fiveDp"
+        app:layout_constraintTop_toTopOf="@+id/imgGroup"
+        app:layout_constraintStart_toEndOf="@+id/imgGroup"
+        app:layout_constraintBottom_toBottomOf="@+id/imgGroup"/>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgSpeaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/group"
+        android:layout_marginStart="@dimen/tenDp"
+
+        app:layout_goneMarginStart="@dimen/tenDp"
+        app:layout_constraintStart_toEndOf="@+id/textConnectionCount"
+        app:layout_constraintTop_toTopOf="@+id/imgGroup"
+        app:layout_constraintBottom_toBottomOf="@+id/imgGroup"
+
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textSpeachCount"
+        android:text="546"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/fiveDp"
+        app:layout_constraintTop_toTopOf="@+id/imgSpeaker"
+        app:layout_constraintStart_toEndOf="@+id/imgSpeaker"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSpeaker"/>
+
+
+
+
+
 
 
 

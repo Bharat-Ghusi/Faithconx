@@ -20,6 +20,12 @@
         <item name="android:textSize">@dimen/FourteenSp</item>
         <item name="fontFamily">@font/gotham_rounded_book</item>
     </style>
+<!--    STYLE FOR HOME LiST LAYOUT CHAT TEXT-->
+    <style name="styleChatText">
+        <item name="fontFamily">@font/gotham_rounded_book</item>
+        <item name="android:textSize">@dimen/FourteenSp</item>
+        <item name="android:textColor">@color/raisinBlack</item>
+    </style>
 
 
 </resources>
