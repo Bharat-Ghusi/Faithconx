@@ -23,7 +23,6 @@ class RandomUsersActivity : AppCompatActivity() {
         call.enqueue(object : Callback<RandomUsers?> {
             override fun onResponse(call: Call<RandomUsers?>, response: Response<RandomUsers?>) {
                 if (response.isSuccessful) {
-
                     Log.i("TAG", response.body().toString())
                 } else {
                     Log.i("TAG", "CODE: ${response.code().toString()}")
