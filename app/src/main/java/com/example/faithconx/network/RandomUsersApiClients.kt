@@ -10,13 +10,17 @@ class RandomUsersApiClients {
         private val BASE_URL = "https://randomuser.me/"
     }
 
-private val retrofit by lazy {
+    /**
+     * . The property is initialized only when it is accessed for the first time,
+     * and subsequent accesses to the property return the same value without reinitializing it.
+     */
+    private val retrofit by lazy {
     Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 }
-    val randomUserApiService by lazy {
+    val randomUserApiService: RandomUserApiService by lazy {
         retrofit.create(RandomUserApiService::class.java)
     }
 
