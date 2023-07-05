@@ -53,9 +53,9 @@ private val  randomUsersViewModel1= RandomUsersViewModel()
     }
 
     private fun setToAdapter(users:RandomUsers) {
-        setToList(users)
+//        setToList(users)
         binding.recyclerHomeFragment.layoutManager= LinearLayoutManager(context)
-        binding.recyclerHomeFragment.adapter = RandomUsersAdapter(listOfRandomUsers)
+        binding.recyclerHomeFragment.adapter = RandomUsersAdapter(users)
 
     }
 
