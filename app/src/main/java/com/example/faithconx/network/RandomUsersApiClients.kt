@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RandomUsersApiClients {
 
-
+//https://stackoverflow.com/questions/36177629/retrofit2-android-expected-begin-array-but-was-begin-object-at-line-1-column-2
     companion object {
         private val BASE_URL = "https://randomuser.me/"
     }
