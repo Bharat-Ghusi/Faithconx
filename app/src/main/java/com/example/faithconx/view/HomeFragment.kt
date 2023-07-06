@@ -1,6 +1,7 @@
 package com.example.faithconx.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.example.faithconx.viewmodel.RandomUsersViewModel
 
 
 class HomeFragment : Fragment() {
+    private var list : MutableList<Result>? = null
 private lateinit var binding:FragmentHomeBinding
 private lateinit var  randomUsersViewModel: RandomUsersViewModel
 private lateinit var randomUsersAdapter: RandomUsersAdapter
@@ -30,6 +32,7 @@ private var randomUsers: RandomUsers? = null
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         randomUsersViewModel =  ViewModelProvider(this).get(RandomUsersViewModel::class.java) //Initialize RandomUsersViewModel
+        Log.i("TAG", "HASHCODE: ${randomUsersViewModel.hashCode()}")
         setDataToAdapter(randomUsers)
 
         //Observer
@@ -67,7 +70,7 @@ private var randomUsers: RandomUsers? = null
 
     private fun setDataToAdapter(users:RandomUsers?) {
         binding.recyclerHomeFragment.layoutManager= LinearLayoutManager(context)
-        randomUsersAdapter = RandomUsersAdapter(users)
+        randomUsersAdapter = RandomUsersAdapter(list) //empty list
         binding.recyclerHomeFragment.adapter = randomUsersAdapter
 
     }

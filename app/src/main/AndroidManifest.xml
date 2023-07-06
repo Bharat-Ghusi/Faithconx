@@ -16,7 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
+        <activity
+            android:name=".view.ActivityProfile"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.MainActivity"
             android:exported="true"
@@ -33,14 +41,10 @@
         <activity
             android:name=".view.ActivitySignup"
             android:exported="false" />
-
         <activity
             android:name=".view.ActivityOtpVerification"
             android:exported="false" />
-
         <activity android:name=".view.ActivityLogin" />
-
-
     </application>
 
 </manifest>

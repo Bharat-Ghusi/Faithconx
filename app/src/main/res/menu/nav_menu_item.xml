@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homeMenu"
         android:icon="@drawable/home"
-        android:title="@string/home" />
+        android:title="@string/home"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/searchMenu"
         android:icon="@drawable/search"
-        android:title="@string/search" />
+        android:title="@string/search"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/newPostMenu"
         android:icon="@drawable/new_post"
-        android:title="@string/new_post" />
+        android:title="@string/new_post"
+
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/chatMenu"
         android:icon="@drawable/chat"
-        android:title="@string/chat" />
+        android:title="@string/chat"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/profileMenu"
         android:icon="@drawable/profile_menu"
-        android:title="@string/profile" />
+        android:title="@string/profile"
+        app:showAsAction="always"/>
 
 </menu>

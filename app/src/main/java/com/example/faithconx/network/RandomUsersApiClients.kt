@@ -1,5 +1,8 @@
 package com.example.faithconx.network
 
+import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -9,6 +12,13 @@ class RandomUsersApiClients {
     companion object {
         private val BASE_URL = "https://randomuser.me/"
     }
+    val loggingInterceptor = HttpLoggingInterceptor().apply {
+        level =HttpLoggingInterceptor.Level.BODY
+    }
+    private val okhttpInterceptor = OkHttpProfilerInterceptor()
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(okhttpInterceptor)
+        .build()
 
     /**
      * . The property is initialized only when it is accessed for the first time,
@@ -17,6 +27,7 @@ class RandomUsersApiClients {
     private val retrofit by lazy {
     Retrofit.Builder()
         .baseUrl(BASE_URL)
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 }

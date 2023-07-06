@@ -2,4 +2,5 @@
 <resources>
 
     <style name="Theme.Faithconx" parent="android:Theme.Material.Light.NoActionBar" />
+
 </resources>
