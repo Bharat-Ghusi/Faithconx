@@ -18,4 +18,5 @@
     <dimen name="twelveSp">12sp</dimen>
     <dimen name="thirtyDp">30dp</dimen>
     <dimen name="eightDp">8dp</dimen>
+    <dimen name="twelveDp">12dp</dimen>
 </resources>

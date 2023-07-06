@@ -6,4 +6,223 @@
     android:layout_height="match_parent"
     tools:context=".view.ActivityProfile">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/antiFlashWhite"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/nav_profile_menu_item"
+        app:title="@string/profile"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/styleProfile" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/sixteenDp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/sixteenDp"  />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgProfile17x17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/toolbarMain"
+        app:srcCompat="@drawable/profile17x17" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textUserFullName"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="wrap_content"
+        android:text="Sultan Almaadeed"
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile17x17"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textUsername"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="wrap_content"
+        android:text="sultanalmaadeed"
+        app:layout_constraintTop_toBottomOf="@+id/textUserFullName"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textFollowersList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3.2k followers"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@+id/textUsername"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toStartOf="@+id/verticalDivider"
+        />
+
+    <View
+        android:id="@+id/verticalDivider"
+        android:layout_width="2dp"
+        android:layout_height="20dp"
+        android:background="#E91E63"
+        app:layout_constraintTop_toTopOf="@+id/textFollowersList"
+        app:layout_constraintStart_toEndOf="@+id/textFollowersList"
+        app:layout_constraintEnd_toStartOf="@+id/textFollowingList"
+        app:layout_constraintBottom_toBottomOf="@+id/textFollowersList"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textFollowingList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="409 following"
+        app:layout_constraintTop_toTopOf="@+id/textFollowersList"
+        app:layout_constraintStart_toEndOf="@+id/verticalDivider"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textAbout"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="wrap_content"
+        android:text="Founder at ENVST Chairman $ARKIU $345m Travelers +70 countries Doha Los Angeles"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/textFollowersList"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTwitterUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="almaadeed"
+        android:gravity="center"
+        android:drawableStart="@drawable/twitter18x18"
+        android:drawablePadding="@dimen/fiveDp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/textAbout"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+        app:layout_constraintEnd_toStartOf="@+id/textInstagramUsername"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textInstagramUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="almaadeed"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/thirtyDp"
+        android:drawableStart="@drawable/instagram18x18"
+        android:drawablePadding="@dimen/fiveDp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/textTwitterUsername"
+        app:layout_constraintStart_toEndOf="@+id/textTwitterUsername"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <View
+        android:id="@+id/horizontalDivider"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="2dp"
+        android:background="#E91E63"
+
+       app:layout_constraintTop_toBottomOf="@id/textTwitterUsername"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgInvitedPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile35x35"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/horizontalDivider"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textJoinedData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Joined 25th March,2020"
+        android:layout_marginStart="@dimen/twelveDp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/imgInvitedPerson"
+        app:layout_constraintTop_toTopOf="@+id/imgInvitedPerson"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textInvitedPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invited by Paul Walker"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/textJoinedData"
+        app:layout_constraintTop_toBottomOf="@+id/textJoinedData"
+        app:layout_constraintBottom_toBottomOf="@+id/imgInvitedPerson"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        />
+
+    <View
+        android:id="@+id/horizontalDividerTwo"
+        android:layout_width="@dimen/zeroDp"
+        android:layout_height="2dp"
+        android:background="#E91E63"
+
+        app:layout_constraintTop_toBottomOf="@id/imgInvitedPerson"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textMemberOf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Member of"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalDividerTwo"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgMemberOf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/memberof_icon35x35"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/textMemberOf"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgMemberAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       app:srcCompat="@drawable/member_add35x35"
+        android:layout_marginStart="@dimen/fifteenDp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/imgMemberOf"
+        app:layout_constraintStart_toEndOf="@+id/imgMemberOf"
+        app:layout_constraintBottom_toBottomOf="@+id/imgMemberOf"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

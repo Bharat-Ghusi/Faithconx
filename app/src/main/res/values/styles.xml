@@ -27,5 +27,12 @@
         <item name="android:textColor">@color/raisinBlack</item>
     </style>
 
+    <style name="styleProfile">
+        <item name="textAllCaps">true</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/gotham_rounded_bold</item>
+        <item name="android:textSize">@dimen/fifteenSp</item>
+    </style>
+
 
 </resources>
