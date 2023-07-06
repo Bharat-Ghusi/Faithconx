@@ -12,23 +12,36 @@ import retrofit2.Response
 
 class RandomUsersViewModel: ViewModel() {
 private val randomUsersMutableData = MutableLiveData<RandomUsers>()
+   private val isVisible = MutableLiveData<Boolean>(false)
     fun getRandomUsers():LiveData<RandomUsers> = randomUsersMutableData
+    fun getProgressVisibility():LiveData<Boolean> =isVisible
 
-     fun fetchRandomUsersFromApi() {
+    init {
+        //Data fetch from API through retrofit
+        fetchRandomUsersFromApi()
+    }
+
+
+    private  fun fetchRandomUsersFromApi() {
+         isVisible.postValue(true) //To set progress bar
         val randomUsersApiClient = RandomUsersApiClients().randomUserApiService
         val call = randomUsersApiClient.getUsers(5)
         call.enqueue(object : Callback<RandomUsers?> {
             override fun onResponse(call: Call<RandomUsers?>, response: Response<RandomUsers?>) {
                 if (response.isSuccessful) {
+                    isVisible.postValue(false)
                     val randomUsers = response.body()
-                    randomUsersMutableData.value = randomUsers
+                    val results = randomUsers?.results
+                    randomUsersMutableData.postValue(randomUsers)
                     Log.i("TAG", randomUsers.toString())
                 } else {
                     Log.i("TAG", "CODE: ${response.code().toString()}")
+                    isVisible.value= false
                 }
             }
 
             override fun onFailure(call: Call<RandomUsers?>, t: Throwable) {
+                isVisible.postValue(false)
                 Log.e("TAG", "FAILURE: ${t.message}")
             }
         })

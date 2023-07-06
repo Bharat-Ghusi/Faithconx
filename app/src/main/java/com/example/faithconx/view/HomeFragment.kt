@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.faithconx.R
@@ -18,46 +19,59 @@ import com.example.faithconx.viewmodel.RandomUsersViewModel
 
 
 class HomeFragment : Fragment() {
-
 private lateinit var binding:FragmentHomeBinding
 private lateinit var  randomUsersViewModel: RandomUsersViewModel
-private val  randomUsersViewModel1= RandomUsersViewModel()
-    private val listOfRandomUsers = ArrayList<Result>()
+private lateinit var randomUsersAdapter: RandomUsersAdapter
+private var randomUsers: RandomUsers? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        randomUsersViewModel =  ViewModelProvider(this).get(RandomUsersViewModel::class.java) //Initialize RandomUsersViewModel
+        setDataToAdapter(randomUsers)
 
+        //Observer
+        setProgressbar()
         setUi()
+
         return binding.root
     }
 
 
-    private fun setUi() {
-      randomUsersViewModel =  ViewModelProvider(this).get(RandomUsersViewModel::class.java)
-        randomUsersViewModel. fetchRandomUsersFromApi()
-        val usersLiveData = randomUsersViewModel.getRandomUsers()
-        usersLiveData.observe(viewLifecycleOwner, Observer {
-            setToAdapter(it)
+    //Set progress bar
+    private fun setProgressbar(){
+        val progressVisibility = randomUsersViewModel.getProgressVisibility()
+        progressVisibility.observe(viewLifecycleOwner, Observer {
+            //Set visibility of progressbar and recycler view true:Progressbar false: recyclerview
+            if(it){
+                binding.recyclerHomeFragment.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
+            }
+            else{
+                binding.recyclerHomeFragment.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
         })
     }
 
-    private fun setToList(results: RandomUsers?) {
-        results?.let {
-            for (users in it.results){
-                listOfRandomUsers.add(users)
-            }
-        }
+    private fun setUi() {
+        val usersLiveData = randomUsersViewModel.getRandomUsers()
+        usersLiveData.observe(viewLifecycleOwner, Observer {
+            randomUsersAdapter.updateList(it)
+        })
     }
 
-    private fun setToAdapter(users:RandomUsers) {
-//        setToList(users)
+
+
+    private fun setDataToAdapter(users:RandomUsers?) {
         binding.recyclerHomeFragment.layoutManager= LinearLayoutManager(context)
-        binding.recyclerHomeFragment.adapter = RandomUsersAdapter(users)
+        randomUsersAdapter = RandomUsersAdapter(users)
+        binding.recyclerHomeFragment.adapter = randomUsersAdapter
 
     }
+
 
 
 
