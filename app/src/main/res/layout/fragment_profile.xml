@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ActivityProfile">
+    android:background="@color/antiFlashWhite"
+    tools:context=".view.ProfileFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarMain"
@@ -13,6 +14,7 @@
         android:background="@color/antiFlashWhite"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
+        android:elevation="@dimen/zeroDp"
         app:menu="@menu/nav_profile_menu_item"
         app:title="@string/profile"
         app:titleCentered="true"
@@ -47,6 +49,8 @@
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
         android:text="Sultan Almaadeed"
+        android:textAppearance="@style/textStyleGothamRoundedMedium"
+        android:layout_marginTop="@dimen/thirtyDp"
         app:layout_constraintTop_toBottomOf="@+id/imgProfile17x17"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
@@ -57,6 +61,8 @@
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
         android:text="sultanalmaadeed"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        android:layout_marginTop="@dimen/sevenDp"
         app:layout_constraintTop_toBottomOf="@+id/textUserFullName"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
@@ -67,6 +73,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3.2k followers"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        android:layout_marginTop="@dimen/thirtyDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@+id/textUsername"
@@ -76,9 +84,11 @@
 
     <View
         android:id="@+id/verticalDivider"
-        android:layout_width="2dp"
-        android:layout_height="20dp"
-        android:background="#E91E63"
+        android:layout_width="@dimen/oneDp"
+        android:layout_height="15dp"
+        android:background="@color/coolGrey"
+        android:layout_marginStart="@dimen/tenDp"
+        android:layout_marginEnd="@dimen/tenDp"
         app:layout_constraintTop_toTopOf="@+id/textFollowersList"
         app:layout_constraintStart_toEndOf="@+id/textFollowersList"
         app:layout_constraintEnd_toStartOf="@+id/textFollowingList"
@@ -90,17 +100,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="409 following"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintTop_toTopOf="@+id/textFollowersList"
         app:layout_constraintStart_toEndOf="@+id/verticalDivider"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textAbout"
-        android:layout_width="@dimen/zeroDp"
+        android:id="@+id/textDesignation"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Founder at ENVST Chairman $ARKIU $345m Travelers +70 countries Doha Los Angeles"
-        app:layout_constraintWidth_percent="0.3"
+        android:text="Founder at ENVST"
+        android:layout_marginTop="@dimen/thirtyDp"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@+id/textFollowersList"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -108,16 +120,97 @@
         />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textDesignationTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chairman"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/textDesignation"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textCompanyTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$ARKIU"
+        android:layout_marginStart="@dimen/fiveDp"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/textDesignationTwo"
+        app:layout_constraintStart_toEndOf="@+id/textDesignationTwo"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textRevenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$345m"
+        android:layout_marginStart="@dimen/fiveDp"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/textDesignationTwo"
+        app:layout_constraintStart_toEndOf="@+id/textCompanyTwo"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textHobby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Travelers +70 countries"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/textDesignationTwo"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Doha"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/textHobby"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Los Angelos"
+        android:layout_marginStart="@dimen/tenDp"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/textCity"
+        app:layout_constraintStart_toEndOf="@+id/textCity"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/textCity"
+        />
+
+
+
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textTwitterUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="almaadeed"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
         android:gravity="center"
         android:drawableStart="@drawable/twitter18x18"
         android:drawablePadding="@dimen/fiveDp"
+
+        android:layout_marginTop="@dimen/thirtyDp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textAbout"
+        app:layout_constraintTop_toBottomOf="@+id/textCity"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:layout_constraintEnd_toStartOf="@+id/textInstagramUsername"
         />
@@ -131,6 +224,8 @@
         android:layout_marginStart="@dimen/thirtyDp"
         android:drawableStart="@drawable/instagram18x18"
         android:drawablePadding="@dimen/fiveDp"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        android:textColor="@color/trueBlue"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toTopOf="@+id/textTwitterUsername"
         app:layout_constraintStart_toEndOf="@+id/textTwitterUsername"
@@ -140,10 +235,10 @@
     <View
         android:id="@+id/horizontalDivider"
         android:layout_width="@dimen/zeroDp"
-        android:layout_height="2dp"
-        android:background="#E91E63"
-
-       app:layout_constraintTop_toBottomOf="@id/textTwitterUsername"
+        android:layout_height="1dp"
+        android:background="@color/coolGrey"
+        android:layout_marginTop="@dimen/thirtyDp"
+        app:layout_constraintTop_toBottomOf="@id/textTwitterUsername"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
@@ -153,6 +248,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/profile35x35"
+        android:layout_marginTop="@dimen/thirtyDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@id/horizontalDivider"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -163,6 +259,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Joined 25th March,2020"
+        android:textColor="@color/Davysgrey"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        android:textSize="@dimen/twelveSp"
         android:layout_marginStart="@dimen/twelveDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@+id/imgInvitedPerson"
@@ -175,6 +274,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Invited by Paul Walker"
+        android:textAppearance="@style/textStyleGothamRoundedMedium"
+        android:textSize="@dimen/FourteenSp"
+
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@+id/textJoinedData"
         app:layout_constraintTop_toBottomOf="@+id/textJoinedData"
@@ -185,9 +287,9 @@
     <View
         android:id="@+id/horizontalDividerTwo"
         android:layout_width="@dimen/zeroDp"
-        android:layout_height="2dp"
-        android:background="#E91E63"
-
+        android:layout_height="@dimen/oneDp"
+        android:background="@color/coolGrey"
+        android:layout_marginTop="@dimen/thirtyDp"
         app:layout_constraintTop_toBottomOf="@id/imgInvitedPerson"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
@@ -198,6 +300,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Member of"
+        android:layout_marginTop="@dimen/thirtyDp"
+        android:textAppearance="@style/textStyleGothamRoundedBook"
+        android:textSize="@dimen/FourteenSp"
+
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@+id/horizontalDividerTwo"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -208,6 +314,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/memberof_icon35x35"
+        android:layout_marginTop="@dimen/tenDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@+id/textMemberOf"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -217,7 +324,7 @@
         android:id="@+id/imgMemberAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       app:srcCompat="@drawable/member_add35x35"
+        app:srcCompat="@drawable/member_add35x35"
         android:layout_marginStart="@dimen/fifteenDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toTopOf="@+id/imgMemberOf"

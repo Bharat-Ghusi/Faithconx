@@ -19,4 +19,8 @@
     <dimen name="thirtyDp">30dp</dimen>
     <dimen name="eightDp">8dp</dimen>
     <dimen name="twelveDp">12dp</dimen>
+    <dimen name="sixteenSp">16sp</dimen>
+    <dimen name="twentyOneDp">21dp</dimen>
+    <dimen name="sevenDp">7dp</dimen>
+    <dimen name="twentyEightDp">28dp</dimen>
 </resources>

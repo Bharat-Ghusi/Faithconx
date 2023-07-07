@@ -33,6 +33,19 @@
         <item name="fontFamily">@font/gotham_rounded_bold</item>
         <item name="android:textSize">@dimen/fifteenSp</item>
     </style>
+<!--Text style of profile-->
+    <style name="textStyleGothamRoundedBook">
+        <item name="fontFamily">@font/gotham_rounded_book</item>
+        <item name="android:textSize">@dimen/thirteenSp</item>
+    </style>
 
+    <style name="textStyleGothamRoundedMedium">
+        <item name="fontFamily">@font/gotham_rounded_medium</item>
+        <item name="android:textSize">@dimen/sixteenSp</item>
+    </style>
+    <style name="textStyleGothamRoundedBold">
+        <item name="fontFamily">@font/gotham_rounded_bold</item>
+        <item name="android:textSize">@dimen/FourteenSp</item>
+    </style>
 
 </resources>
