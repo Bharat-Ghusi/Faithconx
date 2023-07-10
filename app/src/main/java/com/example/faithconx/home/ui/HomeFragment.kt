@@ -1,4 +1,4 @@
-package com.example.faithconx.view
+package com.example.faithconx.home.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -6,12 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.faithconx.R
 import com.example.faithconx.adapter.RandomUsersAdapter
 import com.example.faithconx.databinding.FragmentHomeBinding
 import com.example.faithconx.model.RandomUsers

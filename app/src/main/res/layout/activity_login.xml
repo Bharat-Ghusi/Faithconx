@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.ActivityLogin">
+    tools:context=".login.ui.ActivityLogin">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
@@ -56,7 +56,7 @@
         android:id="@+id/btnClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/close_icon"
+        android:src="@drawable/ic_close"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
 
@@ -84,7 +84,7 @@
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/profile"
+            android:drawableStart="@drawable/ic_profile"
             android:drawablePadding="@dimen/twentyDp"
             android:labelFor="@id/email"
             android:inputType="textEmailAddress"
@@ -107,7 +107,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/password"
+            android:drawableStart="@drawable/ic_password"
             android:drawablePadding="@dimen/twentyDp"
             android:labelFor="@id/password"
             android:inputType="textPassword"
@@ -135,7 +135,7 @@
         android:textColor="@color/white"
         android:padding="@dimen/twentyDp"
         android:textSize="@dimen/FourteenSp"
-        android:background="@drawable/btn_round"
+        android:background="@drawable/btn_round_shape"
         android:onClick="onLoginClick"
         android:textAppearance="@style/btnBaseStyle"
 
@@ -188,11 +188,11 @@
         android:layout_marginTop="@dimen/twentyFiveDp"
         android:layout_marginEnd="@dimen/fiveDp"
         android:backgroundTint="@color/chineseBLue"
-        android:drawableLeft="@drawable/facebook"
+        android:drawableLeft="@drawable/ic_facebook"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/login_with_facebook"
         android:textColor="@color/white"
-        android:background="@drawable/btn_round"
+        android:background="@drawable/btn_round_shape"
 
         android:padding="@dimen/twentyDp"
         android:textAppearance="@style/btnBaseStyle"
@@ -209,11 +209,11 @@
         android:layout_marginStart="@dimen/fiveDp"
         android:layout_marginEnd="@dimen/fiveDp"
         android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/google"
+        android:drawableLeft="@drawable/ic_google"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         android:text="@string/login_with_google"
-        android:background="@drawable/btn_round"
+        android:background="@drawable/btn_round_shape"
         android:layout_marginTop="@dimen/tenDp"
 
         android:padding="@dimen/twentyDp"
@@ -228,11 +228,11 @@
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/mediumSlateBLue"
-        android:drawableLeft="@drawable/call_icon"
+        android:drawableLeft="@drawable/ic_call"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/loginWithPhoneNumber"
         android:textColor="@color/white"
-        android:background="@drawable/btn_round"
+        android:background="@drawable/btn_round_shape"
         android:layout_marginTop="@dimen/tenDp"
         android:onClick="onClickLoginWithPhoneNumber"
         android:padding="@dimen/twentyDp"

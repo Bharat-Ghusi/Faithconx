@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.faithconx.databinding.ActivitySignupBinding
-import com.example.faithconx.login.ActivityLogin
+import com.example.faithconx.login.ui.ActivityLogin
 import com.example.faithconx.model.User
 import com.example.faithconx.util.Constants
 import com.google.android.gms.tasks.OnCompleteListener

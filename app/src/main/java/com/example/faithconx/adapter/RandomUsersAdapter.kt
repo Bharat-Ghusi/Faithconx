@@ -37,7 +37,7 @@ class RandomUsersAdapter(var resultList: MutableList<Result>?): Adapter<RandomUs
            if(it[position].picture.thumbnail.endsWith("jpg",true) && it[position].picture.thumbnail.isNotBlank()){
             Glide.with(holder.binding.imgProfileTwo.context).load(it[position].picture.thumbnail)
                 .apply(RequestOptions().override(100,100))
-                
+
                 .into(holder.binding.imgProfileTwo)
            }
 

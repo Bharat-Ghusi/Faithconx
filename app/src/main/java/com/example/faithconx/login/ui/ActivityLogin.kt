@@ -1,4 +1,4 @@
-package com.example.faithconx.login
+package com.example.faithconx.login.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,7 @@ import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityLoginBinding
 import com.example.faithconx.view.ActivityOtpVerification
 import com.example.faithconx.signup.ui.ActivitySignup
-import com.example.faithconx.view.MainActivity
+import com.example.faithconx.main.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class ActivityLogin : AppCompatActivity() {

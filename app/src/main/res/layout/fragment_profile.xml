@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/antiFlashWhite"
-    tools:context=".view.ProfileFragment">
+    tools:context=".profile.ui.ProfileFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarMain"
@@ -42,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/toolbarMain"
-        app:srcCompat="@drawable/profile17x17" />
+        app:srcCompat="@drawable/img_profile17x17" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textUserFullName"
@@ -204,7 +204,7 @@
         android:text="almaadeed"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         android:gravity="center"
-        android:drawableStart="@drawable/twitter18x18"
+        android:drawableStart="@drawable/img_twitter18x18"
         android:drawablePadding="@dimen/fiveDp"
 
         android:layout_marginTop="@dimen/thirtyDp"
@@ -222,7 +222,7 @@
         android:text="almaadeed"
         android:gravity="center"
         android:layout_marginStart="@dimen/thirtyDp"
-        android:drawableStart="@drawable/instagram18x18"
+        android:drawableStart="@drawable/img_instagram18x18"
         android:drawablePadding="@dimen/fiveDp"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         android:textColor="@color/trueBlue"
@@ -247,7 +247,7 @@
         android:id="@+id/imgInvitedPerson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/profile35x35"
+        android:src="@drawable/img_profile35x35"
         android:layout_marginTop="@dimen/thirtyDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@id/horizontalDivider"
@@ -313,7 +313,7 @@
         android:id="@+id/imgMemberOf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/memberof_icon35x35"
+        app:srcCompat="@drawable/img_memberof_icon35x35"
         android:layout_marginTop="@dimen/tenDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@+id/textMemberOf"
@@ -324,7 +324,7 @@
         android:id="@+id/imgMemberAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/member_add35x35"
+        app:srcCompat="@drawable/img_member_add35x35"
         android:layout_marginStart="@dimen/fifteenDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toTopOf="@+id/imgMemberOf"

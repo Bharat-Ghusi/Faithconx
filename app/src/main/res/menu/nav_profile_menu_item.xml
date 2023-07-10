@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item android:id="@+id/menuShare"
-    android:icon="@drawable/share"
+    android:icon="@drawable/ic_share"
     android:titleCondensed=""
     android:title="@string/share"
     app:showAsAction="always"/>
     <item android:id="@+id/menuSetting"
-        android:icon="@drawable/setting"
+        android:icon="@drawable/ic_setting"
         android:titleCondensed=""
         android:title="@string/setting"
         app:showAsAction="ifRoom"/>

@@ -1,13 +1,13 @@
 package com.example.faithconx.view
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityOtpVerificationBinding
+import com.example.faithconx.main.ui.MainActivity
 import com.example.faithconx.util.Constants
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth

@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item
     android:id="@+id/imgMessageBox"
-    android:icon="@drawable/messagebox"
+    android:icon="@drawable/ic_messagebox"
     android:title="@string/messages"
     android:visible="true"
     app:showAsAction="always"
     />
     <item
         android:id="@+id/imgFavoriteBox"
-        android:icon="@drawable/favoriteicon"
+        android:icon="@drawable/ic_favorite"
         android:title="@string/messages"
         android:visible="true"
         app:showAsAction="always"
         />
     <item
         android:id="@+id/imgNotification"
-        android:icon="@drawable/notification"
+        android:icon="@drawable/ic_notification"
         android:title="@string/messages"
         android:visible="true"
         app:showAsAction="always"
