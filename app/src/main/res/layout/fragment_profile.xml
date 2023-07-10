@@ -35,7 +35,7 @@
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgProfile17x17"
+        android:id="@+id/ivProfile17x17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
@@ -45,31 +45,31 @@
         app:srcCompat="@drawable/img_profile17x17" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textUserFullName"
+        android:id="@+id/tvUserFullName"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
         android:text="Sultan Almaadeed"
         android:textAppearance="@style/textStyleGothamRoundedMedium"
         android:layout_marginTop="@dimen/thirtyDp"
-        app:layout_constraintTop_toBottomOf="@+id/imgProfile17x17"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfile17x17"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textUsername"
+        android:id="@+id/tvUsername"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
-        android:text="sultanalmaadeed"
+        android:text="@string/username"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         android:layout_marginTop="@dimen/sevenDp"
-        app:layout_constraintTop_toBottomOf="@+id/textUserFullName"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserFullName"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textFollowersList"
+        android:id="@+id/tvFollowersList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3.2k followers"
@@ -77,7 +77,7 @@
         android:layout_marginTop="@dimen/thirtyDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintTop_toBottomOf="@+id/textUsername"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toStartOf="@+id/verticalDivider"
         />
@@ -89,116 +89,116 @@
         android:background="@color/coolGrey"
         android:layout_marginStart="@dimen/tenDp"
         android:layout_marginEnd="@dimen/tenDp"
-        app:layout_constraintTop_toTopOf="@+id/textFollowersList"
-        app:layout_constraintStart_toEndOf="@+id/textFollowersList"
-        app:layout_constraintEnd_toStartOf="@+id/textFollowingList"
-        app:layout_constraintBottom_toBottomOf="@+id/textFollowersList"
+        app:layout_constraintTop_toTopOf="@+id/tvFollowersList"
+        app:layout_constraintStart_toEndOf="@+id/tvFollowersList"
+        app:layout_constraintEnd_toStartOf="@+id/tvFollowingList"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFollowersList"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textFollowingList"
+        android:id="@+id/tvFollowingList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="409 following"
         android:textAppearance="@style/textStyleGothamRoundedBook"
-        app:layout_constraintTop_toTopOf="@+id/textFollowersList"
+        app:layout_constraintTop_toTopOf="@+id/tvFollowersList"
         app:layout_constraintStart_toEndOf="@+id/verticalDivider"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textDesignation"
+        android:id="@+id/tvDesignation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Founder at ENVST"
         android:layout_marginTop="@dimen/thirtyDp"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textFollowersList"
+        app:layout_constraintTop_toBottomOf="@+id/tvFollowersList"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textDesignationTwo"
+        android:id="@+id/tvDesignationTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chairman"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textDesignation"
+        app:layout_constraintTop_toBottomOf="@+id/tvDesignation"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textCompanyTwo"
+        android:id="@+id/tvSecCompanyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$ARKIU"
         android:layout_marginStart="@dimen/fiveDp"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toTopOf="@+id/textDesignationTwo"
-        app:layout_constraintStart_toEndOf="@+id/textDesignationTwo"
+        app:layout_constraintTop_toTopOf="@+id/tvDesignationTwo"
+        app:layout_constraintStart_toEndOf="@+id/tvDesignationTwo"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textRevenue"
+        android:id="@+id/tvRevenue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$345m"
         android:layout_marginStart="@dimen/fiveDp"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toTopOf="@+id/textDesignationTwo"
-        app:layout_constraintStart_toEndOf="@+id/textCompanyTwo"
+        app:layout_constraintTop_toTopOf="@+id/tvDesignationTwo"
+        app:layout_constraintStart_toEndOf="@+id/tvSecCompanyName"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textHobby"
+        android:id="@+id/tvHobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Travelers +70 countries"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textDesignationTwo"
+        app:layout_constraintTop_toBottomOf="@+id/tvDesignationTwo"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textCity"
+        android:id="@+id/tvCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Doha"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textHobby"
+        app:layout_constraintTop_toBottomOf="@+id/tvHobby"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textState"
+        android:id="@+id/tvState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Los Angelos"
         android:layout_marginStart="@dimen/tenDp"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toTopOf="@+id/textCity"
-        app:layout_constraintStart_toEndOf="@+id/textCity"
+        app:layout_constraintTop_toTopOf="@+id/tvCity"
+        app:layout_constraintStart_toEndOf="@+id/tvCity"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
-        app:layout_constraintBottom_toBottomOf="@+id/textCity"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCity"
         />
 
 
 
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textTwitterUsername"
+        android:id="@+id/tvTwitterUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="almaadeed"
@@ -210,13 +210,13 @@
         android:layout_marginTop="@dimen/thirtyDp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textCity"
+        app:layout_constraintTop_toBottomOf="@+id/tvCity"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-        app:layout_constraintEnd_toStartOf="@+id/textInstagramUsername"
+        app:layout_constraintEnd_toStartOf="@+id/tvInstagramUsername"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textInstagramUsername"
+        android:id="@+id/tvInstagramUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="almaadeed"
@@ -227,8 +227,8 @@
         android:textAppearance="@style/textStyleGothamRoundedBook"
         android:textColor="@color/trueBlue"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toTopOf="@+id/textTwitterUsername"
-        app:layout_constraintStart_toEndOf="@+id/textTwitterUsername"
+        app:layout_constraintTop_toTopOf="@+id/tvTwitterUsername"
+        app:layout_constraintStart_toEndOf="@+id/tvTwitterUsername"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
@@ -238,13 +238,13 @@
         android:layout_height="1dp"
         android:background="@color/coolGrey"
         android:layout_marginTop="@dimen/thirtyDp"
-        app:layout_constraintTop_toBottomOf="@id/textTwitterUsername"
+        app:layout_constraintTop_toBottomOf="@id/tvTwitterUsername"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgInvitedPerson"
+        android:id="@+id/ivInvitedPerson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/img_profile35x35"
@@ -255,7 +255,7 @@
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         />
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textJoinedData"
+        android:id="@+id/tvJoinedData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Joined 25th March,2020"
@@ -264,13 +264,13 @@
         android:textSize="@dimen/twelveSp"
         android:layout_marginStart="@dimen/twelveDp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@+id/imgInvitedPerson"
-        app:layout_constraintTop_toTopOf="@+id/imgInvitedPerson"
+        app:layout_constraintStart_toEndOf="@+id/ivInvitedPerson"
+        app:layout_constraintTop_toTopOf="@+id/ivInvitedPerson"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textInvitedPersonName"
+        android:id="@+id/tvInvitedPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Invited by Paul Walker"
@@ -278,9 +278,9 @@
         android:textSize="@dimen/FourteenSp"
 
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@+id/textJoinedData"
-        app:layout_constraintTop_toBottomOf="@+id/textJoinedData"
-        app:layout_constraintBottom_toBottomOf="@+id/imgInvitedPerson"
+        app:layout_constraintStart_toStartOf="@+id/tvJoinedData"
+        app:layout_constraintTop_toBottomOf="@+id/tvJoinedData"
+        app:layout_constraintBottom_toBottomOf="@+id/ivInvitedPerson"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         />
 
@@ -290,13 +290,13 @@
         android:layout_height="@dimen/oneDp"
         android:background="@color/coolGrey"
         android:layout_marginTop="@dimen/thirtyDp"
-        app:layout_constraintTop_toBottomOf="@id/imgInvitedPerson"
+        app:layout_constraintTop_toBottomOf="@id/ivInvitedPerson"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textMemberOf"
+        android:id="@+id/tvMemberOf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Member of"
@@ -310,26 +310,26 @@
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgMemberOf"
+        android:id="@+id/ivMemberOf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_memberof_icon35x35"
         android:layout_marginTop="@dimen/tenDp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textMemberOf"
+        app:layout_constraintTop_toBottomOf="@+id/tvMemberOf"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgMemberAdd"
+        android:id="@+id/ivMemberAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_member_add35x35"
         android:layout_marginStart="@dimen/fifteenDp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toTopOf="@+id/imgMemberOf"
-        app:layout_constraintStart_toEndOf="@+id/imgMemberOf"
-        app:layout_constraintBottom_toBottomOf="@+id/imgMemberOf"
+        app:layout_constraintTop_toTopOf="@+id/ivMemberOf"
+        app:layout_constraintStart_toEndOf="@+id/ivMemberOf"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMemberOf"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

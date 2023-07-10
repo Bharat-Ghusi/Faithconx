@@ -33,7 +33,7 @@
 
     <!-- ROW ONE-->
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textSubTitle"
+        android:id="@+id/tvSubTitle"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
         android:text="CHURCH OF ATLANTA"
@@ -47,7 +47,7 @@
 
     <!--  IMAGE VIEW-->
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textTitle"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/tenDp"
@@ -57,11 +57,11 @@
         android:textColor="@color/black"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textSubTitle"
-        app:layout_constraintTop_toBottomOf="@id/textSubTitle" />
+        app:layout_constraintStart_toStartOf="@+id/tvSubTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvSubTitle" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgChurch"
+        android:id="@+id/ivChurch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_church"
@@ -69,98 +69,98 @@
         android:layout_marginTop="@dimen/tenDp"
 
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/textTitle"
+        app:layout_constraintStart_toEndOf="@id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textTitle"
-        app:layout_constraintBottom_toBottomOf="@+id/textTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgProfileOne"
+        android:id="@+id/ivProfileOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_profile1"
         android:layout_marginTop="@dimen/twentyFiveDp"
         android:layout_marginStart="@dimen/sixteenDp"
-        app:layout_constraintTop_toBottomOf="@id/textTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
         />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgProfileTwo"
+        android:id="@+id/ivProfileTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_profile2"
-        app:layout_constraintEnd_toStartOf="@+id/imgProfileOne"
-        app:layout_constraintStart_toStartOf="@+id/imgProfileOne"
-        app:layout_constraintBottom_toTopOf="@+id/imgProfileOne"
-        app:layout_constraintTop_toTopOf="@+id/imgProfileOne"
+        app:layout_constraintEnd_toStartOf="@+id/ivProfileOne"
+        app:layout_constraintStart_toStartOf="@+id/ivProfileOne"
+        app:layout_constraintBottom_toTopOf="@+id/ivProfileOne"
+        app:layout_constraintTop_toTopOf="@+id/ivProfileOne"
         />
 <!--    CHAT-->
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textNameOne"
+        android:id="@+id/tvFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Leiti Hsu"
         android:textAppearance="@style/styleChatText"
         android:layout_marginTop="@dimen/fiveDp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         app:layout_constraintStart_toStartOf="@+id/guidelineColumnOne"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/textNameTwo"
+        app:layout_constraintBottom_toTopOf="@+id/tvSecondName"
         />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgChatOne"
+        android:id="@+id/ivFirstChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_speech_balloon15x15"
         android:layout_marginStart="@dimen/sixteenDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textNameOne"
-        app:layout_constraintStart_toEndOf="@+id/textNameOne"
-        app:layout_constraintBottom_toBottomOf="@+id/textNameOne" />
+        app:layout_constraintTop_toTopOf="@+id/tvFirstName"
+        app:layout_constraintStart_toEndOf="@+id/tvFirstName"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFirstName" />
 <!--    ROW TWO-->
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textNameTwo"
+        android:id="@+id/tvSecondName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Noelle Chesnut Whitmore"
         android:textAppearance="@style/styleChatText"
         android:layout_marginTop="@dimen/fiveDp"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textNameOne"
-        app:layout_constraintStart_toStartOf="@+id/textNameOne"
+        app:layout_constraintTop_toBottomOf="@+id/tvFirstName"
+        app:layout_constraintStart_toStartOf="@+id/tvFirstName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/textNameThree"
+        app:layout_constraintBottom_toTopOf="@+id/tvThirdName"
         />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgChatTwo"
+        android:id="@+id/ivSecondChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_speech_balloon15x15"
         android:layout_marginStart="@dimen/sixteenDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textNameTwo"
-        app:layout_constraintStart_toEndOf="@+id/textNameTwo"
-        app:layout_constraintBottom_toBottomOf="@+id/textNameTwo" />
+        app:layout_constraintTop_toTopOf="@+id/tvSecondName"
+        app:layout_constraintStart_toEndOf="@+id/tvSecondName"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSecondName" />
     <!--    ROW TWO-->
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textNameThree"
+        android:id="@+id/tvThirdName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Drue Kataoka"
         android:layout_marginTop="@dimen/fiveDp"
         android:textAppearance="@style/styleChatText"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textNameTwo"
-        app:layout_constraintStart_toStartOf="@+id/textNameTwo"
+        app:layout_constraintTop_toBottomOf="@+id/tvSecondName"
+        app:layout_constraintStart_toStartOf="@+id/tvSecondName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/textNameFour"
+        app:layout_constraintBottom_toTopOf="@+id/tvFourName"
         />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgChatThree"
+        android:id="@+id/ivThirdChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_speech_balloon15x15"
@@ -168,39 +168,39 @@
         android:layout_marginStart="@dimen/sixteenDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textNameThree"
-        app:layout_constraintStart_toEndOf="@+id/textNameThree"
-        app:layout_constraintBottom_toBottomOf="@+id/textNameThree" />
+        app:layout_constraintTop_toTopOf="@+id/tvThirdName"
+        app:layout_constraintStart_toEndOf="@+id/tvThirdName"
+        app:layout_constraintBottom_toBottomOf="@+id/tvThirdName" />
 
     <!--    ROW TWO-->
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textNameFour"
+        android:id="@+id/tvFourName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bomani X"
         android:layout_marginTop="@dimen/fiveDp"
         android:textAppearance="@style/styleChatText"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/textNameThree"
-        app:layout_constraintStart_toStartOf="@+id/textNameTwo"
+        app:layout_constraintTop_toBottomOf="@+id/tvThirdName"
+        app:layout_constraintStart_toStartOf="@+id/tvSecondName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/imgGroup"
+        app:layout_constraintBottom_toTopOf="@+id/ivGroup"
         />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgChatFour"
+        android:id="@+id/ivFourChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_speech_balloon15x15"
         android:layout_marginStart="@dimen/sixteenDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textNameFour"
-        app:layout_constraintStart_toEndOf="@+id/textNameFour"
-        app:layout_constraintBottom_toBottomOf="@+id/textNameFour" />
+        app:layout_constraintTop_toTopOf="@+id/tvFourName"
+        app:layout_constraintStart_toEndOf="@+id/tvFourName"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFourName" />
 
 <!--    BASE LINE-->
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgGroup"
+        android:id="@+id/ivGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_group"
@@ -209,43 +209,43 @@
 
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/guidelineColumnOne"
-        app:layout_constraintTop_toBottomOf="@id/textNameFour"
+        app:layout_constraintTop_toBottomOf="@id/tvFourName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textConnectionCount"
+        android:id="@+id/tvConnectionCount"
         android:text="546"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/fiveDp"
-        app:layout_constraintTop_toTopOf="@+id/imgGroup"
-        app:layout_constraintStart_toEndOf="@+id/imgGroup"
-        app:layout_constraintBottom_toBottomOf="@+id/imgGroup"/>
+        app:layout_constraintTop_toTopOf="@+id/ivGroup"
+        app:layout_constraintStart_toEndOf="@+id/ivGroup"
+        app:layout_constraintBottom_toBottomOf="@+id/ivGroup"/>
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgSpeaker"
+        android:id="@+id/ivSpeaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_group"
+        app:srcCompat="@drawable/ic_speaker"
         android:layout_marginStart="@dimen/tenDp"
 
         app:layout_goneMarginStart="@dimen/tenDp"
-        app:layout_constraintStart_toEndOf="@+id/textConnectionCount"
-        app:layout_constraintTop_toTopOf="@+id/imgGroup"
-        app:layout_constraintBottom_toBottomOf="@+id/imgGroup"
+        app:layout_constraintStart_toEndOf="@+id/tvConnectionCount"
+        app:layout_constraintTop_toTopOf="@+id/ivGroup"
+        app:layout_constraintBottom_toBottomOf="@+id/ivGroup"
 
         />
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textSpeachCount"
+        android:id="@+id/tvSpeechCount"
         android:text="546"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/fiveDp"
-        app:layout_constraintTop_toTopOf="@+id/imgSpeaker"
-        app:layout_constraintStart_toEndOf="@+id/imgSpeaker"
-        app:layout_constraintBottom_toBottomOf="@+id/imgSpeaker"/>
+        app:layout_constraintTop_toTopOf="@+id/ivSpeaker"
+        app:layout_constraintStart_toEndOf="@+id/ivSpeaker"
+        app:layout_constraintBottom_toBottomOf="@+id/ivSpeaker"/>
 
 
 

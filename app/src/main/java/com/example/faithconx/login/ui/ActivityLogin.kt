@@ -23,22 +23,22 @@ class ActivityLogin : AppCompatActivity() {
     }
 
     private fun onFocusChange() {
-        binding.email.setOnFocusChangeListener { v, hasFocus ->  emailBoxFocusChange(v,hasFocus) }
-        binding.password.setOnFocusChangeListener { v, hasFocus ->  passwordBoxFocusChange(v,hasFocus) }
+        binding.etEmail.setOnFocusChangeListener { v, hasFocus ->  emailBoxFocusChange(v,hasFocus) }
+        binding.etPassword.setOnFocusChangeListener { v, hasFocus ->  passwordBoxFocusChange(v,hasFocus) }
     }
 
     private fun passwordBoxFocusChange(v: View?, hasFocus: Boolean) {
         //Change to when and optimize
         if(!hasFocus){
-            if(binding.password.text.toString().length < 4){
-            binding.passwordInputLayout.isHelperTextEnabled = true
-                binding.passwordInputLayout.helperText = "Field cannot be less than 5."
+            if(binding.etPassword.text.toString().length < 4){
+            binding.tilPassword.isHelperTextEnabled = true
+                binding.tilPassword.helperText = "Field cannot be less than 5."
 
             }
             else
                 binding.btnLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.loginbtn_color));
         }else{
-            binding.passwordInputLayout.isHelperTextEnabled = false
+            binding.tilPassword.isHelperTextEnabled = false
 
         }
     }
@@ -46,13 +46,13 @@ class ActivityLogin : AppCompatActivity() {
     private fun emailBoxFocusChange(v: View?, hasFocus: Boolean) {
         //Change to when and optimize
        if(!hasFocus){
-           if(binding.email.text.toString().length < 4){
-           binding.emailInputLayout.isHelperTextEnabled = true
-           binding.emailInputLayout.helperText = "Field cannot be less than 5."
+           if(binding.etEmail.text.toString().length < 4){
+           binding.tilEmail.isHelperTextEnabled = true
+           binding.tilEmail.helperText = "Field cannot be less than 5."
 
            }
        }else{
-           binding.emailInputLayout.isHelperTextEnabled = false
+           binding.tilEmail.isHelperTextEnabled = false
        }
     }
 
@@ -61,7 +61,7 @@ class ActivityLogin : AppCompatActivity() {
         //use when and scope function
             binding.btnLoginWithPhoneNumber.setOnClickListener { onClickLoginWithPhoneNumber(it) }
             binding.btnLogin.setOnClickListener { onLoginClick(it) }
-            binding.createOne.setOnClickListener { onCreateOneClick(it) }
+            binding.tvCreateOne.setOnClickListener { onCreateOneClick(it) }
 
     }
 
@@ -75,22 +75,22 @@ class ActivityLogin : AppCompatActivity() {
             Toast.makeText(this, "Password or email must be 8 digit", Toast.LENGTH_SHORT).show()
             return
         }
-        val email = binding.email.text.toString().trim()
-        val password = binding.password.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener(this@ActivityLogin
         ) { task ->
             if (task.isSuccessful) {
                 startActivity(Intent(this@ActivityLogin, MainActivity::class.java))
                 finish()
             } else {
-                binding.passwordInputLayout.isHelperTextEnabled = true
-                binding.passwordInputLayout.helperText = "Email or password is wrong."
+                binding.tilPassword.isHelperTextEnabled = true
+                binding.tilPassword.helperText = "Email or password is wrong."
             }
         }
     }
 
     private fun validateUserCred(): Boolean {
-        return binding.email.text.toString().length < 8 && binding.password.text.toString().length  < 5
+        return binding.etEmail.text.toString().length < 8 && binding.etPassword.text.toString().length  < 5
     }
 
 

@@ -10,7 +10,7 @@
 
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainer"
+        android:id="@+id/fcvMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.example.faithconx.home.ui.HomeFragment"
@@ -21,7 +21,7 @@
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavViewMainActivity"
+        android:id="@+id/btmNavView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/nav_menu_item"

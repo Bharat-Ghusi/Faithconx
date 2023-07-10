@@ -57,7 +57,7 @@
         app:layout_constraintTop_toTopOf="@id/guidelineTop" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textSignUp"
+        android:id="@+id/tvSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/twentyFiveDp"
@@ -70,56 +70,56 @@
     <!-- GROUPING -->
     <!--ROW TWO-->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/firstNameInputLayout"
+        android:id="@+id/tilFirstName"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/first_name"
         app:startIconDrawable="@drawable/ic_profile"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/emailInputLayout"
-        app:layout_constraintEnd_toStartOf="@+id/lastNameInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/tilEmail"
+        app:layout_constraintEnd_toStartOf="@+id/tilLastName"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="@id/guidelineRowOne">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/firstName"
+            android:id="@+id/etFirstName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lastNameInputLayout"
+        android:id="@+id/tilLastName"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/last_name"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/emailInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/tilEmail"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toEndOf="@+id/firstNameInputLayout"
-        app:layout_constraintTop_toTopOf="@id/firstNameInputLayout">
+        app:layout_constraintStart_toEndOf="@+id/tilFirstName"
+        app:layout_constraintTop_toTopOf="@id/tilFirstName">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/lastName"
+            android:id="@+id/etLastName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInputLayout"
+        android:id="@+id/tilEmail"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/email"
         app:startIconDrawable="@drawable/ic_email"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPhoneNumberInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/firstNameInputLayout">
+        app:layout_constraintBottom_toTopOf="@+id/tilPhoneNumber"
+        app:layout_constraintEnd_toEndOf="@id/tilLastName"
+        app:layout_constraintStart_toStartOf="@+id/tilFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/tilFirstName">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/email"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textEmailAddress"/>
@@ -131,24 +131,24 @@
         android:layout_height="wrap_content"
         app:layout_constraintVertical_bias="0.4"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@id/firstNameInputLayout"
-        app:layout_constraintTop_toTopOf="@+id/editTextPhoneNumberInputLayout"
-        app:layout_constraintEnd_toStartOf="@+id/editTextPhoneNumberInputLayout"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextPhoneNumberInputLayout"/>
+        app:layout_constraintStart_toStartOf="@id/tilFirstName"
+        app:layout_constraintTop_toTopOf="@+id/tilPhoneNumber"
+        app:layout_constraintEnd_toStartOf="@+id/tilPhoneNumber"
+        app:layout_constraintBottom_toBottomOf="@+id/tilPhoneNumber"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextPhoneNumberInputLayout"
+        android:id="@+id/tilPhoneNumber"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/phone_number"
         app:startIconDrawable="@drawable/ic_smartphone"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPasswordInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/tilPassword"
+        app:layout_constraintEnd_toEndOf="@id/tilLastName"
         app:layout_constraintStart_toEndOf="@+id/ccp"
-        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/tilEmail">
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editTextPhoneNumber"
+            android:id="@+id/etPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="numberDecimal"
@@ -157,27 +157,27 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextPasswordInputLayout"
+        android:id="@+id/tilPassword"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/password"
         app:startIconDrawable="@drawable/ic_password"
         app:passwordToggleEnabled="true"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintBottom_toTopOf="@+id/editTextConfirmPasswordInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumberInputLayout">
+        app:layout_constraintBottom_toTopOf="@+id/tilConfirmPassword"
+        app:layout_constraintEnd_toEndOf="@id/tilLastName"
+        app:layout_constraintStart_toStartOf="@+id/tilFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/tilPhoneNumber">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextConfirmPasswordInputLayout"
+        android:id="@+id/tilConfirmPassword"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/confirm_password"
@@ -185,12 +185,12 @@
         app:passwordToggleEnabled="true"
         app:helperTextTextColor="@color/red"
         app:layout_constraintBottom_toTopOf="@+id/checkboxTermsAndCondition"
-        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordInputLayout">
+        app:layout_constraintEnd_toEndOf="@id/tilLastName"
+        app:layout_constraintStart_toStartOf="@+id/tilFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/tilPassword">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editTextConfirmPassword"
+            android:id="@+id/etConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"/>
@@ -204,16 +204,15 @@
         android:fontFamily="@font/product_sans_regular"
         android:textSize="@dimen/fifteenSp"
         app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
-        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPasswordInputLayout"/>
+        app:layout_constraintEnd_toEndOf="@id/tilLastName"
+        app:layout_constraintStart_toStartOf="@+id/tilFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/tilConfirmPassword"/>
     <!--ROW THREE-->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnContinue"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/american_yellow"
-        android:drawableStart="@drawable/ic_call"
         android:fontFamily="@font/product_sans_bold"
         android:text="@string/btnContinue"
         android:textColor="@color/white"

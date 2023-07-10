@@ -10,7 +10,7 @@
     <string name="don_t_have_an_account">Don’t have an account?</string>
     <string name="create_one">Create one.</string>
     <string name="signup">SignUp</string>
-    <string name="first_name">First Name</string>
+    <string name="first_name">First Name*</string>
     <string name="phone_number">Phone Number*</string>
     <string name="last_name">Last Name</string>
     <string name="confirm_password">Confirm Password*</string>
@@ -35,4 +35,5 @@
     <string name="share">Share</string>
     <string name="setting">Setting</string>
     <string name="btnContinue">Continue</string>
+    <string name="username">\@sultanalmaadeed</string>
 </resources>

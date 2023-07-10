@@ -53,7 +53,7 @@
 
     <!--    Row one-->
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnClose"
+        android:id="@+id/ivClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_close"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageBrandLogo"
+        android:id="@+id/ivBrandLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/guidelineRowOne"
@@ -71,7 +71,7 @@
         app:srcCompat="@drawable/ic_brandlogo_img" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInputLayout"
+        android:id="@+id/tilEmail"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
         android:hint="@string/email"
@@ -81,49 +81,49 @@
         app:layout_constraintTop_toTopOf="@id/guidelineRowOne">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/email"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_profile"
             android:drawablePadding="@dimen/twentyDp"
-            android:labelFor="@id/email"
+            android:labelFor="@id/etEmail"
             android:inputType="textEmailAddress"
             android:padding="@dimen/fifteenDp"
             android:textAppearance="@style/styleEditText"
             android:textSize="@dimen/fifteenSp" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordInputLayout"
+        android:id="@+id/tilPassword"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
         android:hint="@string/password"
         app:passwordToggleEnabled="true"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintEnd_toEndOf="@id/emailInputLayout"
-        app:layout_constraintStart_toStartOf="@id/emailInputLayout"
-        app:layout_constraintTop_toBottomOf="@id/emailInputLayout">
+        app:layout_constraintEnd_toEndOf="@id/tilEmail"
+        app:layout_constraintStart_toStartOf="@id/tilEmail"
+        app:layout_constraintTop_toBottomOf="@id/tilEmail">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/password"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_password"
             android:drawablePadding="@dimen/twentyDp"
-            android:labelFor="@id/password"
+            android:labelFor="@id/etPassword"
             android:inputType="textPassword"
             android:padding="@dimen/fifteenDp"
             android:textAppearance="@style/styleEditText" />
     </com.google.android.material.textfield.TextInputLayout>
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textForgotPassword"
+        android:id="@+id/tvForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/forgot_password"
         android:textAlignment="center"
         android:textColor="@color/bluebonnet"
         android:textSize="@dimen/thirteenSp"
-        app:layout_constraintEnd_toEndOf="@id/emailInputLayout"
-        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
+        app:layout_constraintEnd_toEndOf="@id/tilEmail"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword" />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
         android:layout_width="@dimen/zeroDp"
@@ -139,24 +139,24 @@
         android:onClick="onLoginClick"
         android:textAppearance="@style/btnBaseStyle"
 
-        app:layout_constraintEnd_toEndOf="@id/emailInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/tilEmail"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/emailInputLayout"
-        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
+        app:layout_constraintStart_toStartOf="@id/tilEmail"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword" />
     <!--    Horizontal line START-->
     <View
-        android:id="@+id/leftDivider"
+        android:id="@+id/viewLeftDivider"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/oneDp"
         android:layout_marginTop="@dimen/twentyDp"
         android:background="@color/coolGrey"
-        app:layout_constraintEnd_toStartOf="@+id/textOr"
+        app:layout_constraintEnd_toStartOf="@+id/tvOr"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
 
         />
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textOr"
+        android:id="@+id/tvOr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/tenDp"
@@ -164,17 +164,17 @@
         android:text="@string/or"
         android:textColor="@color/spaceCadet"
         android:textSize="@dimen/fifteenSp"
-        app:layout_constraintEnd_toStartOf="@+id/rightDivider"
-        app:layout_constraintStart_toEndOf="@+id/leftDivider"
+        app:layout_constraintEnd_toStartOf="@+id/viewRightDivider"
+        app:layout_constraintStart_toEndOf="@+id/viewLeftDivider"
         app:layout_constraintTop_toBottomOf="@id/btnLogin" />
     <View
-        android:id="@+id/rightDivider"
+        android:id="@+id/viewRightDivider"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/oneDp"
         android:layout_marginTop="@dimen/twentyDp"
         android:background="@color/coolGrey"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toEndOf="@id/textOr"
+        app:layout_constraintStart_toEndOf="@id/tvOr"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
 
         />
@@ -200,7 +200,7 @@
         app:layout_constraintEnd_toEndOf="@id/btnLogin"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/btnLogin"
-        app:layout_constraintTop_toBottomOf="@id/leftDivider" />
+        app:layout_constraintTop_toBottomOf="@id/viewLeftDivider" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLoginWithGoogle"
@@ -245,7 +245,7 @@
         app:layout_constraintTop_toBottomOf="@id/btnLoginWithGoogle" />
     <!--    Row Three-->
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/dontHaveAnAccount"
+        android:id="@+id/tvDontHaveAnAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/don_t_have_an_account"
@@ -255,12 +255,12 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.7"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
-        app:layout_constraintEnd_toStartOf="@+id/createOne"
+        app:layout_constraintEnd_toStartOf="@+id/tvCreateOne"
         app:layout_constraintStart_toStartOf="@+id/btnLoginWithPhoneNumber"
         app:layout_constraintTop_toTopOf="@id/guidelineRowTwo" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/createOne"
+        android:id="@+id/tvCreateOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_one"
@@ -271,7 +271,7 @@
         app:layout_constraintVertical_bias="0.7"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="@+id/btnLoginWithPhoneNumber"
-        app:layout_constraintStart_toEndOf="@id/dontHaveAnAccount"
+        app:layout_constraintStart_toEndOf="@id/tvDontHaveAnAccount"
         app:layout_constraintTop_toTopOf="@id/guidelineRowTwo" />
 
 

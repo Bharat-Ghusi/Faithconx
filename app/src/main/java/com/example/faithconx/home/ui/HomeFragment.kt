@@ -46,12 +46,12 @@ private var randomUsers: RandomUsers? = null
         progressVisibility.observe(viewLifecycleOwner, Observer {
             //Set visibility of progressbar and recycler view true:Progressbar false: recyclerview
             if(it){
-                binding.recyclerHomeFragment.visibility = View.GONE
-                binding.progressBar.visibility = View.VISIBLE
+                binding.rvNewPost.visibility = View.GONE
+                binding.pbHome.visibility = View.VISIBLE
             }
             else{
-                binding.recyclerHomeFragment.visibility = View.VISIBLE
-                binding.progressBar.visibility = View.GONE
+                binding.rvNewPost.visibility = View.VISIBLE
+                binding.pbHome.visibility = View.GONE
             }
         })
     }
@@ -66,9 +66,9 @@ private var randomUsers: RandomUsers? = null
 
 
     private fun setDataToAdapter(users:RandomUsers?) {
-        binding.recyclerHomeFragment.layoutManager= LinearLayoutManager(context)
+        binding.rvNewPost.layoutManager= LinearLayoutManager(context)
         randomUsersAdapter = RandomUsersAdapter(list) //empty list
-        binding.recyclerHomeFragment.adapter = randomUsersAdapter
+        binding.rvNewPost.adapter = randomUsersAdapter
 
     }
 

@@ -28,17 +28,17 @@ class RandomUsersAdapter(var resultList: MutableList<Result>?): Adapter<RandomUs
 
     override fun onBindViewHolder(holder: RandomUsersViewHolder, position: Int) {
         resultList?.let {
-            holder.binding.textTitle.text = it[position].location.city
-            holder.binding.textSubTitle.text = "${it[position].name.first} ${it[position].name.last}"
-            holder.binding.textNameOne.text = it[position].email
-            holder.binding.textNameTwo.text = it[position].name.first
-            holder.binding.textNameThree.text = it[position].gender
-            holder.binding.textNameFour.text = it[position].phone
+            holder.binding.tvTitle.text = it[position].location.city
+            holder.binding.tvSubTitle.text = "${it[position].name.first} ${it[position].name.last}"
+            holder.binding.tvFirstName.text = it[position].email
+            holder.binding.tvSecondName.text = it[position].name.first
+            holder.binding.tvThirdName.text = it[position].gender
+            holder.binding.tvFourName.text = it[position].phone
            if(it[position].picture.thumbnail.endsWith("jpg",true) && it[position].picture.thumbnail.isNotBlank()){
-            Glide.with(holder.binding.imgProfileTwo.context).load(it[position].picture.thumbnail)
+            Glide.with(holder.binding.ivProfileTwo.context).load(it[position].picture.thumbnail)
                 .apply(RequestOptions().override(100,100))
 
-                .into(holder.binding.imgProfileTwo)
+                .into(holder.binding.ivProfileTwo)
            }
 
         }

@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        binding.bottomNavViewMainActivity.setOnItemSelectedListener(this)
+        binding.btmNavView.setOnItemSelectedListener(this)
 
         setContentView(binding.root)
         setHomeFragment()
@@ -26,11 +26,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun setHomeFragment():Boolean {
-       return supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, HomeFragment()).commit() > 0
+       return supportFragmentManager.beginTransaction().add(R.id.fcvMain, HomeFragment()).commit() > 0
     }
 
     private fun setProfileFragment():Boolean {
-        return supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer,
+        return supportFragmentManager.beginTransaction().replace(R.id.fcvMain,
             ProfileFragment()
         ).commit() > 0
     }

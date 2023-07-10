@@ -39,20 +39,22 @@ class ActivitySignup : AppCompatActivity() {
      * This method will check if fields are at least contain something
      */
     private fun onFocusChangeValidate() {
-        binding.firstName.setOnFocusChangeListener { v, hasFocus -> firstNameFocusCheck(hasFocus) }
-        binding.lastName.setOnFocusChangeListener { v, hasFocus -> lastNameFocusCheck(hasFocus) }
-        binding.email.setOnFocusChangeListener { v, hasFocus -> emailNameFocusCheck(hasFocus) }
-        binding.editTextPhoneNumber.setOnFocusChangeListener { v, hasFocus ->
+        binding.etFirstName.setOnFocusChangeListener { v, hasFocus -> firstNameFocusCheck(hasFocus) }
+        binding.etLastName
+
+.setOnFocusChangeListener { v, hasFocus -> lastNameFocusCheck(hasFocus) }
+        binding.etEmail.setOnFocusChangeListener { v, hasFocus -> emailNameFocusCheck(hasFocus) }
+        binding.etPhoneNumber.setOnFocusChangeListener { v, hasFocus ->
             phoneNumberFocusCheck(
                 hasFocus
             )
         }
-        binding.editTextPassword.setOnFocusChangeListener { v, hasFocus ->
+        binding.etPassword.setOnFocusChangeListener { v, hasFocus ->
             passwordFocusCheck(
                 hasFocus
             )
         }
-        binding.editTextConfirmPassword.setOnFocusChangeListener { v, hasFocus ->
+        binding.etConfirmPassword.setOnFocusChangeListener { v, hasFocus ->
             confirmPasswordFocusCheck(
                 hasFocus
             )
@@ -61,76 +63,76 @@ class ActivitySignup : AppCompatActivity() {
 
     private fun confirmPasswordFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            if (binding.editTextConfirmPassword.text.toString().length < 5) {
-                binding.editTextConfirmPasswordInputLayout.isHelperTextEnabled = true
-                binding.editTextConfirmPasswordInputLayout.helperText="Password must be 6 digit or above."
+            if (binding.etConfirmPassword.text.toString().length < 5) {
+                binding.tilConfirmPassword.isHelperTextEnabled = true
+                binding.tilConfirmPassword.helperText="Password must be 6 digit or above."
             } else
-                binding.editTextConfirmPasswordInputLayout.isHelperTextEnabled = false
+                binding.tilConfirmPassword.isHelperTextEnabled = false
         } else {
-            binding.editTextConfirmPasswordInputLayout.isHelperTextEnabled = false
+            binding.tilConfirmPassword.isHelperTextEnabled = false
         }
     }
 
     private fun passwordFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            binding.editTextPasswordInputLayout.isHelperTextEnabled = true
-            if (binding.editTextPassword.text.toString().length < 5) {
+            binding.tilPassword.isHelperTextEnabled = true
+            if (binding.etPassword.text.toString().length < 5) {
 
-                    binding.editTextPasswordInputLayout.helperText = "Password must be 6 digit or above."
+                    binding.tilPassword.helperText = "Password must be 6 digit or above."
 
             } else
-                binding.editTextPasswordInputLayout.isHelperTextEnabled = false
+                binding.tilPassword.isHelperTextEnabled = false
         } else {
-            binding.editTextPasswordInputLayout.isHelperTextEnabled = false
+            binding.tilPassword.isHelperTextEnabled = false
         }
     }
 
     private fun phoneNumberFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            if (binding.editTextPhoneNumber.text.toString().length == 10) {
-            binding.editTextPhoneNumberInputLayout.isHelperTextEnabled = true
-                binding.editTextPhoneNumberInputLayout.helperText = "Number should be 10 digit."
+            if (binding.etPhoneNumber.text.toString().length == 10) {
+            binding.tilPhoneNumber.isHelperTextEnabled = true
+                binding.tilPhoneNumber.helperText = "Number should be 10 digit."
             } else
-                binding.editTextPhoneNumberInputLayout.isHelperTextEnabled = false
+                binding.tilPhoneNumber.isHelperTextEnabled = false
         } else {
-            binding.editTextPhoneNumberInputLayout.isHelperTextEnabled = false
+            binding.tilPhoneNumber.isHelperTextEnabled = false
         }
     }
 
     private fun emailNameFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            if (binding.email.text.toString().length < 4) {
-            binding.emailInputLayout.isHelperTextEnabled = true
-               binding.emailInputLayout.helperText = "Lastname cannot be less than 5."
+            if (binding.etEmail.text.toString().length < 4) {
+            binding.tilEmail.isHelperTextEnabled = true
+               binding.tilEmail.helperText = "Lastname cannot be less than 5."
             } else
-                binding.emailInputLayout.isHelperTextEnabled = false
+                binding.tilEmail.isHelperTextEnabled = false
         } else {
-            binding.emailInputLayout.isHelperTextEnabled = false
+            binding.tilEmail.isHelperTextEnabled = false
         }
     }
 
 
     private fun lastNameFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            if (binding.lastName.text.toString().length < 4) {
-            binding.lastNameInputLayout.isHelperTextEnabled = true
-                setHelperText(binding.lastNameInputLayout, "Firstname cannot be less than 5.")
+            if (binding.etLastName.text.toString().length < 4) {
+            binding.tilLastName.isHelperTextEnabled = true
+                setHelperText(binding.tilLastName, "Firstname cannot be less than 5.")
             } else
-                binding.lastNameInputLayout.isHelperTextEnabled = false
+                binding.tilLastName.isHelperTextEnabled = false
         } else {
-            binding.lastNameInputLayout.isHelperTextEnabled = false
+            binding.tilLastName.isHelperTextEnabled = false
         }
     }
 
     private fun firstNameFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            if (binding.firstName.text.toString().length < 4) {
-            binding.firstNameInputLayout.isHelperTextEnabled = true
-                setHelperText(binding.firstNameInputLayout, "Firstname cannot be less than 5.")
+            if (binding.etFirstName.text.toString().length < 4) {
+            binding.tilFirstName.isHelperTextEnabled = true
+                setHelperText(binding.tilFirstName, "Firstname cannot be less than 5.")
             } else
-                binding.firstNameInputLayout.isHelperTextEnabled = false
+                binding.tilFirstName.isHelperTextEnabled = false
         } else {
-            binding.firstNameInputLayout.isHelperTextEnabled = false
+            binding.tilFirstName.isHelperTextEnabled = false
         }
     }
 
@@ -141,9 +143,9 @@ class ActivitySignup : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun registerUser() {
-        val password = binding.editTextPassword.text.toString().trim()
-        val confirmPassword = binding.editTextConfirmPassword.text.toString().trim()
-        val email = binding.email.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
+        val confirmPassword = binding.etConfirmPassword.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
         if(validateUserCred()) {
             Toast.makeText(this, "Check field and fill.", Toast.LENGTH_SHORT).show()
             return
@@ -155,9 +157,9 @@ class ActivitySignup : AppCompatActivity() {
         }
     }
     private fun validateUserCred(): Boolean {
-        return binding.email.text.toString().length < 8 && binding.editTextPassword.text.toString().length  < 5
-                && binding.firstName.text.toString().length < 3  && binding.lastName.text.toString().length < 3
-                && binding.editTextConfirmPassword.text.toString().length < 5
+        return binding.etEmail.text.toString().length < 8 && binding.etPassword.text.toString().length  < 5
+                && binding.etFirstName.text.toString().length < 3  && binding.etLastName.text.toString().length < 3
+                && binding.etConfirmPassword.text.toString().length < 5
     }
 
     private fun validateUserDetails(password: String, confirmPassword: String): Boolean {
@@ -171,12 +173,14 @@ class ActivitySignup : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveToDb() {
-        val firstName = binding.firstName.text.toString().trim()
-        val lastName = binding.lastName.text.toString().trim()
-        val email = binding.email.text.toString().trim()
-        binding.ccp.registerCarrierNumberEditText(binding.editTextPhoneNumber)
+        val firstName = binding.etFirstName.text.toString().trim()
+        val lastName = binding.etLastName
+
+.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
+        binding.ccp.registerCarrierNumberEditText(binding.etPhoneNumber)
         val number = binding.ccp.fullNumberWithPlus
-        val password = binding.editTextPassword.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
         //Second store the user details
         firebaseAuth.uid?.let {
             firebaseDatabase.reference.child(Constants.USERS_DB_NAME)
