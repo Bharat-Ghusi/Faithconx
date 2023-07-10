@@ -75,6 +75,7 @@
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
         android:hint="@string/email"
+        app:helperTextTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="@id/guidelineRowOne">
@@ -97,6 +98,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/password"
         app:passwordToggleEnabled="true"
+        app:helperTextTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="@id/emailInputLayout"
         app:layout_constraintStart_toStartOf="@id/emailInputLayout"
         app:layout_constraintTop_toBottomOf="@id/emailInputLayout">
@@ -134,7 +136,7 @@
         android:padding="@dimen/twentyDp"
         android:textSize="@dimen/FourteenSp"
         android:background="@drawable/btn_round"
-
+        android:onClick="onLoginClick"
         android:textAppearance="@style/btnBaseStyle"
 
         app:layout_constraintEnd_toEndOf="@id/emailInputLayout"
@@ -264,6 +266,7 @@
         android:text="@string/create_one"
         android:fontFamily="@font/product_sans_bold"
         android:textColor="@color/cinnabar"
+        android:onClick="onCreateOneClick"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.7"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"

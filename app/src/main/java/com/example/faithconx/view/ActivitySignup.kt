@@ -3,6 +3,7 @@ package com.example.faithconx.view
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -10,20 +11,27 @@ import com.example.faithconx.databinding.ActivitySignupBinding
 import com.example.faithconx.model.User
 import com.example.faithconx.util.Constants
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
+import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import java.time.LocalDateTime
 
 class ActivitySignup : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
     private val firebaseDatabase = FirebaseDatabase.getInstance()
+    private val firebaseAuth = FirebaseAuth.getInstance()
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
         onFocusChangeValidate()
-        registerUser()
+        setOnClickListener()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setOnClickListener() {
+        binding.btnContinue.setOnClickListener { registerUser() }
     }
 
     /**
@@ -52,74 +60,81 @@ class ActivitySignup : AppCompatActivity() {
 
     private fun confirmPasswordFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            binding.editTextConfirmPasswordInputLayout.isErrorEnabled = true
-            if (binding.editTextConfirmPassword.text.toString().length < 2) {
-                binding.editTextConfirmPasswordInputLayout.error = "Password cannot be less than 4"
-            } else {
-                binding.editTextConfirmPasswordInputLayout.isErrorEnabled = false
-            }
-
+            if (binding.editTextConfirmPassword.text.toString().length < 5) {
+                binding.editTextConfirmPasswordInputLayout.isHelperTextEnabled = true
+                binding.editTextConfirmPasswordInputLayout.helperText="Password must be 6 digit or above."
+            } else
+                binding.editTextConfirmPasswordInputLayout.isHelperTextEnabled = false
+        } else {
+            binding.editTextConfirmPasswordInputLayout.isHelperTextEnabled = false
         }
     }
 
     private fun passwordFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            binding.editTextPasswordInputLayout.isErrorEnabled = true
-            if (binding.editTextPassword.text.toString().length < 2) {
-                binding.editTextPasswordInputLayout.error = "Password cannot be less than 4"
-            } else {
-                binding.editTextPasswordInputLayout.isErrorEnabled = false
-            }
+            binding.editTextPasswordInputLayout.isHelperTextEnabled = true
+            if (binding.editTextPassword.text.toString().length < 5) {
 
+                    binding.editTextPasswordInputLayout.helperText = "Password must be 6 digit or above."
+
+            } else
+                binding.editTextPasswordInputLayout.isHelperTextEnabled = false
+        } else {
+            binding.editTextPasswordInputLayout.isHelperTextEnabled = false
         }
     }
 
     private fun phoneNumberFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            binding.editTextPhoneNumberInputLayout.isErrorEnabled = true
-            if (binding.editTextPhoneNumber.text.toString().length != 10) {
-                binding.editTextPhoneNumberInputLayout.error = "Number should be 10 digit."
-            } else {
-                binding.editTextPhoneNumberInputLayout.isErrorEnabled = false
-            }
-
+            if (binding.editTextPhoneNumber.text.toString().length == 10) {
+            binding.editTextPhoneNumberInputLayout.isHelperTextEnabled = true
+                binding.editTextPhoneNumberInputLayout.helperText = "Number should be 10 digit."
+            } else
+                binding.editTextPhoneNumberInputLayout.isHelperTextEnabled = false
+        } else {
+            binding.editTextPhoneNumberInputLayout.isHelperTextEnabled = false
         }
     }
 
     private fun emailNameFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            binding.emailInputLayout.isErrorEnabled = true
-            if (binding.email.text.toString().length < 2) {
-                binding.emailInputLayout.error = "Email cannot be less than 5"
-            } else {
-                binding.emailInputLayout.isErrorEnabled = false
-            }
-
+            if (binding.email.text.toString().length < 4) {
+            binding.emailInputLayout.isHelperTextEnabled = true
+               binding.emailInputLayout.helperText = "Lastname cannot be less than 5."
+            } else
+                binding.emailInputLayout.isHelperTextEnabled = false
+        } else {
+            binding.emailInputLayout.isHelperTextEnabled = false
         }
     }
 
+
     private fun lastNameFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            binding.lastNameInputLayout.isErrorEnabled = true
-            if (binding.lastName.text.toString().length < 2) {
-                binding.lastNameInputLayout.error = "Lastname cannot be less than 3"
-            } else {
-                binding.lastNameInputLayout.isErrorEnabled = false
-            }
-
+            if (binding.lastName.text.toString().length < 4) {
+            binding.lastNameInputLayout.isHelperTextEnabled = true
+                setHelperText(binding.lastNameInputLayout, "Firstname cannot be less than 5.")
+            } else
+                binding.lastNameInputLayout.isHelperTextEnabled = false
+        } else {
+            binding.lastNameInputLayout.isHelperTextEnabled = false
         }
     }
 
     private fun firstNameFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
-            binding.firstNameInputLayout.isErrorEnabled = true
-            if (binding.firstName.text.toString().length < 2) {
-                binding.firstNameInputLayout.error = "firstname cannot be less than 3"
-            } else {
-                binding.firstNameInputLayout.isErrorEnabled = false
-            }
-
+            if (binding.firstName.text.toString().length < 4) {
+            binding.firstNameInputLayout.isHelperTextEnabled = true
+                setHelperText(binding.firstNameInputLayout, "Firstname cannot be less than 5.")
+            } else
+                binding.firstNameInputLayout.isHelperTextEnabled = false
+        } else {
+            binding.firstNameInputLayout.isHelperTextEnabled = false
         }
+    }
+
+    private fun setHelperText(edittext: TextInputLayout, msg: String) {
+        edittext.helperText = msg
     }
 
 
@@ -127,11 +142,22 @@ class ActivitySignup : AppCompatActivity() {
     private fun registerUser() {
         val password = binding.editTextPassword.text.toString().trim()
         val confirmPassword = binding.editTextConfirmPassword.text.toString().trim()
-        if (validateUserDetails(password, confirmPassword)) {
-            saveToDb()
+        val email = binding.email.text.toString().trim()
+        if(validateUserCred()) {
+            Toast.makeText(this, "Check field and fill.", Toast.LENGTH_SHORT).show()
+            return
+        }else if (validateUserDetails(password, confirmPassword)) {
+            loginUserWithEmailAndPassword(email, password)
+        } else {
+            Toast.makeText(this, "Password and confirm password doesn't match.", Toast.LENGTH_LONG)
+                .show()
         }
     }
-
+    private fun validateUserCred(): Boolean {
+        return binding.email.text.toString().length < 8 && binding.editTextPassword.text.toString().length  < 5
+                && binding.firstName.text.toString().length < 3  && binding.lastName.text.toString().length < 3
+                && binding.editTextConfirmPassword.text.toString().length < 5
+    }
 
     private fun validateUserDetails(password: String, confirmPassword: String): Boolean {
         return if (!binding.checkboxTermsAndCondition.isChecked) {
@@ -147,19 +173,51 @@ class ActivitySignup : AppCompatActivity() {
         val firstName = binding.firstName.text.toString().trim()
         val lastName = binding.lastName.text.toString().trim()
         val email = binding.email.text.toString().trim()
-        val number = binding.editTextPhoneNumber.text.toString().trim()
+        binding.ccp.registerCarrierNumberEditText(binding.editTextPhoneNumber)
+        val number = binding.ccp.fullNumberWithPlus
         val password = binding.editTextPassword.text.toString().trim()
-        val time = LocalDateTime.now().toString()
-        firebaseDatabase.reference.child(Constants.USERS_DB_NAME)
-            .child(Constants.USERS_DB_CHILD_NAME+time).setValue(User(firstName, lastName , email,number,password)).
-                addOnCompleteListener(this@ActivitySignup, OnCompleteListener {task ->
-                    if(task.isSuccessful){
-                        startActivity(Intent(this@ActivitySignup,ActivityLogin::class.java))
+        //Second store the user details
+        firebaseAuth.uid?.let {
+            firebaseDatabase.reference.child(Constants.USERS_DB_NAME)
+                .child(it).setValue(User(firstName, lastName, email, number))
+                .addOnCompleteListener(this@ActivitySignup, OnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            this@ActivitySignup,
+                            "Registration Successful",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        startActivity(Intent(this@ActivitySignup, ActivityLogin::class.java))
                         finish()
-                    }else{
-                        Toast.makeText(this@ActivitySignup,"Registration failed",Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(
+                            this@ActivitySignup,
+                            "Registration failed",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 })
+        }
+
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun loginUserWithEmailAndPassword(email: String, password: String) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("TAG", "signInWithCustomToken:success")
+                    saveToDb()
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("TAG", "signInWithCustomToken:failure", task.exception)
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+    }
 }
