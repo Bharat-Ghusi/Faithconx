@@ -12,7 +12,7 @@
     <string name="signup">SignUp</string>
     <string name="first_name">First Name</string>
     <string name="phone_number">Phone Number*</string>
-    <string name="last_name">Last Name*</string>
+    <string name="last_name">Last Name</string>
     <string name="confirm_password">Confirm Password*</string>
     <string name="termsAndCondition">I accept terms and conditions and privacy policies.</string>
     <string name="home">Home</string>

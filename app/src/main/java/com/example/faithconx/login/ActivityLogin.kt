@@ -1,18 +1,15 @@
-package com.example.faithconx.view
+package com.example.faithconx.login
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityLoginBinding
-import com.example.faithconx.firebasedbpractice.HomeActivity
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+import com.example.faithconx.view.ActivityOtpVerification
+import com.example.faithconx.signup.ui.ActivitySignup
+import com.example.faithconx.view.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class ActivityLogin : AppCompatActivity() {
@@ -31,6 +28,7 @@ class ActivityLogin : AppCompatActivity() {
     }
 
     private fun passwordBoxFocusChange(v: View?, hasFocus: Boolean) {
+        //Change to when and optimize
         if(!hasFocus){
             if(binding.password.text.toString().length < 4){
             binding.passwordInputLayout.isHelperTextEnabled = true
@@ -46,6 +44,7 @@ class ActivityLogin : AppCompatActivity() {
     }
 
     private fun emailBoxFocusChange(v: View?, hasFocus: Boolean) {
+        //Change to when and optimize
        if(!hasFocus){
            if(binding.email.text.toString().length < 4){
            binding.emailInputLayout.isHelperTextEnabled = true
@@ -58,7 +57,8 @@ class ActivityLogin : AppCompatActivity() {
     }
 
     private fun setOnClickListener() {
-
+  //Change to VIew.onClickListener()
+        //use when and scope function
             binding.btnLoginWithPhoneNumber.setOnClickListener { onClickLoginWithPhoneNumber(it) }
             binding.btnLogin.setOnClickListener { onLoginClick(it) }
             binding.createOne.setOnClickListener { onCreateOneClick(it) }
@@ -66,11 +66,12 @@ class ActivityLogin : AppCompatActivity() {
     }
 
     fun onClickLoginWithPhoneNumber(view: View) {
-        startActivity(Intent(this,ActivityOtpVerification::class.java))
+        startActivity(Intent(this, ActivityOtpVerification::class.java))
     }
-
+//sepa
     fun onLoginClick(view: View) {
         if(validateUserCred()) {
+            //use string resource
             Toast.makeText(this, "Password or email must be 8 digit", Toast.LENGTH_SHORT).show()
             return
         }
@@ -95,6 +96,6 @@ class ActivityLogin : AppCompatActivity() {
 
 
     fun onCreateOneClick(view: View) {
-        startActivity(Intent(this,ActivitySignup::class.java))
+        startActivity(Intent(this, ActivitySignup::class.java))
     }
 }

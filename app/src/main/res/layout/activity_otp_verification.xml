@@ -20,7 +20,7 @@
         android:id="@+id/imageBrandLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/brandlogo_img"
+        app:srcCompat="@drawable/ic_brandlogo_img"
         android:layout_marginBottom="@dimen/fifteenDp"
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintTop_toTopOf="parent"
