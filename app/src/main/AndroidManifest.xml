@@ -17,7 +17,20 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".view.MainActivity"
+            android:name=".firebasedbpractice.UploadObjectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".firebasedbpractice.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".firebasedbpractice.SigninActivity"
+            android:exported="false" />
+
+
+
+
+        <activity
+            android:name=".view.ActivitySignup"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
@@ -26,18 +39,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".randomusers.RandomUsersActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ActivitySignup"
+            android:name=".view.ActivityLogin"
             android:exported="false" />
         <activity
             android:name=".view.ActivityOtpVerification"
             android:exported="false" />
-        <activity android:name=".view.ActivityLogin" />
+        <activity android:name=".view.MainActivity" />
 
-
+        <activity android:name=".firebasedbpractice.RegisterActivity" />
     </application>
 
 </manifest>

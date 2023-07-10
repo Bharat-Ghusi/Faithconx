@@ -75,8 +75,9 @@
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/first_name"
         app:startIconDrawable="@drawable/profile"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/emailInputLayout"
-        app:layout_constraintEnd_toStartOf="@+id/LastNameInputLayout"
+        app:layout_constraintEnd_toStartOf="@+id/lastNameInputLayout"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="@id/guidelineRowOne">
 
@@ -88,17 +89,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/LastNameInputLayout"
+        android:id="@+id/lastNameInputLayout"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/last_name"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/emailInputLayout"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toEndOf="@+id/firstNameInputLayout"
         app:layout_constraintTop_toTopOf="@id/firstNameInputLayout">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/LastName"
+            android:id="@+id/lastName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"/>
@@ -110,8 +112,9 @@
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/email"
         app:startIconDrawable="@drawable/email"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/editTextPhoneNumberInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
         app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/firstNameInputLayout">
 
@@ -122,18 +125,28 @@
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/firstNameInputLayout"
+        app:layout_constraintTop_toTopOf="@+id/editTextPhoneNumberInputLayout"
+        app:layout_constraintEnd_toStartOf="@+id/editTextPhoneNumberInputLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPhoneNumberInputLayout"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextPhoneNumberInputLayout"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/phone_number"
         app:startIconDrawable="@drawable/smartphone_call"
-        app:prefixText="+91"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/editTextPasswordInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
+        app:layout_constraintStart_toEndOf="@+id/ccp"
         app:layout_constraintTop_toBottomOf="@+id/emailInputLayout">
-
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/editTextPhoneNumber"
             android:layout_width="match_parent"
@@ -150,8 +163,9 @@
         android:hint="@string/password"
         app:startIconDrawable="@drawable/password"
         app:passwordToggleEnabled="true"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/editTextConfirmPasswordInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
         app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumberInputLayout">
 
@@ -169,8 +183,9 @@
         android:hint="@string/confirm_password"
         app:startIconDrawable="@drawable/confirm_password"
         app:passwordToggleEnabled="true"
+
         app:layout_constraintBottom_toTopOf="@+id/checkboxTermsAndCondition"
-        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
         app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordInputLayout">
 
@@ -189,7 +204,7 @@
         android:fontFamily="@font/product_sans_regular"
         android:textSize="@dimen/fifteenSp"
         app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
-        app:layout_constraintEnd_toEndOf="@id/LastNameInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/lastNameInputLayout"
         app:layout_constraintStart_toStartOf="@+id/firstNameInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPasswordInputLayout"/>
     <!--ROW THREE-->
