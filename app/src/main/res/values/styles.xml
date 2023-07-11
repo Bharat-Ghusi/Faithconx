@@ -48,6 +48,8 @@
         <item name="fontFamily">@font/gotham_rounded_bold</item>
         <item name="android:textSize">@dimen/FourteenSp</item>
     </style>
+
+
     <!--    Edittext fields theme-->
     <style name="edtStyle">
         <!-- Hint color and label color in FALSE state -->
@@ -59,7 +61,6 @@
             <item name="colorControlNormal">@color/Color Name</item>      -->
 <!--   Helper text     -->
         <item name="helperTextTextColor">@color/red</item>
-
     </style>
 
 </resources>

@@ -96,10 +96,10 @@
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="@id/guidelineRowOne">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFirstName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,10 +114,10 @@
         app:layout_constraintStart_toEndOf="@+id/tilFirstName"
         app:layout_constraintTop_toTopOf="@id/tilFirstName">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etLastName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,11 +132,12 @@
         app:layout_constraintEnd_toEndOf="@id/tilLastName"
         app:layout_constraintStart_toStartOf="@+id/tilFirstName"
         app:layout_constraintTop_toBottomOf="@+id/tilFirstName">
+        
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,10 +163,10 @@
         app:layout_constraintEnd_toEndOf="@id/tilLastName"
         app:layout_constraintStart_toEndOf="@+id/ccp"
         app:layout_constraintTop_toBottomOf="@+id/tilEmail">
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPhoneNumber"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:maxLength="10"
             />
@@ -184,10 +185,10 @@
         app:layout_constraintStart_toStartOf="@+id/tilFirstName"
         app:layout_constraintTop_toBottomOf="@+id/tilPhoneNumber">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -204,10 +205,10 @@
         app:layout_constraintStart_toStartOf="@+id/tilFirstName"
         app:layout_constraintTop_toBottomOf="@+id/tilPassword">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etConfirmPassword"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
     <androidx.appcompat.widget.AppCompatCheckBox
@@ -233,7 +234,7 @@
         android:textColor="@color/white"
         android:background="@drawable/btn_round_shape"
         android:layout_marginTop="@dimen/tenDp"
-
+        android:onClick="onContinueClick"
         android:padding="@dimen/fifteenDp"
         android:textAppearance="@style/btnBaseStyle"
 
