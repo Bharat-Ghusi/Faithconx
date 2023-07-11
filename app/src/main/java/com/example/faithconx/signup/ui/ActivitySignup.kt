@@ -11,17 +11,23 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivitySignupBinding
 import com.example.faithconx.login.ui.ActivityLogin
-import com.example.faithconx.model.User
+import com.example.faithconx.signup.viewmodel.AuthViewModel
+import com.example.faithconx.signup.viewmodel.DatabaseViewModel
 import com.example.faithconx.util.Constants
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class ActivitySignup : AppCompatActivity(), View.OnClickListener {
+    companion object {
+        private const val TAG = "ActivitySignup"
+    }
+
     private lateinit var binding: ActivitySignupBinding
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private val firebaseAuth = FirebaseAuth.getInstance()
+    private val databaseViewModel = DatabaseViewModel()
+    private val authModel = AuthViewModel()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -192,56 +198,47 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveToDb() {
         val firstName = binding.etFirstName.text.toString().trim()
-        val lastName = binding.etLastName
-
-            .text.toString().trim()
+        val lastName = binding.etLastName.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
         binding.ccp.registerCarrierNumberEditText(binding.etPhoneNumber)
         val number = binding.ccp.fullNumberWithPlus
         val password = binding.etPassword.text.toString().trim()
-        //Second store the user details
-        firebaseAuth.uid?.let {
-            firebaseDatabase.reference.child(Constants.USERS_DB_NAME)
-                .child(it).setValue(User(firstName, lastName, email, number))
-                .addOnCompleteListener(this@ActivitySignup, OnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(
-                            this@ActivitySignup,
-                            "Registration Successful",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        startActivity(Intent(this@ActivitySignup, ActivityLogin::class.java))
-                        finish()
-                    } else {
-                        Toast.makeText(
-                            this@ActivitySignup,
-                            "Registration failed",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                })
+        //store the user details
+        databaseViewModel.saveUserDetailsToDb(firstName, lastName, email, number, firebaseAuth)
+        databaseViewModel.getDataSavingState().observe(this) { state ->
+            if (state) {
+                //Data save successfully
+                Log.i(TAG, Constants.SUCCESS_MSG_OF_SAVING_USER_DATA)
+                startActivity(Intent(this@ActivitySignup, ActivityLogin::class.java))
+                finish()
+            } else {
+                //Failed to save data
+                Log.i(TAG, Constants.FAILURE_MSG_OF_SAVING_USER_DATA)
+            }
         }
+//
+
 
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun loginUserWithEmailAndPassword(email: String, password: String) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithCustomToken:success")
-                    saveToDb()
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("TAG", "signInWithCustomToken:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+        authModel.register(email, password)
+        // User is already logged in,
+        if (firebaseAuth.currentUser != null) {
+            Log.i(TAG,firebaseAuth.currentUser.toString())
+            Toast.makeText(this, Constants.USER_ALREADY_LOGGEDIN_MSG, Toast.LENGTH_LONG).show()
+            return
+        }
+        authModel.getAuthenticationState().observe(
+            this
+        ) {
+            if (it) {
+                saveToDb()
+            } else {
+                Toast.makeText(this,Constants.AUHTENTICATION_FAILED_MSG,Toast.LENGTH_LONG).show()
             }
-
+        }
     }
 
 

@@ -332,4 +332,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivMemberOf"
         />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/ivMemberOf"
+        app:layout_constraintStart_toEndOf="@+id/guidelineStart"
+       />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
