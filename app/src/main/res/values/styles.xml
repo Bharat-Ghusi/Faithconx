@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<style name="btnBaseStyle" >
-    <item name="paddingStart">@dimen/fifteenDp</item>
-    <item name="paddingEnd">@dimen/fifteenDp</item>
+    <style name="btnBaseStyle">
+        <item name="paddingStart">@dimen/fifteenDp</item>
+        <item name="paddingEnd">@dimen/fifteenDp</item>
 
-    <item name="android:textSize">@dimen/fifteenSp</item>
-    <item name="textAllCaps" >false</item>
-    <item name="android:textAlignment">center</item>
-</style>
-    
-    
+        <item name="android:textSize">@dimen/fifteenSp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+
     <style name="styleEditText">
         <item name="android:textSize">@dimen/fifteenDp</item>
     </style>
-    
-<!--    New Post compact style-->
+
+    <!--    New Post compact style-->
     <style name="styleNewPost">
         <item name="android:textSize">@dimen/FourteenSp</item>
         <item name="fontFamily">@font/gotham_rounded_book</item>
     </style>
-<!--    STYLE FOR HOME LiST LAYOUT CHAT TEXT-->
+    <!--    STYLE FOR HOME LiST LAYOUT CHAT TEXT-->
     <style name="styleChatText">
         <item name="fontFamily">@font/gotham_rounded_book</item>
         <item name="android:textSize">@dimen/FourteenSp</item>
@@ -33,7 +33,7 @@
         <item name="fontFamily">@font/gotham_rounded_bold</item>
         <item name="android:textSize">@dimen/fifteenSp</item>
     </style>
-<!--Text style of profile-->
+    <!--Text style of profile-->
     <style name="textStyleGothamRoundedBook">
         <item name="fontFamily">@font/gotham_rounded_book</item>
         <item name="android:textSize">@dimen/thirteenSp</item>
@@ -43,9 +43,23 @@
         <item name="fontFamily">@font/gotham_rounded_medium</item>
         <item name="android:textSize">@dimen/sixteenSp</item>
     </style>
+
     <style name="textStyleGothamRoundedBold">
         <item name="fontFamily">@font/gotham_rounded_bold</item>
         <item name="android:textSize">@dimen/FourteenSp</item>
+    </style>
+    <!--    Edittext fields theme-->
+    <style name="edtStyle">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="hintTextColor">@color/primary_color_theme</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorControlActivated">@color/primary_color_theme</item>
+
+        <!--    <item name="colorAccent">@color/Color Name</item>
+            <item name="colorControlNormal">@color/Color Name</item>      -->
+<!--   Helper text     -->
+        <item name="helperTextTextColor">@color/red</item>
+
     </style>
 
 </resources>

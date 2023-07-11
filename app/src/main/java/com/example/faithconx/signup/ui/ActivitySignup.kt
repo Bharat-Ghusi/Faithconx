@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivitySignupBinding
 import com.example.faithconx.login.ui.ActivityLogin
 import com.example.faithconx.model.User
@@ -16,7 +18,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class ActivitySignup : AppCompatActivity() {
+class ActivitySignup : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivitySignupBinding
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -32,7 +34,22 @@ class ActivitySignup : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setOnClickListener() {
-        binding.btnContinue.setOnClickListener { registerUser() }
+        binding.btnClose.setOnClickListener(this@ActivitySignup)
+        binding.btnContinue.setOnClickListener(this@ActivitySignup)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.btnClose -> redirectToLoginScreen()
+            R.id.btnContinue -> registerUser()
+        }
+    }
+
+    //    1: redirect to login screen on click of close btn
+    private fun redirectToLoginScreen() {
+        startActivity(Intent(this, ActivityLogin::class.java))
+        finish()
     }
 
     /**
@@ -42,7 +59,7 @@ class ActivitySignup : AppCompatActivity() {
         binding.etFirstName.setOnFocusChangeListener { v, hasFocus -> firstNameFocusCheck(hasFocus) }
         binding.etLastName
 
-.setOnFocusChangeListener { v, hasFocus -> lastNameFocusCheck(hasFocus) }
+            .setOnFocusChangeListener { v, hasFocus -> lastNameFocusCheck(hasFocus) }
         binding.etEmail.setOnFocusChangeListener { v, hasFocus -> emailNameFocusCheck(hasFocus) }
         binding.etPhoneNumber.setOnFocusChangeListener { v, hasFocus ->
             phoneNumberFocusCheck(
@@ -65,7 +82,7 @@ class ActivitySignup : AppCompatActivity() {
         if (!hasFocus) {
             if (binding.etConfirmPassword.text.toString().length < 5) {
                 binding.tilConfirmPassword.isHelperTextEnabled = true
-                binding.tilConfirmPassword.helperText="Password must be 6 digit or above."
+                binding.tilConfirmPassword.helperText = "Password must be 6 digit or above."
             } else
                 binding.tilConfirmPassword.isHelperTextEnabled = false
         } else {
@@ -78,7 +95,7 @@ class ActivitySignup : AppCompatActivity() {
             binding.tilPassword.isHelperTextEnabled = true
             if (binding.etPassword.text.toString().length < 5) {
 
-                    binding.tilPassword.helperText = "Password must be 6 digit or above."
+                binding.tilPassword.helperText = "Password must be 6 digit or above."
 
             } else
                 binding.tilPassword.isHelperTextEnabled = false
@@ -90,7 +107,7 @@ class ActivitySignup : AppCompatActivity() {
     private fun phoneNumberFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
             if (binding.etPhoneNumber.text.toString().length == 10) {
-            binding.tilPhoneNumber.isHelperTextEnabled = true
+                binding.tilPhoneNumber.isHelperTextEnabled = true
                 binding.tilPhoneNumber.helperText = "Number should be 10 digit."
             } else
                 binding.tilPhoneNumber.isHelperTextEnabled = false
@@ -102,8 +119,8 @@ class ActivitySignup : AppCompatActivity() {
     private fun emailNameFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
             if (binding.etEmail.text.toString().length < 4) {
-            binding.tilEmail.isHelperTextEnabled = true
-               binding.tilEmail.helperText = "Lastname cannot be less than 5."
+                binding.tilEmail.isHelperTextEnabled = true
+                binding.tilEmail.helperText = "Lastname cannot be less than 5."
             } else
                 binding.tilEmail.isHelperTextEnabled = false
         } else {
@@ -115,7 +132,7 @@ class ActivitySignup : AppCompatActivity() {
     private fun lastNameFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
             if (binding.etLastName.text.toString().length < 4) {
-            binding.tilLastName.isHelperTextEnabled = true
+                binding.tilLastName.isHelperTextEnabled = true
                 setHelperText(binding.tilLastName, "Firstname cannot be less than 5.")
             } else
                 binding.tilLastName.isHelperTextEnabled = false
@@ -127,7 +144,7 @@ class ActivitySignup : AppCompatActivity() {
     private fun firstNameFocusCheck(hasFocus: Boolean) {
         if (!hasFocus) {
             if (binding.etFirstName.text.toString().length < 4) {
-            binding.tilFirstName.isHelperTextEnabled = true
+                binding.tilFirstName.isHelperTextEnabled = true
                 setHelperText(binding.tilFirstName, "Firstname cannot be less than 5.")
             } else
                 binding.tilFirstName.isHelperTextEnabled = false
@@ -146,19 +163,20 @@ class ActivitySignup : AppCompatActivity() {
         val password = binding.etPassword.text.toString().trim()
         val confirmPassword = binding.etConfirmPassword.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
-        if(validateUserCred()) {
+        if (validateUserCred()) {
             Toast.makeText(this, "Check field and fill.", Toast.LENGTH_SHORT).show()
             return
-        }else if (validateUserDetails(password, confirmPassword)) {
+        } else if (validateUserDetails(password, confirmPassword)) {
             loginUserWithEmailAndPassword(email, password)
         } else {
             Toast.makeText(this, "Password and confirm password doesn't match.", Toast.LENGTH_LONG)
                 .show()
         }
     }
+
     private fun validateUserCred(): Boolean {
-        return binding.etEmail.text.toString().length < 8 && binding.etPassword.text.toString().length  < 5
-                && binding.etFirstName.text.toString().length < 3  && binding.etLastName.text.toString().length < 3
+        return binding.etEmail.text.toString().length < 8 && binding.etPassword.text.toString().length < 5
+                && binding.etFirstName.text.toString().length < 3 && binding.etLastName.text.toString().length < 3
                 && binding.etConfirmPassword.text.toString().length < 5
     }
 
@@ -176,7 +194,7 @@ class ActivitySignup : AppCompatActivity() {
         val firstName = binding.etFirstName.text.toString().trim()
         val lastName = binding.etLastName
 
-.text.toString().trim()
+            .text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
         binding.ccp.registerCarrierNumberEditText(binding.etPhoneNumber)
         val number = binding.ccp.fullNumberWithPlus
@@ -225,4 +243,6 @@ class ActivitySignup : AppCompatActivity() {
             }
 
     }
+
+
 }
