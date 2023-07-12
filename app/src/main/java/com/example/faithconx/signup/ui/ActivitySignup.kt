@@ -13,14 +13,14 @@ import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivitySignupBinding
 import com.example.faithconx.helper.user.UserValidation
 import com.example.faithconx.login.ui.ActivityLogin
+import com.example.faithconx.signup.helper.UserHelper
 import com.example.faithconx.signup.viewmodel.AuthViewModel
 import com.example.faithconx.signup.viewmodel.DatabaseViewModel
 import com.example.faithconx.util.Constants
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class ActivitySignup : AppCompatActivity(), View.OnClickListener {
+class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusChangeListener {
     companion object {
         private const val TAG = "ActivitySignup"
     }
@@ -32,6 +32,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener {
     private val databaseViewModel = DatabaseViewModel()
     private val authModel = AuthViewModel()
     private val userValidation = UserValidation()
+    private val userHelper = UserHelper()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,14 +40,35 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setOnClickListener()
+        setOnFocusChangeListener()
     }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setOnClickListener() {
         binding.btnClose.setOnClickListener(this@ActivitySignup)
         binding.btnContinue.setOnClickListener(this@ActivitySignup)
         binding.civCamera.setOnClickListener(this@ActivitySignup)
+
     }
+    private fun setOnFocusChangeListener() {
+        binding.etFirstName.onFocusChangeListener = this@ActivitySignup
+        binding.etEmail.onFocusChangeListener = this@ActivitySignup
+        binding.etPhoneNumber.onFocusChangeListener = this@ActivitySignup
+        binding.etPassword.onFocusChangeListener = this@ActivitySignup
+        binding.etConfirmPassword.onFocusChangeListener = this@ActivitySignup
+    }
+
+    override fun onFocusChange(view: View?, hasFocus: Boolean) {
+      when(view?.id){
+          R.id.etFirstName -> userHelper.etFirstNameFocusChange(hasFocus,binding.tilFirstName,binding.etFirstName)
+          R.id.etEmail ->userHelper. etEmailFocusChange(hasFocus,binding.tilEmail,binding.etEmail)
+          R.id.etPhoneNumber -> userHelper. etPhoneNumberFocusChange(hasFocus,binding.tilPhoneNumber,binding.etPhoneNumber)
+          R.id.etPassword ->userHelper. etPasswordFocusChange(hasFocus,binding.tilPassword,binding.etPassword)
+          R.id.etConfirmPassword -> userHelper.etConfirmPasswordFocusChange(hasFocus,binding.tilConfirmPassword,binding.etConfirmPassword,binding.etPassword)
+      }
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(view: View?) {
@@ -70,38 +92,81 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun onContinueClick(view: View?) {
         val password = binding.etPassword.text.toString().trim()
-        val confirmPassword = binding.etConfirmPassword.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
+
         //Validate user details
-        if(!userValidation.validateFirstName(binding.etFirstName) && !userValidation.validateLastName(binding.etLastName)
-            && !userValidation.validateEmail(binding.etEmail) &&  !userValidation.validatePhoneNumber(binding.etPhoneNumber)
-            && !userValidation.validatePassword(binding.etPassword) && !userValidation.validateConfirmPassword(binding.etPassword, binding.etConfirmPassword)){
+        if(!userValidation.validateFirstName(binding.etFirstName,binding.tilFirstName) ){
+            binding.tilFirstName.requestFocus()
+
+            binding.tilEmail.error=null
+            binding.tilPhoneNumber.error=null
+            binding.tilPassword.error=null
+            binding.tilConfirmPassword.error=null
+
+            return
+        }
+        else if(!userValidation.validateEmail(binding.etEmail,binding.tilEmail)){
+            binding.tilEmail.requestFocus()
+
+            binding.tilFirstName.error=null
+            binding.tilPhoneNumber.error=null
+            binding.tilPassword.error=null
+            binding.tilConfirmPassword.error=null
+            return
+        }
+        else if(! userValidation.validatePhoneNumber(binding.etPhoneNumber,binding.tilPhoneNumber)){
+            binding.tilPhoneNumber.requestFocus()
+
+            binding.tilEmail.error=null
+            binding.tilFirstName.error=null
+            binding.tilPassword.error=null
+            binding.tilConfirmPassword.error=null
+            return
+        }
+         else if(!userValidation.validatePassword(binding.etPassword,binding.tilPassword) ){
+            binding.tilPassword.requestFocus()
+
+            binding.tilEmail.error=null
+            binding.tilPhoneNumber.error=null
+            binding.tilFirstName.error=null
+            binding.tilConfirmPassword.error=null
+            return
+        }
+         else if(!userValidation.validateConfirmPassword(binding.etPassword, binding.etConfirmPassword,binding.tilConfirmPassword)){
+            binding.tilConfirmPassword.requestFocus()
+
+            binding.tilEmail.error=null
+            binding.tilPhoneNumber.error=null
+            binding.tilPassword.error=null
+            binding.tilFirstName.error=null
             return
         }
 
-        if (!binding.checkboxTermsAndCondition.isChecked) {
-            Toast.makeText(this, Constants.TERMS_AND_CONDITION_MSG , Toast.LENGTH_LONG)
-                .show()
+//      Checkbox validation.
+        else if (!validateCheckbox()) {
+            binding.checkboxTermsAndCondition.requestFocus()
             return
         }
+        //Everything is right.
         else
         loginUserWithEmailAndPassword(email, password)
     }
 
-    private fun validateUserCred(): Boolean {
-        return binding.etEmail.text.toString().length < 8 && binding.etPassword.text.toString().length < 5
-                && binding.etFirstName.text.toString().length < 3 && binding.etLastName.text.toString().length < 3
-                && binding.etConfirmPassword.text.toString().length < 5
+    //Checkbox validation
+    private fun validateCheckbox():Boolean{
+        if (!binding.checkboxTermsAndCondition.isChecked) {
+            binding.checkboxTermsAndCondition.error = Constants.TERMS_AND_CONDITION_MSG
+            Toast.makeText(this,Constants.TERMS_AND_CONDITION_MSG,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        else{
+            binding.checkboxTermsAndCondition.error =null
+            return true
+        }
+
     }
 
-    private fun validateUserDetails(password: String, confirmPassword: String): Boolean {
-        return if (!binding.checkboxTermsAndCondition.isChecked) {
-            Toast.makeText(this, "Please agree terms and condition first.", Toast.LENGTH_LONG)
-                .show()
-            false
-        } else
-            password == confirmPassword
-    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveToDb() {
@@ -156,12 +221,5 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener {
     private fun uploadProfileImage() {
 
     }
-
-
-
-    /**
-     * User details validation
-     */
-
 
 }

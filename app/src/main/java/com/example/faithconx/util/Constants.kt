@@ -31,9 +31,10 @@ object Constants {
     val LASTNAME_MAX_LENGTH = 20
 
     //    PASSWORD
-    val PASSWORD_IS_TOO_WEAK_MSG = "Password is too weak."
+    val PASSWORD_IS_TOO_WEAK_MSG = "Password is too weak use combination of[1,A,a,@,$,_,]."
     val PASSWORD_NOT_MATCH_MSG = "Password doesn't match."
     //CHECKBOX
     val TERMS_AND_CONDITION_MSG = "Please agree terms and condition."
-
+//EMAIL
+    val EMAIL_FORMAT_MSG = "Bad email format."
 }

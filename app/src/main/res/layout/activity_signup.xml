@@ -108,8 +108,9 @@
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
         android:hint="@string/last_name"
+        app:startIconDrawable="@drawable/ic_profile"
         android:theme="@style/edtStyle"
-        app:layout_constraintBottom_toTopOf="@+id/tilEmail"
+        app:layout_constraintBottom_toBottomOf="@+id/tilFirstName"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toEndOf="@+id/tilFirstName"
         app:layout_constraintTop_toTopOf="@id/tilFirstName">

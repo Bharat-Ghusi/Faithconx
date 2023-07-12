@@ -2,18 +2,20 @@ package com.example.faithconx.helper.user
 
 import com.example.faithconx.util.Constants
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class UserValidation {
-    fun validateFirstName(editText: TextInputEditText): Boolean {
+    fun validateFirstName(editText: TextInputEditText,editTextLayout: TextInputLayout): Boolean {
         val text = editText.text.toString()
         if (text.isEmpty()) {
-            editText.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
+            editTextLayout.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
             return false
         } else if (text.length < Constants.FIRSTNAME_MIN_LENGTH) {
-            editText.error = Constants.FIRSTNAME_TOO_SMALL_MSG
+            editTextLayout.error = Constants.FIRSTNAME_TOO_SMALL_MSG
             return false
-        } else if (text.length < Constants.FIRSTNAME_MAX_LENGTH) {
-            editText.error = Constants.FIRSTNAME_TOO_LARGE_MSG
+        } else if (text.length > Constants.FIRSTNAME_MAX_LENGTH) {
+            editTextLayout.error = Constants.FIRSTNAME_TOO_LARGE_MSG
+            return false
         }
         /**
          * "\A"     -> denotes the start of the string.
@@ -22,10 +24,10 @@ class UserValidation {
         "\z"    ->represents the end of the string OR  It ensures that the entire string matches this pattern from start to end..
          */
         else if (!text.matches(Regex("\\A\\w{4,20}\\z"))) {
-            editText.error = Constants.WHITE_SPACE_ERROR_MSG
+            editTextLayout.error = Constants.WHITE_SPACE_ERROR_MSG
             return false
         } else
-            editText.error = null
+            editTextLayout.error = null
 
         return true
     }
@@ -38,7 +40,7 @@ class UserValidation {
         } else if (text.length < Constants.LASTNAME_MIN_LENGTH) {
             editText.error = Constants.LASTNAME_TOO_SMALL_MSG
             return false
-        } else if (text.length < Constants.LASTNAME_MAX_LENGTH) {
+        } else if (text.length > Constants.LASTNAME_MAX_LENGTH) {
             editText.error = Constants.LASTNAME_TOO_LARGE_MSG
         }
         /**
@@ -55,10 +57,10 @@ class UserValidation {
         return true
     }
 
-    fun validateEmail(editText: TextInputEditText): Boolean {
+    fun validateEmail(editText: TextInputEditText,editTextLayout: TextInputLayout): Boolean {
         val text = editText.text.toString()
         if (text.isEmpty()) {
-            editText.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
+            editTextLayout.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
             return false
         }
         /**
@@ -76,32 +78,32 @@ class UserValidation {
         [a-z]+: This matches one or more occurrences of lowercase letters only. It represents
         the top-level domain portion of the email address after the dot.
          */
-        else if (!text.matches(Regex("[a-zA-Z0-9._-]+@[a-z]+\\\\.+[a-z]+"))) {
-            editText.error = Constants.WHITE_SPACE_ERROR_MSG
+        else if (!text.matches(Regex("[a-z0-9]+@[a-z]+\\.[a-z]{2,3}"))) {
+            editTextLayout.error = Constants.EMAIL_FORMAT_MSG
             return false
         }
         else
-            editText.error = null
+            editTextLayout.error = null
         return true
     }
-    fun validatePhoneNumber(editText: TextInputEditText): Boolean {
+    fun validatePhoneNumber(editText: TextInputEditText,editTextLayout: TextInputLayout): Boolean {
         val text = editText.text.toString()
         if (text.isEmpty()) {
-            editText.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
+            editTextLayout.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
             return false
         }
 
         else
-            editText.error = null
+            editTextLayout.error = null
         return true
     }
-    fun validatePassword(editText: TextInputEditText): Boolean {
+    fun validatePassword(editText: TextInputEditText,editTextLayout: TextInputLayout): Boolean {
         val text = editText.text.toString()
         val regex = Regex(
             "^" +
-                    //"(?=.*[0-9])" +         //at least 1 digit
-                    //"(?=.*[a-z])" +         //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
                     "(?=.*[a-zA-Z])" +      //any letter
                     "(?=.*[@#$%^&+=])" +    //at least 1 special character
                     "(?=\\S+$)" +           //no white spaces
@@ -109,22 +111,25 @@ class UserValidation {
                     "$"
         )
         if (text.isEmpty()) {
-            editText.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
+            editTextLayout.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
             return false
         }
         else if(! text.matches(regex)){
-            editText.error = Constants.PASSWORD_IS_TOO_WEAK_MSG
+            editTextLayout.error = Constants.PASSWORD_IS_TOO_WEAK_MSG
+            return false
         }
 
         else
-            editText.error = null
+            editTextLayout.error = null
         return true
     }
-    fun validateConfirmPassword(etPassword: TextInputEditText,etConfirmPassword:TextInputEditText): Boolean {
+    fun validateConfirmPassword(etPassword: TextInputEditText,etConfirmPassword:TextInputEditText,editTextLayout: TextInputLayout): Boolean {
         if(etPassword.text.toString() != etConfirmPassword.text.toString()){
-            etConfirmPassword.error = Constants.PASSWORD_NOT_MATCH_MSG
+            editTextLayout.error = Constants.PASSWORD_NOT_MATCH_MSG
             return  false
         }
+        else
+            editTextLayout.error = null
         return true
     }
 }
