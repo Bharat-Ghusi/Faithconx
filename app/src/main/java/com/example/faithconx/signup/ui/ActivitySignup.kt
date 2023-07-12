@@ -4,11 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivitySignupBinding
 import com.example.faithconx.helper.user.UserValidation
@@ -20,7 +22,7 @@ import com.example.faithconx.util.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusChangeListener {
+class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusChangeListener{
     companion object {
         private const val TAG = "ActivitySignup"
     }
@@ -41,6 +43,21 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
         setContentView(binding.root)
         setOnClickListener()
         setOnFocusChangeListener()
+        setOnPhoneNumberChanges()
+    }
+
+    private fun setOnPhoneNumberChanges() {
+        binding.ccp.registerCarrierNumberEditText(binding.etPhoneNumber)
+        binding.ccp.setPhoneNumberValidityChangeListener {
+            if(!it){
+                binding.etPhoneNumber.filters =arrayOf<InputFilter>()
+            }else{
+                // Create an InputFilter to constrain the length limit
+                val filters = arrayOf<InputFilter>(InputFilter.LengthFilter( binding.etPhoneNumber.text.toString().length))
+                binding.etPhoneNumber.filters = filters
+                binding.etPhoneNumber.error = null
+            }
+        }
     }
 
 
@@ -49,8 +66,16 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
         binding.btnClose.setOnClickListener(this@ActivitySignup)
         binding.btnContinue.setOnClickListener(this@ActivitySignup)
         binding.civCamera.setOnClickListener(this@ActivitySignup)
+        binding.ccp.setOnCountryChangeListener { onCountryChange() }
 
     }
+
+    private fun onCountryChange() {
+        val filters = arrayOf<InputFilter>()
+        binding.etPhoneNumber.filters = filters
+       binding. etPhoneNumber.setText("")
+    }
+
     private fun setOnFocusChangeListener() {
         binding.etFirstName.onFocusChangeListener = this@ActivitySignup
         binding.etEmail.onFocusChangeListener = this@ActivitySignup
@@ -63,10 +88,28 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
       when(view?.id){
           R.id.etFirstName -> userHelper.etFirstNameFocusChange(hasFocus,binding.tilFirstName,binding.etFirstName)
           R.id.etEmail ->userHelper. etEmailFocusChange(hasFocus,binding.tilEmail,binding.etEmail)
-          R.id.etPhoneNumber -> userHelper. etPhoneNumberFocusChange(hasFocus,binding.tilPhoneNumber,binding.etPhoneNumber)
+          R.id.etPhoneNumber -> onEtPhoneNumberFocusChange()
           R.id.etPassword ->userHelper. etPasswordFocusChange(hasFocus,binding.tilPassword,binding.etPassword)
           R.id.etConfirmPassword -> userHelper.etConfirmPasswordFocusChange(hasFocus,binding.tilConfirmPassword,binding.etConfirmPassword,binding.etPassword)
       }
+    }
+
+    private fun onEtPhoneNumberFocusChange() {
+        binding.etPhoneNumber.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                if (!binding.ccp.isValidFullNumber) {
+                    binding.tilPhoneNumber.error = Constants.INVALID_NUMBER_MSG
+                }
+
+
+            } else if (!binding.ccp.isValidFullNumber) {
+                binding.tilPhoneNumber.error = Constants.INVALID_NUMBER_MSG
+
+            }
+            else{
+                binding.tilPhoneNumber.error = null
+            }
+        }
     }
 
 
@@ -94,6 +137,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
         val password = binding.etPassword.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
 
+
         //Validate user details
         if(!userValidation.validateFirstName(binding.etFirstName,binding.tilFirstName) ){
             binding.tilFirstName.requestFocus()
@@ -114,7 +158,9 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
             binding.tilConfirmPassword.error=null
             return
         }
-        else if(! userValidation.validatePhoneNumber(binding.etPhoneNumber,binding.tilPhoneNumber)){
+
+        else if(!binding.ccp.isValidFullNumber){
+            binding.tilPhoneNumber.error = Constants.INVALID_NUMBER_MSG
             binding.tilPhoneNumber.requestFocus()
 
             binding.tilEmail.error=null
@@ -173,7 +219,8 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
         val firstName = binding.etFirstName.text.toString().trim()
         val lastName = binding.etLastName.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
-        binding.ccp.registerCarrierNumberEditText(binding.etPhoneNumber)
+
+
         val number = binding.ccp.fullNumberWithPlus
         val password = binding.etPassword.text.toString().trim()
         //store the user details

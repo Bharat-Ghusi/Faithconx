@@ -1,8 +1,13 @@
 package com.example.faithconx.helper.user
 
+import android.renderscript.ScriptGroup.Input
+import android.text.InputFilter
+import android.util.Log
 import com.example.faithconx.util.Constants
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.hbb20.CountryCodePicker
+import com.hbb20.CountryCodePicker.OnCountryChangeListener
 
 class UserValidation {
     fun validateFirstName(editText: TextInputEditText,editTextLayout: TextInputLayout): Boolean {
@@ -86,16 +91,28 @@ class UserValidation {
             editTextLayout.error = null
         return true
     }
-    fun validatePhoneNumber(editText: TextInputEditText,editTextLayout: TextInputLayout): Boolean {
-        val text = editText.text.toString()
-        if (text.isEmpty()) {
-            editTextLayout.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
-            return false
+    fun validatePhoneNumber(editText: TextInputEditText,editTextLayout: TextInputLayout,ccp: CountryCodePicker
+    ): Boolean {
+        var isValid = false
+//        Validity Change Listener will get callBack every time validity of entered number changes.
+
+        ccp.setPhoneNumberValidityChangeListener {
+            if(!it){
+                editText.filters =arrayOf<InputFilter>()
+                editTextLayout.error =Constants.INVALID_NUMBER_MSG
+                isValid=false
+
+            }else{
+                // Create an InputFilter to constrain the length limit
+                val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(editText.text.toString().length))
+                editText.filters = filters
+                editTextLayout.error = null
+                isValid=true
+
+            }
         }
 
-        else
-            editTextLayout.error = null
-        return true
+        return isValid
     }
     fun validatePassword(editText: TextInputEditText,editTextLayout: TextInputLayout): Boolean {
         val text = editText.text.toString()

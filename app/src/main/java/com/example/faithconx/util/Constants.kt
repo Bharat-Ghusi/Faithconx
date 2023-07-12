@@ -37,4 +37,6 @@ object Constants {
     val TERMS_AND_CONDITION_MSG = "Please agree terms and condition."
 //EMAIL
     val EMAIL_FORMAT_MSG = "Bad email format."
+    //NUMBER
+    val INVALID_NUMBER_MSG="Invalid number."
 }

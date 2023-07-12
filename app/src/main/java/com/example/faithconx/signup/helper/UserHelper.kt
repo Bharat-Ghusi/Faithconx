@@ -3,6 +3,7 @@ package com.example.faithconx.signup.helper
 import com.example.faithconx.helper.user.UserValidation
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.hbb20.CountryCodePicker
 
 class UserHelper {
     private val userValidation = UserValidation()
@@ -27,13 +28,15 @@ class UserHelper {
         }
     }
 
-    fun etPhoneNumberFocusChange(
+    fun     etPhoneNumberFocusChange(
         hasFocus: Boolean,
         tilPhoneNumber: TextInputLayout,
-        etPhoneNumber: TextInputEditText
+        etPhoneNumber: TextInputEditText,
+        ccp: CountryCodePicker
     ) {
-        if (!hasFocus) {
-            userValidation.validatePhoneNumber(etPhoneNumber, tilPhoneNumber)
+
+        if (hasFocus) {
+//            userValidation.validatePhoneNumber(etPhoneNumber, tilPhoneNumber, ccp)
         }
     }
 
