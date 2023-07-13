@@ -95,6 +95,7 @@ class UserValidation {
     ): Boolean {
         var isValid = false
 //        Validity Change Listener will get callBack every time validity of entered number changes.
+        //called only when entered number is valid.
 
         ccp.setPhoneNumberValidityChangeListener {
             if(!it){

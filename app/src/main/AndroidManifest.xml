@@ -36,26 +36,34 @@
         <activity
             android:name=".randomusers.RandomUsersActivity"
             android:exported="false" />
+
         <activity
             android:name=".signup.ui.ActivitySignup"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" />
-        <activity
-            android:name=".view.ActivityOtpVerification"
-            android:exported="false" />
+
         <activity android:name=".login.ui.ActivityLogin"
             android:windowSoftInputMode="adjustResize"
             />
+
+        <activity
+            android:name=".view.ActivityOtpVerification"
+            android:exported="false" />
+
         <activity android:name=".firebasedbpractice.RegisterActivity" />
+
         <activity
             android:name=".firebasedbpractice.UploadObjectActivity"
             android:exported="false" />
+
         <activity
             android:name=".firebasedbpractice.HomeActivity"
             android:exported="false" />
+
         <activity
             android:name=".firebasedbpractice.SigninActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>

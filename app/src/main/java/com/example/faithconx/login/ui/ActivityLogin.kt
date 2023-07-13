@@ -3,6 +3,7 @@ package com.example.faithconx.login.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.faithconx.R
@@ -28,6 +29,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
         setOnClickListener()
         onTextChangeListener()
     }
+
 
     private fun onTextChangeListener() {
         binding.etEmail.addTextChangedListener { onEtEmailTextChange() }
@@ -64,6 +66,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
         binding.btnLoginWithPhoneNumber.setOnClickListener(this)
         binding.btnLogin.setOnClickListener(this)
         binding.tvCreateOne.setOnClickListener(this)
+        binding.ivClose.setOnClickListener(this)
 
     }
 
@@ -72,6 +75,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
             R.id.btnLoginWithPhoneNumber -> onClickLoginWithPhoneNumber(view)
             R.id.btnLogin -> onLoginClick(view)
             R.id.tvCreateOne -> onCreateOneClick(view)
+            R.id.ivClose -> super.onBackPressed()
         }
     }
 

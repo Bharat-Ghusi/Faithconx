@@ -20,11 +20,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setHomeFragment()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
     private fun setHomeFragment():Boolean {
        return supportFragmentManager.beginTransaction().add(R.id.fcvMain, HomeFragment()).commit() > 0
     }

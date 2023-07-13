@@ -13,7 +13,7 @@ import com.example.faithconx.adapter.RandomUsersAdapter
 import com.example.faithconx.databinding.FragmentHomeBinding
 import com.example.faithconx.model.RandomUsers
 import com.example.faithconx.model.Result
-import com.example.faithconx.viewmodel.RandomUsersViewModel
+import com.example.faithconx.home.viewmodel.RandomUsersViewModel
 
 
 class HomeFragment : Fragment() {
@@ -33,7 +33,7 @@ private var randomUsers: RandomUsers? = null
         setDataToAdapter(randomUsers)
 
         //Observer
-        setProgressbar()
+        setContentToRecyclerView()
         setUi()
 
         return binding.root
@@ -41,7 +41,7 @@ private var randomUsers: RandomUsers? = null
 
 
     //Set progress bar
-    private fun setProgressbar(){
+    private fun setContentToRecyclerView(){
         val progressVisibility = randomUsersViewModel.getProgressVisibility()
         progressVisibility.observe(viewLifecycleOwner, Observer {
             //Set visibility of progressbar and recycler view true:Progressbar false: recyclerview

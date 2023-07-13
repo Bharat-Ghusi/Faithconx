@@ -1,4 +1,4 @@
-package com.example.faithconx.viewmodel
+package com.example.faithconx.home.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -26,7 +26,7 @@ private val randomUsersMutableData = MutableLiveData<MutableList<Result>?>()
     private  fun fetchRandomUsersFromApi() {
          isVisible.postValue(true) //To set progress bar
         val randomUsersApiClient = RandomUsersApiClients().randomUserApiService
-        val call = randomUsersApiClient.getUsers(5)
+        val call = randomUsersApiClient.getUsers(8)
         call.enqueue(object : Callback<RandomUsers?> {
             override fun onResponse(call: Call<RandomUsers?>, response: Response<RandomUsers?>) {
                 if (response.isSuccessful) {
