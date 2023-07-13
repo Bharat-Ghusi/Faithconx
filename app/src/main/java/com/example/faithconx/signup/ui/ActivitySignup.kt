@@ -26,6 +26,12 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
     companion object {
         private const val TAG = "ActivitySignup"
     }
+    private var isFirstNameValid = false
+    private var isLastNameValid = false
+    private var isEmailValid = false
+    private var isPhoneNumberValid = false
+    private var isPasswordValid = false
+    private var isConfirmPasswordValid = false
 
     private var uri: Uri? = null
     private lateinit var binding: ActivitySignupBinding
@@ -44,6 +50,55 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
         setOnClickListener()
         setOnFocusChangeListener()
         setOnPhoneNumberChanges()
+        onTextChangeListener()
+
+    }
+
+    private fun onTextChangeListener() {
+        binding.etFirstName.addTextChangedListener { onFirstNameTextChange() }
+//        binding.etEmail.addTextChangedListener { onLastNameTextChange() }
+        binding.etPhoneNumber.addTextChangedListener { onPhoneNumberTextChange() }
+        binding.etPassword.addTextChangedListener { onPasswordTextChange() }
+        binding.etConfirmPassword.addTextChangedListener { onConfirmPasswordTextChange() }
+    }
+
+    private fun onFirstNameTextChange() {
+        if(binding.etFirstName.text?.isEmpty() == true){
+            binding.tilFirstName.error = null
+            return
+        }
+        isFirstNameValid = userValidation.validateFirstName(binding.etFirstName, binding.tilFirstName)
+    }
+
+    private fun onPhoneNumberTextChange() {
+        if(binding.etPhoneNumber.text?.isEmpty() == true){
+            binding.tilPhoneNumber.error = null
+            return
+        }
+        isPhoneNumberValid = userValidation.validateFirstName(binding.etPhoneNumber, binding.tilPhoneNumber)
+    }
+
+    private fun onPasswordTextChange() {
+        if(binding.etPassword.text?.isEmpty() == true){
+            binding.tilPassword.error = null
+            return
+        }
+        isPasswordValid = userValidation.validateFirstName(binding.etPassword, binding.tilPassword)
+    }
+
+    private fun onConfirmPasswordTextChange() {
+        if(userValidation.validateFirstName(binding.etConfirmPassword, binding.tilConfirmPassword)
+            && isEmailValid && isFirstNameValid && isPhoneNumberValid && isPasswordValid){
+            binding.btnContinue.backgroundTintList = resources.getColorStateList(R.color.loginbtn_enable_color)
+            binding.btnContinue.isEnabled= true
+        }
+        else if(binding.etConfirmPassword.text?.toString()?.isEmpty() == true){
+            binding.tilConfirmPassword.error = null
+        }
+        else{
+            binding.btnContinue.backgroundTintList = resources.getColorStateList(R.color.loginbtn_disable_color)
+            binding.btnContinue.isEnabled=false
+        }
     }
 
     private fun setOnPhoneNumberChanges() {
@@ -94,11 +149,17 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
       }
     }
 
+    /**
+     * On focus change of phone number edittext it will check
+     * if number is valid or not and set the error message.
+     */
     private fun onEtPhoneNumberFocusChange() {
         binding.etPhoneNumber.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 if (!binding.ccp.isValidFullNumber) {
                     binding.tilPhoneNumber.error = Constants.INVALID_NUMBER_MSG
+                }else{
+                    binding.tilPhoneNumber.error = null
                 }
 
 
@@ -193,52 +254,9 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
             binding.checkboxTermsAndCondition.requestFocus()
             return
         }
-        //Everything is right.
+        //Everything is right good to go.
         else
         loginUserWithEmailAndPassword(email, password)
-    }
-
-    //Checkbox validation
-    private fun validateCheckbox():Boolean{
-        if (!binding.checkboxTermsAndCondition.isChecked) {
-            binding.checkboxTermsAndCondition.error = Constants.TERMS_AND_CONDITION_MSG
-            Toast.makeText(this,Constants.TERMS_AND_CONDITION_MSG,Toast.LENGTH_SHORT).show()
-            return false
-        }
-        else{
-            binding.checkboxTermsAndCondition.error =null
-            return true
-        }
-
-    }
-
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun saveToDb() {
-        val firstName = binding.etFirstName.text.toString().trim()
-        val lastName = binding.etLastName.text.toString().trim()
-        val email = binding.etEmail.text.toString().trim()
-
-
-        val number = binding.ccp.fullNumberWithPlus
-        val password = binding.etPassword.text.toString().trim()
-        //store the user details
-        databaseViewModel.saveUserDetailsToDb(firstName, lastName, email, number, firebaseAuth)
-        databaseViewModel.getDataSavingState().observe(this) { state ->
-            if (state) {
-                //Data save successfully
-                Log.i(TAG, Constants.SUCCESS_MSG_OF_SAVING_USER_DATA)
-                startActivity(Intent(this@ActivitySignup, ActivityLogin::class.java))
-                finish()
-            } else {
-                //Failed to save data
-                Log.i(TAG, Constants.FAILURE_MSG_OF_SAVING_USER_DATA)
-            }
-        }
-//
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -263,6 +281,52 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
             }
         }
     }
+
+    //Checkbox validation
+    private fun validateCheckbox():Boolean{
+        if (!binding.checkboxTermsAndCondition.isChecked) {
+            binding.checkboxTermsAndCondition.error = Constants.TERMS_AND_CONDITION_MSG
+            Toast.makeText(this,Constants.TERMS_AND_CONDITION_MSG,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        else{
+            binding.checkboxTermsAndCondition.error =null
+            return true
+        }
+
+    }
+
+
+    /**
+     * Store user profile details to Firebase realtime DB
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun saveToDb() {
+        val firstName = binding.etFirstName.text.toString().trim()
+        val lastName = binding.etLastName.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
+
+
+        val number = binding.ccp.fullNumberWithPlus
+        //store the user details
+        databaseViewModel.saveUserDetailsToDb(firstName, lastName, email, number, firebaseAuth)
+        databaseViewModel.getDataSavingState().observe(this) { state ->
+            if (state) {
+                //Data save successfully
+                Log.i(TAG, Constants.SUCCESS_MSG_OF_SAVING_USER_DATA)
+                startActivity(Intent(this@ActivitySignup, ActivityLogin::class.java))
+                finish()
+            } else {
+                //Failed to save data
+                Log.i(TAG, Constants.FAILURE_MSG_OF_SAVING_USER_DATA)
+            }
+        }
+//
+
+
+    }
+
+
 
 
     private fun uploadProfileImage() {

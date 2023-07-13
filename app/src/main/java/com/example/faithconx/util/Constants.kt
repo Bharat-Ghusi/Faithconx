@@ -14,6 +14,12 @@ object Constants {
     val FIELD_CANNOT_BE_EMPTY_MSG = "Field cannot be empty"
 
     /**
+     * LOGIN PAGE
+     */
+    val EMAIL_OR_PASSWOD_WRONG_MSG = "Email password is wrong."
+
+
+    /**
      * SIGNUP PAGE
      */
     val WHITE_SPACE_ERROR_MSG = "White Spaces are not allowed."

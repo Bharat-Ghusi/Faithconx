@@ -1,101 +1,117 @@
 package com.example.faithconx.login.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityLoginBinding
-import com.example.faithconx.view.ActivityOtpVerification
-import com.example.faithconx.signup.ui.ActivitySignup
+import com.example.faithconx.helper.user.UserValidation
+import com.example.faithconx.login.viewmodel.LoginAuthViewModel
 import com.example.faithconx.main.ui.MainActivity
-import com.google.firebase.auth.FirebaseAuth
+import com.example.faithconx.signup.ui.ActivitySignup
+import com.example.faithconx.util.Constants
+import com.example.faithconx.view.ActivityOtpVerification
 
-class ActivityLogin : AppCompatActivity() {
-    private lateinit var binding:ActivityLoginBinding
+class ActivityLogin : AppCompatActivity(), View.OnClickListener {
+    private var isEmailCorrect= false
+    private val userValidation = UserValidation()
+    private lateinit var binding: ActivityLoginBinding
+    private val loginAuthViewModel = LoginAuthViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setOnClickListener()
-        onFocusChange()
+        onTextChangeListener()
     }
 
-    private fun onFocusChange() {
-        binding.etEmail.setOnFocusChangeListener { v, hasFocus ->  emailBoxFocusChange(v,hasFocus) }
-        binding.etPassword.setOnFocusChangeListener { v, hasFocus ->  passwordBoxFocusChange(v,hasFocus) }
+    private fun onTextChangeListener() {
+        binding.etEmail.addTextChangedListener { onEtEmailTextChange() }
+        binding.etPassword.addTextChangedListener { onEtPasswordTextChange() }
     }
 
-    private fun passwordBoxFocusChange(v: View?, hasFocus: Boolean) {
-        //Change to when and optimize
-        if(!hasFocus){
-            if(binding.etPassword.text.toString().length < 4){
-            binding.tilPassword.isHelperTextEnabled = true
-                binding.tilPassword.helperText = "Field cannot be less than 5."
+    private fun onEtPasswordTextChange() {
+      if( userValidation.validatePassword(binding.etPassword,binding.tilPassword)
+                &&  isEmailCorrect ){
+          binding.btnLogin.backgroundTintList = resources.getColorStateList(R.color.loginbtn_enable_color)
+          binding.btnLogin.isEnabled= true
+      }
+        else if(binding.etPassword.text?.toString()?.isEmpty() == true){
+            binding.tilPassword.error = null
+      }
+        else{
+          binding.btnLogin.backgroundTintList = resources.getColorStateList(R.color.loginbtn_disable_color)
+          binding.btnLogin.isEnabled=false
+      }
+    }
 
-            }
-            else
-                binding.btnLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.loginbtn_color));
-        }else{
-            binding.tilPassword.isHelperTextEnabled = false
+    private fun onEtEmailTextChange() {
+        if(binding.etEmail.text?.isEmpty() == true){
+            binding.tilEmail.error = null
+            return
+        }
+        isEmailCorrect = userValidation.validateEmail(binding.etEmail,binding.tilEmail)
+    }
 
+
+    private fun setOnClickListener() {
+        //Change to VIew.onClickListener()
+        //use when and scope function
+        binding.btnLoginWithPhoneNumber.setOnClickListener(this)
+        binding.btnLogin.setOnClickListener(this)
+        binding.tvCreateOne.setOnClickListener(this)
+
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.btnLoginWithPhoneNumber -> onClickLoginWithPhoneNumber(view)
+            R.id.btnLogin -> onLoginClick(view)
+            R.id.tvCreateOne -> onCreateOneClick(view)
         }
     }
 
-    private fun emailBoxFocusChange(v: View?, hasFocus: Boolean) {
-        //Change to when and optimize
-       if(!hasFocus){
-           if(binding.etEmail.text.toString().length < 4){
-           binding.tilEmail.isHelperTextEnabled = true
-           binding.tilEmail.helperText = "Field cannot be less than 5."
 
-           }
-       }else{
-           binding.tilEmail.isHelperTextEnabled = false
-       }
-    }
-
-    private fun setOnClickListener() {
-  //Change to VIew.onClickListener()
-        //use when and scope function
-            binding.btnLoginWithPhoneNumber.setOnClickListener { onClickLoginWithPhoneNumber(it) }
-            binding.btnLogin.setOnClickListener { onLoginClick(it) }
-            binding.tvCreateOne.setOnClickListener { onCreateOneClick(it) }
-
-    }
-
+    /**
+     * Open OTP Activity.
+     */
     fun onClickLoginWithPhoneNumber(view: View) {
         startActivity(Intent(this, ActivityOtpVerification::class.java))
     }
-//sepa
+
+    /**
+     * First check if user inputs are well formatted and
+     * on authentication if success redirect to Home fragment.
+     *
+     */
     fun onLoginClick(view: View) {
-        if(validateUserCred()) {
-            //use string resource
-            Toast.makeText(this, "Password or email must be 8 digit", Toast.LENGTH_SHORT).show()
-            return
-        }
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener(this@ActivityLogin
-        ) { task ->
-            if (task.isSuccessful) {
+        //Authenticate user
+        loginAuthViewModel.loginUser(email, password)
+        //Redirect to home screen if authentication successful
+        loginAuthViewModel.getAuthenticationState().observe(this){ isSuccess ->
+            if(isSuccess){
                 startActivity(Intent(this@ActivityLogin, MainActivity::class.java))
                 finish()
-            } else {
-                binding.tilPassword.isHelperTextEnabled = true
-                binding.tilPassword.helperText = "Email or password is wrong."
+            }
+            //Email or password is wrong
+            else{
+                binding.tilPassword.error = Constants.EMAIL_OR_PASSWOD_WRONG_MSG
             }
         }
     }
 
     private fun validateUserCred(): Boolean {
-        return binding.etEmail.text.toString().length < 8 && binding.etPassword.text.toString().length  < 5
+        return binding.etEmail.text.toString().length < 8 && binding.etPassword.text.toString().length < 5
     }
-
 
 
     fun onCreateOneClick(view: View) {
         startActivity(Intent(this, ActivitySignup::class.java))
     }
+
+
 }

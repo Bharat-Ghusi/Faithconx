@@ -52,6 +52,7 @@
 
     <!--    Edittext fields theme-->
     <style name="edtStyle">
+        <item name="android:textSize">@dimen/fifteenSp</item>
         <!-- Hint color and label color in FALSE state -->
         <item name="hintTextColor">@color/primary_color_theme</item>
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
