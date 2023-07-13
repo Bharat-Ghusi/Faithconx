@@ -45,4 +45,7 @@ object Constants {
     val EMAIL_FORMAT_MSG = "Bad email format."
     //NUMBER
     val INVALID_NUMBER_MSG="Invalid number."
+    //USER
+    const val USER_SESSION_KEY= "User session."
+    val DEFAULT_VALUE= null
 }

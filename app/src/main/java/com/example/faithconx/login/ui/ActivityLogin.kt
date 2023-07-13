@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityLoginBinding
+import com.example.faithconx.helper.user.UserSession
 import com.example.faithconx.helper.user.UserValidation
 import com.example.faithconx.login.viewmodel.LoginAuthViewModel
 import com.example.faithconx.main.ui.MainActivity
@@ -15,6 +16,7 @@ import com.example.faithconx.util.Constants
 import com.example.faithconx.view.ActivityOtpVerification
 
 class ActivityLogin : AppCompatActivity(), View.OnClickListener {
+    private val userSession = UserSession()
     private var isEmailCorrect= false
     private val userValidation = UserValidation()
     private lateinit var binding: ActivityLoginBinding
@@ -94,6 +96,8 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
         //Redirect to home screen if authentication successful
         loginAuthViewModel.getAuthenticationState().observe(this){ isSuccess ->
             if(isSuccess){
+                userSession.createSession(this)
+                userSession.setUser(com.example.faithconx.model.UserSession(email,true))
                 startActivity(Intent(this@ActivityLogin, MainActivity::class.java))
                 finish()
             }

@@ -1,6 +1,7 @@
 package com.example.faithconx.profile.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import com.example.faithconx.R
 import com.example.faithconx.databinding.FragmentProfileBinding
+import com.example.faithconx.helper.user.UserSession
 import com.example.faithconx.login.ui.ActivityLogin
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() ,View.OnClickListener{
+    private val userSession = UserSession()
 private lateinit var binding: FragmentProfileBinding
 private val firebaseAuth =FirebaseAuth.getInstance()
 
@@ -36,8 +39,11 @@ private val firebaseAuth =FirebaseAuth.getInstance()
     }
 
     private fun logoutUser() {
+        userSession.createSession(activity)
+        userSession.removeUser()
         firebaseAuth.signOut()
         activity?.supportFragmentManager?.popBackStack()
+        activity?.finish()
         startActivity(Intent(activity,ActivityLogin::class.java))
     }
 
