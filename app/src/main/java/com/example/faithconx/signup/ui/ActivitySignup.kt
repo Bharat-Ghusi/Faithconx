@@ -48,7 +48,6 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setOnClickListener()
-        setOnFocusChangeListener()
         setOnPhoneNumberChanges()
         onTextChangeListener()
 
@@ -56,10 +55,18 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
 
     private fun onTextChangeListener() {
         binding.etFirstName.addTextChangedListener { onFirstNameTextChange() }
-//        binding.etEmail.addTextChangedListener { onLastNameTextChange() }
+        binding.etEmail.addTextChangedListener { onEmailTextChange() }
         binding.etPhoneNumber.addTextChangedListener { onPhoneNumberTextChange() }
         binding.etPassword.addTextChangedListener { onPasswordTextChange() }
         binding.etConfirmPassword.addTextChangedListener { onConfirmPasswordTextChange() }
+    }
+
+    private fun onEmailTextChange() {
+        if(binding.etEmail.text?.isEmpty() == true){
+            binding.tilEmail.error = null
+            return
+        }
+        isEmailValid = userValidation.validateEmail(binding.etEmail, binding.tilEmail)
     }
 
     private fun onFirstNameTextChange() {
@@ -75,7 +82,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
             binding.tilPhoneNumber.error = null
             return
         }
-        isPhoneNumberValid = userValidation.validateFirstName(binding.etPhoneNumber, binding.tilPhoneNumber)
+        isPhoneNumberValid = userValidation.validatePhoneNumber(binding.etPhoneNumber,binding.tilPhoneNumber,binding.ccp)
     }
 
     private fun onPasswordTextChange() {
@@ -83,11 +90,11 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
             binding.tilPassword.error = null
             return
         }
-        isPasswordValid = userValidation.validateFirstName(binding.etPassword, binding.tilPassword)
+        isPasswordValid = userValidation.validatePassword(binding.etPassword, binding.tilPassword)
     }
 
     private fun onConfirmPasswordTextChange() {
-        if(userValidation.validateFirstName(binding.etConfirmPassword, binding.tilConfirmPassword)
+        if(userValidation.validateConfirmPassword(binding.etPassword,binding.etConfirmPassword,binding.tilConfirmPassword)
             && isEmailValid && isFirstNameValid && isPhoneNumberValid && isPasswordValid){
             binding.btnContinue.backgroundTintList = resources.getColorStateList(R.color.loginbtn_enable_color)
             binding.btnContinue.isEnabled= true
@@ -129,14 +136,6 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
         val filters = arrayOf<InputFilter>()
         binding.etPhoneNumber.filters = filters
        binding. etPhoneNumber.setText("")
-    }
-
-    private fun setOnFocusChangeListener() {
-        binding.etFirstName.onFocusChangeListener = this@ActivitySignup
-        binding.etEmail.onFocusChangeListener = this@ActivitySignup
-        binding.etPhoneNumber.onFocusChangeListener = this@ActivitySignup
-        binding.etPassword.onFocusChangeListener = this@ActivitySignup
-        binding.etConfirmPassword.onFocusChangeListener = this@ActivitySignup
     }
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
@@ -199,58 +198,9 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
         val email = binding.etEmail.text.toString().trim()
 
 
-        //Validate user details
-        if(!userValidation.validateFirstName(binding.etFirstName,binding.tilFirstName) ){
-            binding.tilFirstName.requestFocus()
-
-            binding.tilEmail.error=null
-            binding.tilPhoneNumber.error=null
-            binding.tilPassword.error=null
-            binding.tilConfirmPassword.error=null
-
-            return
-        }
-        else if(!userValidation.validateEmail(binding.etEmail,binding.tilEmail)){
-            binding.tilEmail.requestFocus()
-
-            binding.tilFirstName.error=null
-            binding.tilPhoneNumber.error=null
-            binding.tilPassword.error=null
-            binding.tilConfirmPassword.error=null
-            return
-        }
-
-        else if(!binding.ccp.isValidFullNumber){
-            binding.tilPhoneNumber.error = Constants.INVALID_NUMBER_MSG
-            binding.tilPhoneNumber.requestFocus()
-
-            binding.tilEmail.error=null
-            binding.tilFirstName.error=null
-            binding.tilPassword.error=null
-            binding.tilConfirmPassword.error=null
-            return
-        }
-         else if(!userValidation.validatePassword(binding.etPassword,binding.tilPassword) ){
-            binding.tilPassword.requestFocus()
-
-            binding.tilEmail.error=null
-            binding.tilPhoneNumber.error=null
-            binding.tilFirstName.error=null
-            binding.tilConfirmPassword.error=null
-            return
-        }
-         else if(!userValidation.validateConfirmPassword(binding.etPassword, binding.etConfirmPassword,binding.tilConfirmPassword)){
-            binding.tilConfirmPassword.requestFocus()
-
-            binding.tilEmail.error=null
-            binding.tilPhoneNumber.error=null
-            binding.tilPassword.error=null
-            binding.tilFirstName.error=null
-            return
-        }
 
 //      Checkbox validation.
-        else if (!validateCheckbox()) {
+        if (!validateCheckbox()) {
             binding.checkboxTermsAndCondition.requestFocus()
             return
         }

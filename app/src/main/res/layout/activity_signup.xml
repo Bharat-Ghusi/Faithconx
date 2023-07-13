@@ -228,7 +228,7 @@
         android:id="@+id/btnContinue"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/american_yellow"
+        android:backgroundTint="@color/platinum"
         android:fontFamily="@font/product_sans_bold"
         android:text="@string/btnContinue"
         android:textColor="@color/white"
@@ -237,7 +237,7 @@
         android:onClick="onContinueClick"
         android:padding="@dimen/fifteenDp"
         android:textAppearance="@style/btnBaseStyle"
-
+        android:enabled="false"
         android:layout_marginStart="@dimen/fiveDp"
         android:layout_marginEnd="@dimen/fiveDp"
         app:layout_constraintTop_toTopOf="@id/guidelineRowTwo"
