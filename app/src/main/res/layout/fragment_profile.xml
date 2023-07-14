@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -237,7 +238,7 @@
         android:layout_width="@dimen/zeroDp"
         android:layout_height="1dp"
         android:background="@color/coolGrey"
-        android:layout_marginTop="@dimen/thirtyDp"
+        android:layout_marginTop="@dimen/fortyDp"
         app:layout_constraintTop_toBottomOf="@id/tvTwitterUsername"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
@@ -289,7 +290,7 @@
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/oneDp"
         android:background="@color/coolGrey"
-        android:layout_marginTop="@dimen/thirtyDp"
+        android:layout_marginTop="@dimen/fortyDp"
         app:layout_constraintTop_toBottomOf="@id/ivInvitedPerson"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
@@ -300,7 +301,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Member of"
-        android:layout_marginTop="@dimen/thirtyDp"
+        android:layout_marginTop="@dimen/fortyDp"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         android:textSize="@dimen/FourteenSp"
 
@@ -314,7 +315,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_memberof_icon35x35"
-        android:layout_marginTop="@dimen/tenDp"
+        android:layout_marginTop="@dimen/twentyDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@+id/tvMemberOf"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
