@@ -24,4 +24,5 @@
     <dimen name="sevenDp">7dp</dimen>
     <dimen name="twentyEightDp">28dp</dimen>
     <dimen name="twoFiftyDp">250dp</dimen>
+    <dimen name="zeroPointOneDp">0.1dp</dimen>
 </resources>

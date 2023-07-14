@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/antiFlashWhite"
     tools:context=".profile.ui.ProfileFragment">
 
@@ -33,17 +36,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/sixteenDp"  />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLineRowOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
 
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivProfile17x17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:srcCompat="@drawable/img_profile17x17"
         app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/toolbarMain"
-        app:srcCompat="@drawable/img_profile17x17" />
+        app:layout_constraintBottom_toTopOf="@+id/tvUserFullName"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvUserFullName"
@@ -51,10 +62,11 @@
         android:layout_height="wrap_content"
         android:text="Sultan Almaadeed"
         android:textAppearance="@style/textStyleGothamRoundedMedium"
-        android:layout_marginTop="@dimen/thirtyDp"
+        android:layout_marginTop="@dimen/fifteenDp"
         app:layout_constraintTop_toBottomOf="@+id/ivProfile17x17"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@+id/tvUsername"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -63,10 +75,11 @@
         android:layout_height="wrap_content"
         android:text="@string/username"
         android:textAppearance="@style/textStyleGothamRoundedBook"
-        android:layout_marginTop="@dimen/sevenDp"
+        android:layout_marginTop="@dimen/fiveDp"
         app:layout_constraintTop_toBottomOf="@+id/tvUserFullName"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -75,12 +88,13 @@
         android:layout_height="wrap_content"
         android:text="3.2k followers"
         android:textAppearance="@style/textStyleGothamRoundedBook"
-        android:layout_marginTop="@dimen/thirtyDp"
+        android:layout_marginTop="@dimen/twentyDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toStartOf="@+id/verticalDivider"
+        app:layout_constraintBottom_toTopOf="@+id/tvDesignation"
         />
 
     <View
@@ -105,6 +119,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvFollowersList"
         app:layout_constraintStart_toEndOf="@+id/verticalDivider"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFollowersList"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -112,12 +127,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Founder at ENVST"
-        android:layout_marginTop="@dimen/thirtyDp"
+        android:layout_marginTop="@dimen/twentyDp"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@+id/tvFollowersList"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@+id/tvDesignationTwo"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -130,6 +146,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDesignation"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@+id/tvHobby"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -143,6 +160,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvDesignationTwo"
         app:layout_constraintStart_toEndOf="@+id/tvDesignationTwo"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDesignationTwo"
         />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvRevenue"
@@ -155,6 +173,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvDesignationTwo"
         app:layout_constraintStart_toEndOf="@+id/tvSecCompanyName"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/tvDesignationTwo"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -167,6 +186,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDesignationTwo"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@id/tvCity"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -179,6 +199,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvHobby"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/guidLineRowOne"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -208,12 +229,13 @@
         android:drawableStart="@drawable/img_twitter18x18"
         android:drawablePadding="@dimen/fiveDp"
 
-        android:layout_marginTop="@dimen/thirtyDp"
+        android:layout_marginTop="@dimen/twentyDp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/tvCity"
+        app:layout_constraintTop_toTopOf="@id/guidLineRowOne"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:layout_constraintEnd_toStartOf="@+id/tvInstagramUsername"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalDivider"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -231,17 +253,19 @@
         app:layout_constraintTop_toTopOf="@+id/tvTwitterUsername"
         app:layout_constraintStart_toEndOf="@+id/tvTwitterUsername"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@id/tvTwitterUsername"
         />
 
     <View
         android:id="@+id/horizontalDivider"
         android:layout_width="@dimen/zeroDp"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/zeroPointOneDp"
         android:background="@color/coolGrey"
-        android:layout_marginTop="@dimen/fortyDp"
+        android:layout_marginTop="@dimen/twentyDp"
         app:layout_constraintTop_toBottomOf="@id/tvTwitterUsername"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@id/ivInvitedPerson"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -249,11 +273,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/img_profile35x35"
-        android:layout_marginTop="@dimen/thirtyDp"
+        android:layout_marginTop="@dimen/twentyDp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@id/horizontalDivider"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalDividerTwo"
         />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvJoinedData"
@@ -268,6 +293,7 @@
         app:layout_constraintStart_toEndOf="@+id/ivInvitedPerson"
         app:layout_constraintTop_toTopOf="@+id/ivInvitedPerson"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@id/tvInvitedPersonName"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -288,12 +314,13 @@
     <View
         android:id="@+id/horizontalDividerTwo"
         android:layout_width="@dimen/zeroDp"
-        android:layout_height="@dimen/oneDp"
+        android:layout_height="@dimen/zeroPointOneDp"
         android:background="@color/coolGrey"
-        android:layout_marginTop="@dimen/fortyDp"
+        android:layout_marginTop="@dimen/twentyDp"
         app:layout_constraintTop_toBottomOf="@id/ivInvitedPerson"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@id/tvMemberOf"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -301,24 +328,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Member of"
-        android:layout_marginTop="@dimen/fortyDp"
+        android:layout_marginTop="@dimen/twentyDp"
         android:textAppearance="@style/textStyleGothamRoundedBook"
         android:textSize="@dimen/FourteenSp"
 
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintTop_toBottomOf="@+id/horizontalDividerTwo"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintBottom_toTopOf="@id/ivMemberOf"
+        />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivMemberOf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_memberof_icon35x35"
-        android:layout_marginTop="@dimen/twentyDp"
+        android:layout_marginTop="@dimen/fiveDp"
         app:layout_constraintHorizontal_bias="0"
+        android:layout_marginBottom="@dimen/twentyDp"
         app:layout_constraintTop_toBottomOf="@+id/tvMemberOf"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -333,14 +364,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivMemberOf"
         />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/ivMemberOf"
-        app:layout_constraintStart_toEndOf="@+id/guidelineStart"
-       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
