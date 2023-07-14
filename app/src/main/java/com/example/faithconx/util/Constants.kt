@@ -48,4 +48,6 @@ object Constants {
     //USER
     const val USER_SESSION_KEY= "User session."
     val DEFAULT_VALUE= null
+    //Fragments
+    const val COMING_SOON_MSG = "Coming soon."
 }

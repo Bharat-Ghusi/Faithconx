@@ -17,7 +17,7 @@
         android:id="@+id/newPostMenu"
         android:icon="@drawable/ic_new_post"
         android:title="@string/empty"
-        android:iconTintMode="add"
+        android:iconTint="@color/american_yellow"
         app:showAsAction="always"/>
 
     <item
