@@ -22,7 +22,8 @@
         app:menu="@menu/nav_profile_menu_item"
         app:title="@string/profile"
         app:titleCentered="true"
-        app:titleTextAppearance="@style/styleProfile" />
+        app:titleTextAppearance="@style/styleProfile">
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"

@@ -3,8 +3,6 @@ package com.example.faithconx.profile.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.MenuItem.OnMenuItemClickListener
 import android.view.View
@@ -17,7 +15,7 @@ import com.example.faithconx.helper.user.UserSession
 import com.example.faithconx.login.ui.ActivityLogin
 import com.google.firebase.auth.FirebaseAuth
 
-class ProfileFragment : Fragment(), View.OnClickListener, OnMenuItemClickListener{
+class ProfileFragment : Fragment(), OnMenuItemClickListener{
     private val userSession = UserSession()
     private lateinit var binding: FragmentProfileBinding
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -40,24 +38,19 @@ class ProfileFragment : Fragment(), View.OnClickListener, OnMenuItemClickListene
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menuLogout -> logoutUser()
+            R.id.menuLogout -> logoutUser(item)
         }
         return true
     }
 
-    override fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.btnLogout -> logoutUser()
-        }
-    }
 
-    private fun logoutUser() {
+    private fun logoutUser(view: MenuItem) {
         userSession.createSession(activity)
         userSession.removeUser()
         firebaseAuth.signOut()
         activity?.supportFragmentManager?.popBackStack()
-        activity?.finish()
         startActivity(Intent(activity, ActivityLogin::class.java))
+        activity?.finish()
     }
 
 

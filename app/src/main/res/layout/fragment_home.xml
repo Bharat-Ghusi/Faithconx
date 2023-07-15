@@ -14,6 +14,8 @@
     android:background="@color/antiFlashWhite"
     tools:context=".home.ui.HomeFragment">
 
+
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/tbHome"
         android:layout_width="match_parent"

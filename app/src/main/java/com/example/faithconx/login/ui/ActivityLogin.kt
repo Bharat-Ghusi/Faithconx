@@ -75,7 +75,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
             R.id.btnLoginWithPhoneNumber -> onClickLoginWithPhoneNumber(view)
             R.id.btnLogin -> onLoginClick(view)
             R.id.tvCreateOne -> onCreateOneClick(view)
-            R.id.ivClose -> super.onBackPressed()
+            R.id.ivClose -> finish()
         }
     }
 
