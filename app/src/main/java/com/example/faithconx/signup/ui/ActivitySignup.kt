@@ -1,6 +1,9 @@
 package com.example.faithconx.signup.ui
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.READ_MEDIA_IMAGES
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +18,7 @@ import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivitySignupBinding
 import com.example.faithconx.helper.user.UserValidation
 import com.example.faithconx.login.ui.ActivityLogin
+import com.example.faithconx.signup.helper.MediaPermission
 import com.example.faithconx.signup.helper.UserHelper
 import com.example.faithconx.signup.viewmodel.AuthViewModel
 import com.example.faithconx.signup.viewmodel.DatabaseViewModel
@@ -22,10 +26,12 @@ import com.example.faithconx.util.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusChangeListener{
+class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener {
     companion object {
         private const val TAG = "ActivitySignup"
     }
+
+    private val mediaPermission = MediaPermission()
     private var isFirstNameValid = false
     private var isLastNameValid = false
     private var isEmailValid = false
@@ -62,7 +68,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
     }
 
     private fun onEmailTextChange() {
-        if(binding.etEmail.text?.isEmpty() == true){
+        if (binding.etEmail.text?.isEmpty() == true) {
             binding.tilEmail.error = null
             return
         }
@@ -70,23 +76,26 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
     }
 
     private fun onFirstNameTextChange() {
-        if(binding.etFirstName.text?.isEmpty() == true){
+        if (binding.etFirstName.text?.isEmpty() == true) {
             binding.tilFirstName.error = null
             return
         }
-        isFirstNameValid = userValidation.validateFirstName(binding.etFirstName, binding.tilFirstName)
+        isFirstNameValid =
+            userValidation.validateFirstName(binding.etFirstName, binding.tilFirstName)
     }
 
     private fun onPhoneNumberTextChange() {
-        if(binding.etPhoneNumber.text?.isEmpty() == true){
+        if (binding.etPhoneNumber.text?.isEmpty() == true) {
             binding.tilPhoneNumber.error = null
             return
         }
-        isPhoneNumberValid = userValidation.validatePhoneNumber(binding.etPhoneNumber,binding.tilPhoneNumber,binding.ccp)
+        isPhoneNumberValid = userValidation.validatePhoneNumber(
+            binding.etPhoneNumber, binding.tilPhoneNumber, binding.ccp
+        )
     }
 
     private fun onPasswordTextChange() {
-        if(binding.etPassword.text?.isEmpty() == true){
+        if (binding.etPassword.text?.isEmpty() == true) {
             binding.tilPassword.error = null
             return
         }
@@ -94,28 +103,31 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
     }
 
     private fun onConfirmPasswordTextChange() {
-        if(userValidation.validateConfirmPassword(binding.etPassword,binding.etConfirmPassword,binding.tilConfirmPassword)
-            && isEmailValid && isFirstNameValid && isPhoneNumberValid && isPasswordValid){
-            binding.btnContinue.backgroundTintList = resources.getColorStateList(R.color.loginbtn_enable_color)
-            binding.btnContinue.isEnabled= true
-        }
-        else if(binding.etConfirmPassword.text?.toString()?.isEmpty() == true){
+        if (userValidation.validateConfirmPassword(
+                binding.etPassword, binding.etConfirmPassword, binding.tilConfirmPassword
+            ) && isEmailValid && isFirstNameValid && isPhoneNumberValid && isPasswordValid
+        ) {
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_enable_color)
+            binding.btnContinue.isEnabled = true
+        } else if (binding.etConfirmPassword.text?.toString()?.isEmpty() == true) {
             binding.tilConfirmPassword.error = null
-        }
-        else{
-            binding.btnContinue.backgroundTintList = resources.getColorStateList(R.color.loginbtn_disable_color)
-            binding.btnContinue.isEnabled=false
+        } else {
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_disable_color)
+            binding.btnContinue.isEnabled = false
         }
     }
 
     private fun setOnPhoneNumberChanges() {
         binding.ccp.registerCarrierNumberEditText(binding.etPhoneNumber)
         binding.ccp.setPhoneNumberValidityChangeListener {
-            if(!it){
-                binding.etPhoneNumber.filters =arrayOf<InputFilter>()
-            }else{
+            if (!it) {
+                binding.etPhoneNumber.filters = arrayOf<InputFilter>()
+            } else {
                 // Create an InputFilter to constrain the length limit
-                val filters = arrayOf<InputFilter>(InputFilter.LengthFilter( binding.etPhoneNumber.text.toString().length))
+                val filters =
+                    arrayOf<InputFilter>(InputFilter.LengthFilter(binding.etPhoneNumber.text.toString().length))
                 binding.etPhoneNumber.filters = filters
                 binding.etPhoneNumber.error = null
             }
@@ -127,25 +139,46 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
     private fun setOnClickListener() {
         binding.btnClose.setOnClickListener(this@ActivitySignup)
         binding.btnContinue.setOnClickListener(this@ActivitySignup)
-        binding.civCamera.setOnClickListener(this@ActivitySignup)
+        binding.civEditProfileImg.setOnClickListener(this@ActivitySignup)
         binding.ccp.setOnCountryChangeListener { onCountryChange() }
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.btnClose -> redirectToLoginScreen()
+            R.id.btnContinue -> onContinueClick(view)
+            R.id.civ_editProfileImg -> onEditProfileImgClick(view)
+        }
+    }
+
+
     private fun onCountryChange() {
         val filters = arrayOf<InputFilter>()
         binding.etPhoneNumber.filters = filters
-       binding. etPhoneNumber.setText("")
+        binding.etPhoneNumber.setText("")
     }
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
-      when(view?.id){
-          R.id.etFirstName -> userHelper.etFirstNameFocusChange(hasFocus,binding.tilFirstName,binding.etFirstName)
-          R.id.etEmail ->userHelper. etEmailFocusChange(hasFocus,binding.tilEmail,binding.etEmail)
-          R.id.etPhoneNumber -> onEtPhoneNumberFocusChange()
-          R.id.etPassword ->userHelper. etPasswordFocusChange(hasFocus,binding.tilPassword,binding.etPassword)
-          R.id.etConfirmPassword -> userHelper.etConfirmPasswordFocusChange(hasFocus,binding.tilConfirmPassword,binding.etConfirmPassword,binding.etPassword)
-      }
+        when (view?.id) {
+            R.id.etFirstName -> userHelper.etFirstNameFocusChange(
+                hasFocus, binding.tilFirstName, binding.etFirstName
+            )
+
+            R.id.etEmail -> userHelper.etEmailFocusChange(
+                hasFocus, binding.tilEmail, binding.etEmail
+            )
+
+            R.id.etPhoneNumber -> onEtPhoneNumberFocusChange()
+            R.id.etPassword -> userHelper.etPasswordFocusChange(
+                hasFocus, binding.tilPassword, binding.etPassword
+            )
+
+            R.id.etConfirmPassword -> userHelper.etConfirmPasswordFocusChange(
+                hasFocus, binding.tilConfirmPassword, binding.etConfirmPassword, binding.etPassword
+            )
+        }
     }
 
     /**
@@ -157,7 +190,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
             if (hasFocus) {
                 if (!binding.ccp.isValidFullNumber) {
                     binding.tilPhoneNumber.error = Constants.INVALID_NUMBER_MSG
-                }else{
+                } else {
                     binding.tilPhoneNumber.error = null
                 }
 
@@ -165,19 +198,9 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
             } else if (!binding.ccp.isValidFullNumber) {
                 binding.tilPhoneNumber.error = Constants.INVALID_NUMBER_MSG
 
-            }
-            else{
+            } else {
                 binding.tilPhoneNumber.error = null
             }
-        }
-    }
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.btnClose -> redirectToLoginScreen()
-            R.id.btnContinue -> onContinueClick(view)
         }
     }
 
@@ -198,15 +221,13 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
         val email = binding.etEmail.text.toString().trim()
 
 
-
 //      Checkbox validation.
         if (!validateCheckbox()) {
             binding.checkboxTermsAndCondition.requestFocus()
             return
         }
         //Everything is right good to go.
-        else
-        loginUserWithEmailAndPassword(email, password)
+        else loginUserWithEmailAndPassword(email, password)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -233,14 +254,13 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
     }
 
     //Checkbox validation
-    private fun validateCheckbox():Boolean{
+    private fun validateCheckbox(): Boolean {
         if (!binding.checkboxTermsAndCondition.isChecked) {
             binding.checkboxTermsAndCondition.error = Constants.TERMS_AND_CONDITION_MSG
-            Toast.makeText(this,Constants.TERMS_AND_CONDITION_MSG,Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, Constants.TERMS_AND_CONDITION_MSG, Toast.LENGTH_SHORT).show()
             return false
-        }
-        else{
-            binding.checkboxTermsAndCondition.error =null
+        } else {
+            binding.checkboxTermsAndCondition.error = null
             return true
         }
 
@@ -277,10 +297,38 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener,View.OnFocusCha
     }
 
 
-
-
     private fun uploadProfileImage() {
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    fun onEditProfileImgClick(view: View) {
+        val readImagePermission =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) READ_MEDIA_IMAGES
+            else READ_EXTERNAL_STORAGE
+        val permissions = arrayOf(readImagePermission)
+//        Permission granted
+        if (mediaPermission.isPermissionGranted(this, arrayOf(readImagePermission))) {
+            Toast.makeText(this, "Permission already granted.", Toast.LENGTH_LONG).show()
+        }
+//        Permission not granted then request for permission
+        else {
+            mediaPermission.requestPermission(this, permissions, Constants.MEDIA_PERMISSION_CODE)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == Constants.MEDIA_PERMISSION_CODE && grantResults.isNotEmpty()) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission Granted.", Toast.LENGTH_SHORT).show()
+            } else
+                Toast.makeText(this, "Permission Denied.", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
