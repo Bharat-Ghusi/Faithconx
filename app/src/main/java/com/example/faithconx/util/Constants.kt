@@ -52,4 +52,9 @@ object Constants {
     const val COMING_SOON_MSG = "Coming soon."
     //Media permission code
     const val MEDIA_PERMISSION_CODE=1
+    //Media permission code
+    const val MEDIA_BROWSE_CODE=1
+    //Profile image key
+    const val PROFILE_IMAGES_ROOT_KEY = "Profile Images"
+    const val IMAGE_URL_PREFIX = "image/"
 }

@@ -1,28 +1,36 @@
 package com.example.faithconx.signup.viewmodel
 
-import android.content.Intent
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.faithconx.login.ui.ActivityLogin
 import com.example.faithconx.model.User
 import com.example.faithconx.util.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class DatabaseViewModel: ViewModel() {
+class DatabaseViewModel : ViewModel() {
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private val dataSavingState = MutableLiveData<Boolean>()
-    fun getDataSavingState():LiveData<Boolean> = dataSavingState
+    fun getDataSavingState(): LiveData<Boolean> = dataSavingState
 
 
-    fun saveUserDetailsToDb(firstName:String, lastName:String, email:String, number:String, firebaseAuth: FirebaseAuth){
-
+    fun saveUserDetailsToDb(
+        firstName: String?,
+        lastName: String?,
+        email: String?,
+        number: String?,
+        profileUrl:String?,
+        firebaseAuth: FirebaseAuth?
+    ) {
+val em = email
+        val pro = profileUrl
         firebaseAuth?.uid?.let {
+            firebaseDatabase.purgeOutstandingWrites()
+            firebaseDatabase.goOffline()
+            firebaseDatabase.goOnline()
             firebaseDatabase.reference.child(Constants.USERS_DB_NAME)
-                .child(it).setValue(User(firstName, lastName, email, number))
+                .child(it).setValue(User(firstName, lastName, email, number, profileUrl))
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
                         //Save to DB successful

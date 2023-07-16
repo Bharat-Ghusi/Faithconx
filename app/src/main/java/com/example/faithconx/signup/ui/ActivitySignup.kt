@@ -2,15 +2,18 @@ package com.example.faithconx.signup.ui
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.READ_MEDIA_IMAGES
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.InputFilter
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -18,6 +21,7 @@ import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivitySignupBinding
 import com.example.faithconx.helper.user.UserValidation
 import com.example.faithconx.login.ui.ActivityLogin
+import com.example.faithconx.main.ui.MainActivity
 import com.example.faithconx.signup.helper.MediaPermission
 import com.example.faithconx.signup.helper.UserHelper
 import com.example.faithconx.signup.viewmodel.AuthViewModel
@@ -25,12 +29,14 @@ import com.example.faithconx.signup.viewmodel.DatabaseViewModel
 import com.example.faithconx.util.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 
 class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusChangeListener {
     companion object {
         private const val TAG = "ActivitySignup"
     }
 
+    private var imageUrl: Uri? = null
     private val mediaPermission = MediaPermission()
     private var isFirstNameValid = false
     private var isLastNameValid = false
@@ -227,11 +233,11 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
             return
         }
         //Everything is right good to go.
-        else loginUserWithEmailAndPassword(email, password)
+        else registerUserWithEmailAndPassword(email, password)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun loginUserWithEmailAndPassword(email: String, password: String) {
+    private fun registerUserWithEmailAndPassword(email: String, password: String) {
         authModel.register(email, password)
         // User is already logged in,
         if (firebaseAuth.currentUser != null) {
@@ -242,12 +248,13 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         authModel.getAuthenticationState().observe(
             this
         ) {
+            //User has successfully register with email and password
             if (it) {
-                //Upload image first
-                uploadProfileImage()
                 //save to DB
                 saveToDb()
-            } else {
+            }
+            //User registration failed
+            else {
                 Toast.makeText(this, Constants.AUHTENTICATION_FAILED_MSG, Toast.LENGTH_LONG).show()
             }
         }
@@ -275,21 +282,39 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         val firstName = binding.etFirstName.text.toString().trim()
         val lastName = binding.etLastName.text.toString().trim()
         val email = binding.etEmail.text.toString().trim()
-
-
         val number = binding.ccp.fullNumberWithPlus
+        //Upload image first
+
         //store the user details
-        databaseViewModel.saveUserDetailsToDb(firstName, lastName, email, number, firebaseAuth)
+        imageUrl?.toString()?.let {imageUrl ->
+            databaseViewModel.saveUserDetailsToDb(
+                firstName,
+                lastName,
+                email,
+                number,
+                imageUrl,
+                firebaseAuth
+            )
+        } ?:
+        databaseViewModel.saveUserDetailsToDb(
+            firstName,
+            lastName,
+            email,
+            number,
+            imageUrl?.toString(),
+            firebaseAuth
+        )
         databaseViewModel.getDataSavingState().observe(this) { state ->
             if (state) {
                 //Data save successfully
                 Log.i(TAG, Constants.SUCCESS_MSG_OF_SAVING_USER_DATA)
-                startActivity(Intent(this@ActivitySignup, ActivityLogin::class.java))
+                startActivity(Intent(this@ActivitySignup, MainActivity::class.java))
                 finish()
             } else {
                 //Failed to save data
                 Log.i(TAG, Constants.FAILURE_MSG_OF_SAVING_USER_DATA)
             }
+
         }
 //
 
@@ -297,8 +322,31 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun uploadProfileImage() {
-
+        val storageReference =
+            FirebaseStorage.getInstance().getReference(Constants.PROFILE_IMAGES_ROOT_KEY)
+                .child(Constants.IMAGE_URL_PREFIX + firebaseAuth.currentUser?.uid)
+        filePathUri?.let { filePathUri ->
+            storageReference.putFile(filePathUri)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.i("TAG", "Image uploaded successfully.")
+                        storageReference.downloadUrl.addOnSuccessListener { uri ->
+                            imageUrl = uri
+                            Log.i("TAG", "Downloaded img uri successfully: ${uri.toString()}")
+                            val userInfo = uri?.userInfo
+                        }
+                    } else {
+                        Log.i("TAG", "Image upload failed.")
+                        Toast.makeText(
+                            this@ActivitySignup,
+                            "Image updation failed.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -310,6 +358,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
 //        Permission granted
         if (mediaPermission.isPermissionGranted(this, arrayOf(readImagePermission))) {
             Toast.makeText(this, "Permission already granted.", Toast.LENGTH_LONG).show()
+            browseProfileImage()
         }
 //        Permission not granted then request for permission
         else {
@@ -326,9 +375,36 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         if (requestCode == Constants.MEDIA_PERMISSION_CODE && grantResults.isNotEmpty()) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission Granted.", Toast.LENGTH_SHORT).show()
+                browseProfileImage()
             } else
                 Toast.makeText(this, "Permission Denied.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    /**
+     * . Use registerForActivityResult(ActivityResultContract, ActivityResultCallback)
+     * passing in a StartActivityForResult object for the ActivityResultContract.
+     */
+    private var filePathUri: Uri? = null
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                filePathUri = result.data?.data
+                binding.civProfile.setImageURI(filePathUri)
+                uploadProfileImage()
+            }
+        }
+
+    /**
+     * Browse Image from external storage.
+     */
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun browseProfileImage() {
+        resultLauncher.launch(Intent(Intent.ACTION_PICK).setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
     }
 
 }
