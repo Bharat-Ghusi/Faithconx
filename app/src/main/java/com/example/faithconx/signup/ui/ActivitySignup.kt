@@ -447,6 +447,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
      */
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun browseProfileImage() {
         resultLauncher.launch(Intent(Intent.ACTION_PICK).setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
     }

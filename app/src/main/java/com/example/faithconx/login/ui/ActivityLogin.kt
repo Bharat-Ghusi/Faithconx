@@ -6,11 +6,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityLoginBinding
 import com.example.faithconx.helper.user.UserSession
 import com.example.faithconx.helper.user.UserValidation
 import com.example.faithconx.login.viewmodel.LoginAuthViewModel
+import com.example.faithconx.login.viewmodel.PhoneAuthViewModel
 import com.example.faithconx.main.ui.MainActivity
 import com.example.faithconx.signup.ui.ActivitySignup
 import com.example.faithconx.util.Constants
@@ -22,6 +24,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
 class ActivityLogin : AppCompatActivity(), View.OnClickListener {
+    private var phoneAuthViewModel:PhoneAuthViewModel? = null
     private val userSession = UserSession()
     private var isEmailCorrect = false
     private val userValidation = UserValidation()
@@ -141,9 +144,6 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun validateUserCred(): Boolean {
-        return binding.etEmail.text.toString().length < 8 && binding.etPassword.text.toString().length < 5
-    }
 
 
     fun onCreateOneClick(view: View) {
@@ -157,8 +157,9 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
 
     //    Send a verification code to the user's phone
     fun onGetOtpClick(view: View) {
-        //Register cpp with number
-        binding.ccp.registerCarrierNumberEditText(binding.editTextPhoneNumber)
+
+
+////////////////////
         val options = PhoneAuthOptions.newBuilder()
             .setPhoneNumber(binding.ccp.fullNumberWithPlus)
             .setTimeout(60L, TimeUnit.SECONDS)
@@ -185,6 +186,9 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
     }
 
     fun onSubmitClick(view: View) {
+
+
+        ///////////
         binding.editTextOtpSubmit.text.toString()?.let {
             if (it.isNotEmpty() && it.length == Constants.OTP_LENGTH) {
                 //Progress Bar Enabled.
