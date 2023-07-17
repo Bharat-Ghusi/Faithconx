@@ -104,6 +104,7 @@
         app:passwordToggleEnabled="true"
         app:helperTextTextColor="@color/red"
         android:theme="@style/edtStyle"
+
         app:startIconDrawable="@drawable/ic_password"
         app:layout_constraintEnd_toEndOf="@id/tilEmail"
         app:layout_constraintStart_toStartOf="@id/tilEmail"
@@ -147,6 +148,28 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/tilEmail"
         app:layout_constraintTop_toBottomOf="@id/tilPassword" />
+
+
+<!--    GROUP ONE-->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/grpGmailLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids=""
+        />
+
+
+
+<!--    GROUP TWO-->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/grpOtpLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="btnLogin,tilEmail, tilPassword, tvForgotPassword "
+        />
+
+
+
     <!--    Horizontal line START-->
     <View
         android:id="@+id/viewLeftDivider"
@@ -246,7 +269,8 @@
         android:layout_marginEnd="@dimen/fiveDp"
         app:layout_constraintEnd_toEndOf="@id/btnLogin"
         app:layout_constraintStart_toStartOf="@id/btnLogin"
-        app:layout_constraintTop_toBottomOf="@id/btnLoginWithGoogle" />
+        app:layout_constraintTop_toBottomOf="@id/btnLoginWithGoogle"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"/>
     <!--    Row Three-->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDontHaveAnAccount"

@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginAuthViewModel:ViewModel() {
     private val firebaseAuth = FirebaseAuth.getInstance()
-    private val authenticationState=MutableLiveData<Boolean>(false)
+    private val authenticationState=MutableLiveData<Boolean>()
     fun getAuthenticationState():LiveData<Boolean> = authenticationState
 
     fun loginUser(email:String, password:String){

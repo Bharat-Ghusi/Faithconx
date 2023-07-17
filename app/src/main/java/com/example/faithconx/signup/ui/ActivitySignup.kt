@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivitySignupBinding
 import com.example.faithconx.helper.user.UserValidation
@@ -26,6 +27,7 @@ import com.example.faithconx.signup.helper.MediaPermission
 import com.example.faithconx.signup.helper.UserHelper
 import com.example.faithconx.signup.viewmodel.AuthViewModel
 import com.example.faithconx.signup.viewmodel.DatabaseViewModel
+import com.example.faithconx.signup.viewmodel.ImageStorageViewModel
 import com.example.faithconx.util.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -36,6 +38,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         private const val TAG = "ActivitySignup"
     }
 
+    private val imageDatabaseViewModel = ImageStorageViewModel()
     private var imageUrl: Uri? = null
     private val mediaPermission = MediaPermission()
     private var isFirstNameValid = false
@@ -279,8 +282,32 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
      */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveToDb() {
+        val firstName = binding.etFirstName.text.toString().trim()
+        val lastName = binding.etLastName.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
+        val number = binding.ccp.fullNumberWithPlus
 //        upload image first
-     uploadProfileImage()
+//     uploadProfileImage()
+
+        //Observer
+        filePathUri?.let {
+            imageDatabaseViewModel.uploadProfileImage(filePathUri)
+            imageDatabaseViewModel.isImageSaved().observe(this, Observer { isImageSaved ->
+                if (isImageSaved) {
+                    imageDatabaseViewModel.getDownloadedImageUri()
+                        .observe(this@ActivitySignup, Observer { uri ->
+                            saveUserCredential(firstName, lastName, email, number, uri.toString())
+                        })
+                }
+                //False means save user input without profiles.
+                else {
+                    Log.e("TAG", "Image upload failed.")
+                }
+            })
+
+        } ?: saveUserCredential(firstName, lastName, email, number, "")
+
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -295,20 +322,24 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
                         Log.i("TAG", "Image uploaded successfully.")
                         storageReference.downloadUrl.addOnSuccessListener { uri ->
                             //Save complete user cred
-                            saveUserCredential( binding.etFirstName.text.toString().trim(),
+                            saveUserCredential(
+                                binding.etFirstName.text.toString().trim(),
                                 binding.etLastName.text.toString().trim(),
                                 binding.etEmail.text.toString().trim(),
-                                binding.ccp.fullNumberWithPlus,uri.toString())
+                                binding.ccp.fullNumberWithPlus, uri.toString()
+                            )
 
                             imageUrl = uri
                             Log.i("TAG", "Downloaded img uri successfully: ${uri.toString()}")
                         }
                     } else {
                         //Save complete user cred
-                        saveUserCredential( binding.etFirstName.text.toString().trim(),
+                        saveUserCredential(
+                            binding.etFirstName.text.toString().trim(),
                             binding.etLastName.text.toString().trim(),
                             binding.etEmail.text.toString().trim(),
-                            binding.ccp.fullNumberWithPlus,uri.toString())
+                            binding.ccp.fullNumberWithPlus, uri.toString()
+                        )
 
                         Log.i("TAG", "Image upload failed.")
                         Toast.makeText(
@@ -320,6 +351,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
                 }
         }
     }
+
     private fun saveUserCredential(
         firstName: String,
         lastName: String,
@@ -358,11 +390,6 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
 
         }
     }
-
-
-
-
-
 
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)

@@ -2,6 +2,7 @@ package com.example.faithconx.login.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.example.faithconx.main.ui.MainActivity
 import com.example.faithconx.signup.ui.ActivitySignup
 import com.example.faithconx.util.Constants
 import com.example.faithconx.view.ActivityOtpVerification
+import kotlin.system.exitProcess
 
 class ActivityLogin : AppCompatActivity(), View.OnClickListener {
     private val userSession = UserSession()
@@ -26,6 +28,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setOnClickListener()
         setOnClickListener()
         onTextChangeListener()
     }
@@ -75,8 +78,12 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
             R.id.btnLoginWithPhoneNumber -> onClickLoginWithPhoneNumber(view)
             R.id.btnLogin -> onLoginClick(view)
             R.id.tvCreateOne -> onCreateOneClick(view)
-            R.id.ivClose -> finish()
+            R.id.ivClose ->  onCloseClick()
         }
+    }
+
+    private fun onCloseClick() {
+        finish()
     }
 
 
@@ -119,6 +126,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
 
     fun onCreateOneClick(view: View) {
         startActivity(Intent(this, ActivitySignup::class.java))
+        finish()
     }
 
 
