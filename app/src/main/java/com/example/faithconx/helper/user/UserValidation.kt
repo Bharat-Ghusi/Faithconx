@@ -28,7 +28,7 @@ class UserValidation {
         "{4,20}"-> specifies that the previous pattern (\w) should occur between 4 and 20 times OR  has a length between 4 and 20 characters (inclusive).
         "\z"    ->represents the end of the string OR  It ensures that the entire string matches this pattern from start to end..
          */
-        else if (!text.matches(Regex("\\A\\w{4,20}\\z"))) {
+        else if (!text.matches(Regex("\\A\\w+\\z"))) {
             editTextLayout.error = Constants.WHITE_SPACE_ERROR_MSG
             return false
         } else

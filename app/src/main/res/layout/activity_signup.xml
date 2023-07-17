@@ -71,15 +71,17 @@
         >
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_profile"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@drawable/img_srk"
+            android:layout_width="@dimen/ninetySixDp"
+            android:layout_height="@dimen/ninetySixDp"
+            app:civ_border_width="@dimen/fiveDp"
+            app:civ_border_color="@color/primary_color_theme"
+            android:src="@drawable/ic_default_img"
             android:layout_gravity="bottom|center_horizontal" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_editProfileImg"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/thirtyDp"
+            android:layout_height="@dimen/thirtyDp"
             android:src="@drawable/ic_camera"
             android:onClick="onEditProfileImgClick"
             android:layout_gravity="bottom|right"

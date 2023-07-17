@@ -25,4 +25,5 @@
     <dimen name="twentyEightDp">28dp</dimen>
     <dimen name="twoFiftyDp">250dp</dimen>
     <dimen name="zeroPointOneDp">0.1dp</dimen>
+    <dimen name="ninetySixDp">96dp</dimen>
 </resources>

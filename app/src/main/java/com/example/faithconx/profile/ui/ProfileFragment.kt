@@ -1,5 +1,6 @@
 package com.example.faithconx.profile.ui
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.MenuItem
 import android.view.MenuItem.OnMenuItemClickListener
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.faithconx.R
@@ -38,9 +40,26 @@ class ProfileFragment : Fragment(), OnMenuItemClickListener{
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menuLogout -> logoutUser(item)
+            R.id.menuLogout -> showDialogBox(item)
         }
         return true
+    }
+
+    private fun showDialogBox(view: MenuItem){
+        activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.setMessage(getString(R.string.do_you_want_to_logout))
+                .setTitle("Alert !")
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.yes)
+                ) { dialog, which ->
+                    logoutUser(view)
+                     }
+                .setNegativeButton(getString(R.string.no), DialogInterface.OnClickListener { dialog, which ->
+                    dialog.dismiss()
+                })
+            builder.create().show()
+        }
     }
 
 

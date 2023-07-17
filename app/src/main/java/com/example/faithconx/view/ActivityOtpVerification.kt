@@ -19,14 +19,14 @@ import java.util.concurrent.TimeUnit
 class ActivityOtpVerification : AppCompatActivity() {
     private lateinit var binding: ActivityOtpVerificationBinding
     private var verificationId = ""
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var   authCredential:PhoneAuthCredential
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtpVerificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setOnClickListener()
+//        setOnClickListener()
     }
 
     private fun setOnClickListener() {
@@ -64,7 +64,17 @@ class ActivityOtpVerification : AppCompatActivity() {
 
         setVisibility(binding.groupSubmitOtp.id, View.VISIBLE)
     }
+    fun onSubmitClick(view: View) {
+        binding.editTextOtpSubmit.text.toString()?.let {
+            if(it.isNotEmpty() && it.length == Constants.OTP_LENGTH){
+                //Progress Bar Enabled.
+                binding?.otpProgressBar?.visibility = View.VISIBLE
+                authCredential = PhoneAuthProvider.getCredential(verificationId,it)
+                signInWithPhoneAuthCredential(authCredential)
+            }
+        }
 
+    }
     private fun setVisibility(id: Int, visibility: Int) {
         when(id){
             R.id.groupGetOtp -> binding.groupGetOtp.visibility= visibility
@@ -91,15 +101,5 @@ class ActivityOtpVerification : AppCompatActivity() {
     }
 
 
-    fun onSubmitClick(view: View) {
-       binding.editTextOtpSubmit.text.toString()?.let {
-        if(it.isNotEmpty() && it.length == Constants.OTP_LENGTH){
-            //Progress Bar Enabled.
-        binding?.otpProgressBar?.visibility = View.VISIBLE
-            authCredential = PhoneAuthProvider.getCredential(verificationId,it)
-            signInWithPhoneAuthCredential(authCredential)
-        }
-       }
 
-    }
 }

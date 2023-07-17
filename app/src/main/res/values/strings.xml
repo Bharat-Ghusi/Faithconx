@@ -37,4 +37,7 @@
     <string name="btnContinue">Continue</string>
     <string name="username">\@sultanalmaadeed</string>
     <string name="empty" />
+    <string name="do_you_want_to_logout">Do you want to logout ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
