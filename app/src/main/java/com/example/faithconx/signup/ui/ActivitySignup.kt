@@ -279,48 +279,9 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
      */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveToDb() {
-        val firstName = binding.etFirstName.text.toString().trim()
-        val lastName = binding.etLastName.text.toString().trim()
-        val email = binding.etEmail.text.toString().trim()
-        val number = binding.ccp.fullNumberWithPlus
-        //Upload image first
-
-        //store the user details
-        imageUrl?.toString()?.let {imageUrl ->
-            databaseViewModel.saveUserDetailsToDb(
-                firstName,
-                lastName,
-                email,
-                number,
-                imageUrl,
-                firebaseAuth
-            )
-        } ?:
-        databaseViewModel.saveUserDetailsToDb(
-            firstName,
-            lastName,
-            email,
-            number,
-            imageUrl?.toString(),
-            firebaseAuth
-        )
-        databaseViewModel.getDataSavingState().observe(this) { state ->
-            if (state) {
-                //Data save successfully
-                Log.i(TAG, Constants.SUCCESS_MSG_OF_SAVING_USER_DATA)
-                startActivity(Intent(this@ActivitySignup, MainActivity::class.java))
-                finish()
-            } else {
-                //Failed to save data
-                Log.i(TAG, Constants.FAILURE_MSG_OF_SAVING_USER_DATA)
-            }
-
-        }
-//
-
-
+//        upload image first
+     uploadProfileImage()
     }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun uploadProfileImage() {
@@ -333,11 +294,22 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
                     if (task.isSuccessful) {
                         Log.i("TAG", "Image uploaded successfully.")
                         storageReference.downloadUrl.addOnSuccessListener { uri ->
+                            //Save complete user cred
+                            saveUserCredential( binding.etFirstName.text.toString().trim(),
+                                binding.etLastName.text.toString().trim(),
+                                binding.etEmail.text.toString().trim(),
+                                binding.ccp.fullNumberWithPlus,uri.toString())
+
                             imageUrl = uri
                             Log.i("TAG", "Downloaded img uri successfully: ${uri.toString()}")
-                            val userInfo = uri?.userInfo
                         }
                     } else {
+                        //Save complete user cred
+                        saveUserCredential( binding.etFirstName.text.toString().trim(),
+                            binding.etLastName.text.toString().trim(),
+                            binding.etEmail.text.toString().trim(),
+                            binding.ccp.fullNumberWithPlus,uri.toString())
+
                         Log.i("TAG", "Image upload failed.")
                         Toast.makeText(
                             this@ActivitySignup,
@@ -348,6 +320,50 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
                 }
         }
     }
+    private fun saveUserCredential(
+        firstName: String,
+        lastName: String,
+        email: String,
+        fullNumberWithPlus: String,
+        imageUrl: String
+    ) {
+        //store the user details
+        imageUrl?.toString()?.let { imageUrl ->
+            databaseViewModel.saveUserDetailsToDb(
+                firstName,
+                lastName,
+                email,
+                fullNumberWithPlus,
+                imageUrl,
+                firebaseAuth
+            )
+        } ?: databaseViewModel.saveUserDetailsToDb(
+            firstName,
+            lastName,
+            email,
+            fullNumberWithPlus,
+            "",
+            firebaseAuth
+        )
+        databaseViewModel.getDataSavingState().observe(this) { state ->
+            if (state) {
+                //Data save successfully
+                Log.i(ActivitySignup.TAG, Constants.SUCCESS_MSG_OF_SAVING_USER_DATA)
+                startActivity(Intent(this@ActivitySignup, MainActivity::class.java))
+                finish()
+            } else {
+                //Failed to save data
+                Log.i(ActivitySignup.TAG, Constants.FAILURE_MSG_OF_SAVING_USER_DATA)
+            }
+
+        }
+    }
+
+
+
+
+
+
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun onEditProfileImgClick(view: View) {
@@ -366,6 +382,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -394,7 +411,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
                 // There are no request codes
                 filePathUri = result.data?.data
                 binding.civProfile.setImageURI(filePathUri)
-                uploadProfileImage()
+
             }
         }
 
@@ -402,7 +419,7 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
      * Browse Image from external storage.
      */
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     private fun browseProfileImage() {
         resultLauncher.launch(Intent(Intent.ACTION_PICK).setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
     }

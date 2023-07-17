@@ -56,5 +56,5 @@ object Constants {
     const val MEDIA_BROWSE_CODE=1
     //Profile image key
     const val PROFILE_IMAGES_ROOT_KEY = "Profile Images"
-    const val IMAGE_URL_PREFIX = "image/"
+    const val IMAGE_URL_PREFIX = "images/"
 }
