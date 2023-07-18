@@ -1,11 +1,16 @@
 package com.example.faithconx.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
+
+@Parcelize
 data class Location(
-    val city: String,
-    val coordinates: Coordinates,
-    val country: String,
+    var city: String,
+    val coordinates:@RawValue Coordinates,
+    var country: String,
     val postcode: String,
-    val state: String,
-    val street: Street,
-    val timezone: Timezone
-)
+    var state: String,
+    val street:@RawValue Street,
+    val timezone: @RawValue Timezone
+) : Parcelable

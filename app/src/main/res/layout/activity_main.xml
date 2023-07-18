@@ -12,11 +12,10 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcvMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/zeroDp"
         android:name="com.example.faithconx.home.ui.HomeFragment"
         tools:layout="@layout/fragment_home"
-
-        android:layout_marginBottom="?attr/actionBarSize"
+       app:layout_constraintBottom_toTopOf="@+id/btmNavView"
         app:layout_constraintTop_toTopOf="parent"
         />
 
