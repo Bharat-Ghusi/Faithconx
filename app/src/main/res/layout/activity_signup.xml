@@ -155,6 +155,9 @@
         android:id="@+id/ccp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:ccp_hintExampleNumber="true"
+
+
         app:layout_constraintVertical_bias="0.4"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/tilFirstName"
@@ -166,7 +169,6 @@
         android:id="@+id/tilPhoneNumber"
         android:layout_width="@dimen/zeroDp"
         android:layout_height="@dimen/zeroDp"
-        android:hint="@string/phone_number"
         app:startIconDrawable="@drawable/ic_smartphone"
         android:theme="@style/edtStyle"
         app:layout_constraintBottom_toTopOf="@+id/tilPassword"

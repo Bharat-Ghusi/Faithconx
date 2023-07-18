@@ -104,6 +104,7 @@ class UserValidation {
                 isValid=false
 
             }else{
+                //Number is valid.
                 // Create an InputFilter to constrain the length limit
                 val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(editText.text.toString().length))
                 editText.filters = filters
