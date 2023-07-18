@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/antiFlashWhite"
-    tools:context=".profile.ui.ProfileFragment">
+    tools:context=".main.profile.ui.ProfileFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarMain"
@@ -24,6 +24,27 @@
         app:titleCentered="true"
         app:titleTextAppearance="@style/styleProfile">
     </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/grpAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="ivProfile17x17,tvUserFullName,tvUsername,
+tvFollowersList,tvFollowingList,verticalDivider,tvDesignationOne,tvCompanyOne , tvDesignationTwo
+, tvSecCompanyName, tvRevenue, tvHobby, tvCity, tvState, tvTwitterUsername, tvInstagramUsername,
+horizontalDivider,ivInvitedPerson, tvJoinedData, tvInvitedPersonName, horizontalDividerTwo,
+tvMemberOf, ivMemberOf, ivMemberAdd"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
@@ -51,6 +72,9 @@
         android:layout_height="90dp"
         tools:srcCompat="@drawable/img_profile17x17"
         app:layout_constraintHorizontal_bias="0"
+        android:scaleType="centerCrop"
+        android:background="@drawable/round_shape"
+        android:elevation="@dimen/fiveDp"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/toolbarMain"

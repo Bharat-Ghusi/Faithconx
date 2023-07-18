@@ -1,4 +1,4 @@
-package com.example.faithconx.profile.viewmodel
+package com.example.faithconx.main.profile.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData

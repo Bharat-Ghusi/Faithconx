@@ -1,4 +1,4 @@
-package com.example.faithconx.profile.ui
+package com.example.faithconx.main.profile.ui
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -20,7 +20,7 @@ import com.example.faithconx.databinding.FragmentProfileBinding
 import com.example.faithconx.helper.user.UserSession
 import com.example.faithconx.login.ui.ActivityLogin
 import com.example.faithconx.model.User
-import com.example.faithconx.profile.viewmodel.ProfileViewModel
+import com.example.faithconx.main.profile.viewmodel.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment(), OnMenuItemClickListener{
@@ -34,6 +34,10 @@ class ProfileFragment : Fragment(), OnMenuItemClickListener{
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater)
+        //Progressbar
+        binding.grpAll.visibility =View.GONE
+        binding.progressbar.visibility =View.VISIBLE
+
 
         setOnClickListener()
         setUserDataToTv()
@@ -50,6 +54,8 @@ class ProfileFragment : Fragment(), OnMenuItemClickListener{
             })
             profileViewModel.getUser().observe(activity, Observer {
                 setToTv(it)
+                binding.grpAll.visibility =View.VISIBLE
+                binding.progressbar.visibility =View.GONE
             })
 
         }

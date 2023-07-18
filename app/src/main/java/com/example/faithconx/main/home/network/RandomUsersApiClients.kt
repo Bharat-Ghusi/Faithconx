@@ -1,4 +1,4 @@
-package com.example.faithconx.network
+package com.example.faithconx.main.home.network
 
 import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import okhttp3.OkHttpClient

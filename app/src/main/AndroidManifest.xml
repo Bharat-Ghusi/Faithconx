@@ -35,9 +35,6 @@
             android:name=".main.ui.MainActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".randomusers.RandomUsersActivity"
-            android:exported="false" />
 
         <activity
             android:name=".signup.ui.ActivitySignup"

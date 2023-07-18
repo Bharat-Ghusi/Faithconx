@@ -1,4 +1,4 @@
-package com.example.faithconx.adapter
+package com.example.faithconx.main.home.adapter
 
 import android.graphics.Bitmap
 import android.view.LayoutInflater

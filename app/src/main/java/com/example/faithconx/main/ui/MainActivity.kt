@@ -8,8 +8,11 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityMainBinding
-import com.example.faithconx.home.ui.HomeFragment
-import com.example.faithconx.profile.ui.ProfileFragment
+import com.example.faithconx.main.chat.ChatFragment
+import com.example.faithconx.main.home.ui.HomeFragment
+import com.example.faithconx.main.newpost.NewPostFragment
+import com.example.faithconx.main.profile.ui.ProfileFragment
+import com.example.faithconx.main.search.SearchFragment
 import com.example.faithconx.util.Constants
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -72,20 +75,49 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun setChatFragment(item: MenuItem): Boolean {
 
-        Toast.makeText(this, Constants.COMING_SOON_MSG,Toast.LENGTH_SHORT).show()
-        return true
+        previousSelectedMenuItem?.let {
+            it.isChecked = false
+        }
+        item.isChecked = true // Select the current item
+        previousSelectedMenuItem = item
+
+
+
+        return supportFragmentManager.beginTransaction().replace(
+            R.id.fcvMain,
+            ChatFragment()
+        ).commit() > 0
     }
 
     private fun setNewPostFragment(item: MenuItem): Boolean {
+        previousSelectedMenuItem?.let {
+            it.isChecked = false
+        }
+        item.isChecked = true // Select the current item
+        previousSelectedMenuItem = item
 
-        Toast.makeText(this, Constants.COMING_SOON_MSG,Toast.LENGTH_SHORT).show()
-        return true
+
+
+        return supportFragmentManager.beginTransaction().replace(
+            R.id.fcvMain,
+            NewPostFragment()
+        ).commit() > 0
     }
 
     private fun setSearchFragment(item: MenuItem): Boolean {
 
-        Toast.makeText(this, Constants.COMING_SOON_MSG,Toast.LENGTH_SHORT).show()
-        return true
+        previousSelectedMenuItem?.let {
+            it.isChecked = false
+        }
+        item.isChecked = true // Select the current item
+        previousSelectedMenuItem = item
+
+
+
+        return supportFragmentManager.beginTransaction().replace(
+            R.id.fcvMain,
+            SearchFragment()
+        ).commit() > 0
     }
 
 

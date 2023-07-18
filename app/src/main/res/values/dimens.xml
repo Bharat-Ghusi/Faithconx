@@ -27,4 +27,5 @@
     <dimen name="zeroPointOneDp">0.1dp</dimen>
     <dimen name="ninetySixDp">96dp</dimen>
     <dimen name="threeDp">3dp</dimen>
+    <dimen name="thirtySp">30sp</dimen>
 </resources>

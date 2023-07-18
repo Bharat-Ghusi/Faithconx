@@ -1,4 +1,4 @@
-package com.example.faithconx.home.ui
+package com.example.faithconx.main.home.ui
 
 import android.os.Bundle
 import android.os.Handler
@@ -13,11 +13,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
-import com.example.faithconx.adapter.RandomUsersAdapter
+import com.example.faithconx.main.home.adapter.RandomUsersAdapter
 import com.example.faithconx.databinding.FragmentHomeBinding
 import com.example.faithconx.model.RandomUsers
 import com.example.faithconx.model.Result
-import com.example.faithconx.home.viewmodel.RandomUsersViewModel
+import com.example.faithconx.main.home.viewmodel.RandomUsersViewModel
 
 
 class HomeFragment : Fragment(), OnRefreshListener{

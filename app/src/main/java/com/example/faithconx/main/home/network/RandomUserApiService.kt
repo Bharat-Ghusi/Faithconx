@@ -1,4 +1,4 @@
-package com.example.faithconx.network
+package com.example.faithconx.main.home.network
 
 import com.example.faithconx.model.RandomUsers
 import retrofit2.Call

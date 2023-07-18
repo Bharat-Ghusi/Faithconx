@@ -1,4 +1,4 @@
-package com.example.faithconx.home.viewmodel
+package com.example.faithconx.main.home.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.faithconx.model.RandomUsers
 import com.example.faithconx.model.Result
-import com.example.faithconx.network.RandomUsersApiClients
+import com.example.faithconx.main.home.network.RandomUsersApiClients
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
