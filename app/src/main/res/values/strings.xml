@@ -40,4 +40,7 @@
     <string name="do_you_want_to_logout">Do you want to logout ?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="password_cannot_be_empty">Password cannot be empty.</string>
+    <string name="field_cannot_be_empty">Field cannot be empty.</string>
+    <string name="email_or_password_is_wrong">Email or password is wrong.</string>
 </resources>

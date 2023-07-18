@@ -92,6 +92,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     //swiperefreshlayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    // libphonenumber
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.31'
 
 
 }

@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.telephony.PhoneNumberUtils
 import android.text.InputFilter
 import android.util.Log
 import android.view.View
@@ -168,13 +167,13 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
 
     @RequiresApi(Build.VERSION_CODES.S)
     private fun onCountryChange() {
-    binding.ccp.
-
 
         val filters = arrayOf<InputFilter>()
         binding.etPhoneNumber.filters = filters
         binding.etPhoneNumber.setText("")
     }
+
+
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         when (view?.id) {
@@ -366,6 +365,8 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         fullNumberWithPlus: String,
         imageUrl: String
     ) {
+
+
         //store the user details
         imageUrl?.toString()?.let { imageUrl ->
             databaseViewModel.saveUserDetailsToDb(

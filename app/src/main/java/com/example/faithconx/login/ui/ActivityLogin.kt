@@ -3,10 +3,10 @@ package com.example.faithconx.login.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.Observer
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityLoginBinding
 import com.example.faithconx.helper.user.UserSession
@@ -23,9 +23,10 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
-class ActivityLogin : AppCompatActivity(), View.OnClickListener {
+class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeListener{
     private var phoneAuthViewModel:PhoneAuthViewModel? = null
     private val userSession = UserSession()
+    private var isPasswordCorrect = false
     private var isEmailCorrect = false
     private val userValidation = UserValidation()
     private lateinit var binding: ActivityLoginBinding
@@ -40,10 +41,39 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setOnClickListener()
-        setOnClickListener()
+        setOnFocusListener()
         onTextChangeListener()
     }
 
+    private fun setOnFocusListener() {
+        binding.etPassword.onFocusChangeListener = this
+        binding.etEmail.onFocusChangeListener = this
+    }
+
+    override fun onFocusChange(view: View?, hasFocus: Boolean) {
+       when(view?.id){
+           R.id.etPassword -> onPasswordFocusChange(hasFocus)
+           R.id.etEmail -> onEmailFocusChange(hasFocus)
+       }
+    }
+
+    private fun onPasswordFocusChange(hasFocus: Boolean) {
+        if(!hasFocus) {
+            if (binding.etPassword.text?.isEmpty() == true) {
+                binding.tilPassword.error = getString(R.string.field_cannot_be_empty)
+            } else {
+                binding.tilPassword.error = getString(R.string.empty)
+            }
+        }
+    }
+
+    private fun onEmailFocusChange(hasFocus: Boolean) {
+        if(!hasFocus) {
+            if (binding.etEmail.text?.isEmpty() == true) {
+                binding.tilEmail.error = getString(R.string.field_cannot_be_empty)
+            }
+        }
+    }
 
     private fun onTextChangeListener() {
         binding.etEmail.addTextChangedListener { onEtEmailTextChange() }
@@ -51,27 +81,47 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun onEtPasswordTextChange() {
-        if (userValidation.validatePassword(binding.etPassword, binding.tilPassword)
-            && isEmailCorrect
-        ) {
+        if (binding.etPassword.text.toString().isEmpty()) {
+            binding.tilPassword.error = getString(R.string.password_cannot_be_empty)
+            binding.btnLogin.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_disable_color)
+            binding.btnLogin.isEnabled = false
+            isPasswordCorrect = false
+        }
+//        isEmailCorrect == true and password is not empty
+        else if (isEmailCorrect) {
+            binding.tilPassword.error = getString(R.string.empty)
+            isPasswordCorrect = true
             binding.btnLogin.backgroundTintList =
                 resources.getColorStateList(R.color.loginbtn_enable_color)
             binding.btnLogin.isEnabled = true
-        } else if (binding.etPassword.text?.toString()?.isEmpty() == true) {
-            binding.tilPassword.error = null
-        } else {
+
+        }
+//        isEmailCorrect == false && password is not empty
+        else
+            binding.tilPassword.error = getString(R.string.empty)
+            isPasswordCorrect = true
+
+
+
+    }
+
+    private fun onEtEmailTextChange() {
+        isEmailCorrect = userValidation.validateEmail(binding.etEmail, binding.tilEmail)
+        if(! isEmailCorrect){
             binding.btnLogin.backgroundTintList =
                 resources.getColorStateList(R.color.loginbtn_disable_color)
             binding.btnLogin.isEnabled = false
         }
-    }
-
-    private fun onEtEmailTextChange() {
-        if (binding.etEmail.text?.isEmpty() == true) {
-            binding.tilEmail.error = null
-            return
+         else if(isPasswordCorrect){
+            binding.btnLogin.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_enable_color)
+            binding.btnLogin.isEnabled = true
         }
-        isEmailCorrect = userValidation.validateEmail(binding.etEmail, binding.tilEmail)
+
+
+
+
     }
 
 
@@ -139,7 +189,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
                 binding.grpRemaining.visibility = View.VISIBLE
                 binding.grpGmailLogin.visibility = View.VISIBLE
                 binding.otpProgressBar.visibility = View.GONE
-                binding.tilPassword.error = Constants.EMAIL_OR_PASSWOD_WRONG_MSG
+                binding.tilPassword.error = getString(R.string.email_or_password_is_wrong)
             }
         }
     }
@@ -229,4 +279,6 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener {
                 }
             }
     }
+
+
 }

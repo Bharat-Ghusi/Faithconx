@@ -1,6 +1,5 @@
 package com.example.faithconx.signup.viewmodel
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,11 +19,12 @@ class DatabaseViewModel : ViewModel() {
         lastName: String?,
         email: String?,
         number: String?,
-        profileUrl:String?,
+        profileUrl: String?,
         firebaseAuth: FirebaseAuth?
     ) {
-val em = email
-        val pro = profileUrl
+        //Get hardcoded data
+        val user = setFakeSignupData(firstName,lastName,email,number,profileUrl)
+
         firebaseAuth?.uid?.let {
             firebaseDatabase.purgeOutstandingWrites()
             firebaseDatabase.goOffline()
@@ -42,5 +42,9 @@ val em = email
                     }
                 }
         }
+    }
+
+    private fun setFakeSignupData(firstName: String?, lastName: String?, email: String?, number: String?, profileUrl: String?):User {
+
     }
 }
