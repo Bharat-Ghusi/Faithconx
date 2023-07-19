@@ -1,12 +1,16 @@
 package com.example.faithconx.login.ui
 
+import android.content.Context
 import android.content.Intent
+import android.hardware.input.InputManager
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityLoginBinding
 import com.example.faithconx.helper.user.UserSession
@@ -23,8 +27,9 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
-class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeListener{
-    private var phoneAuthViewModel:PhoneAuthViewModel? = null
+class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeListener {
+    private var otpScreenFlag = true
+    private var phoneAuthViewModel: PhoneAuthViewModel? = null
     private val userSession = UserSession()
     private var isPasswordCorrect = false
     private var isEmailCorrect = false
@@ -51,14 +56,15 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
     }
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
-       when(view?.id){
-           R.id.etPassword -> onPasswordFocusChange(hasFocus)
-           R.id.etEmail -> onEmailFocusChange(hasFocus)
-       }
+        when (view?.id) {
+            R.id.etPassword -> onPasswordFocusChange(hasFocus)
+            R.id.etEmail -> onEmailFocusChange(hasFocus)
+        }
     }
 
     private fun onPasswordFocusChange(hasFocus: Boolean) {
-        if(!hasFocus) {
+        if (!hasFocus) {
+
             if (binding.etPassword.text?.isEmpty() == true) {
                 binding.tilPassword.error = getString(R.string.field_cannot_be_empty)
             } else {
@@ -68,7 +74,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
     }
 
     private fun onEmailFocusChange(hasFocus: Boolean) {
-        if(!hasFocus) {
+        if (!hasFocus) {
             if (binding.etEmail.text?.isEmpty() == true) {
                 binding.tilEmail.error = getString(R.string.field_cannot_be_empty)
             }
@@ -100,26 +106,22 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
 //        isEmailCorrect == false && password is not empty
         else
             binding.tilPassword.error = getString(R.string.empty)
-            isPasswordCorrect = true
-
+        isPasswordCorrect = true
 
 
     }
 
     private fun onEtEmailTextChange() {
         isEmailCorrect = userValidation.validateEmail(binding.etEmail, binding.tilEmail)
-        if(! isEmailCorrect){
+        if (!isEmailCorrect) {
             binding.btnLogin.backgroundTintList =
                 resources.getColorStateList(R.color.loginbtn_disable_color)
             binding.btnLogin.isEnabled = false
-        }
-         else if(isPasswordCorrect){
+        } else if (isPasswordCorrect) {
             binding.btnLogin.backgroundTintList =
                 resources.getColorStateList(R.color.loginbtn_enable_color)
             binding.btnLogin.isEnabled = true
         }
-
-
 
 
     }
@@ -157,9 +159,30 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
      * Open OTP Activity.
      */
     fun onClickLoginWithPhoneNumber(view: View) {
-        binding.grpGmailLogin.visibility = View.GONE
-        binding.grpGetOtp.visibility = View.VISIBLE
+       if(otpScreenFlag){
+           otpScreenFlag = false
+           binding.grpGmailLogin.visibility = View.GONE
+           binding.grpGetOtp.visibility = View.VISIBLE
+       }else{
+           otpScreenFlag = true
+           binding.grpGmailLogin.visibility = View.VISIBLE
+           binding.grpGetOtp.visibility = View.GONE
+       }
 
+    }
+    private fun enableKeyboard(flag:Boolean){
+        try {
+            this.currentFocus?.let {
+               if(flag){
+
+               }else{
+                   val inputMethodManager =
+                       getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                   inputMethodManager?.hideSoftInputFromWindow(binding.root.windowToken,0)
+               }
+
+            }
+        }catch (e:Exception){e.printStackTrace()}
     }
 
     /**
@@ -168,9 +191,11 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
      *
      */
     fun onLoginClick(view: View) {
+        enableKeyboard(false)
+        //HIDE all view
         binding.grpRemaining.visibility = View.GONE
         binding.grpGmailLogin.visibility = View.GONE
-        binding.otpProgressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
 
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
@@ -188,12 +213,11 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
             else {
                 binding.grpRemaining.visibility = View.VISIBLE
                 binding.grpGmailLogin.visibility = View.VISIBLE
-                binding.otpProgressBar.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
                 binding.tilPassword.error = getString(R.string.email_or_password_is_wrong)
             }
         }
     }
-
 
 
     fun onCreateOneClick(view: View) {
@@ -207,47 +231,76 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
 
     //    Send a verification code to the user's phone
     fun onGetOtpClick(view: View) {
+        //hide keyboard
+        enableKeyboard(false)
+        binding.grpRemaining.visibility = View.GONE
+        binding.grpGetOtp.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+
+        phoneAuthViewModel = PhoneAuthViewModel(this)
+        binding.ccp.registerCarrierNumberEditText(binding.editTextPhoneNumber)
+        phoneAuthViewModel?.getOtp(binding.ccp.fullNumberWithPlus)
+        phoneAuthViewModel?.getLoggedInState()?.observe(this, Observer {logInState ->
+            if(logInState){
+                startActivity(Intent(this@ActivityLogin, MainActivity::class.java))
+                finish()
+            }
+            //Otp SEnt failed
+            else{
+                binding.progressBar.visibility = View.GONE
+                binding.grpRemaining.visibility = View.VISIBLE
+                binding.grpGetOtp.visibility =View.VISIBLE
+            }
+        })
+        phoneAuthViewModel?.getOtpVerificationId()?.observe(this@ActivityLogin, Observer { otp ->
+            binding.progressBar.visibility = View.GONE
+            binding.grpRemaining.visibility =View.VISIBLE
+            binding.grpSubmitOtp.visibility =View.VISIBLE
+            verificationId = otp
+
+        })
 
 
 ////////////////////
-        val options = PhoneAuthOptions.newBuilder()
-            .setPhoneNumber(binding.ccp.fullNumberWithPlus)
-            .setTimeout(60L, TimeUnit.SECONDS)
-            .setActivity(this)
-            .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                override fun onCodeSent(otp: String, p1: PhoneAuthProvider.ForceResendingToken) {
-                    super.onCodeSent(otp, p1)
-                    verificationId = otp //OTP ID
-                }
-
-                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                    signInWithPhoneAuthCredential(credential)
-                }
-
-                override fun onVerificationFailed(e: FirebaseException) {
-                    Toast.makeText(this@ActivityLogin, e.message, Toast.LENGTH_LONG)
-                        .show()
-                }
-
-            }).build()
-        PhoneAuthProvider.verifyPhoneNumber(options)
-
-        setVisibility(binding.grpSubmitOtp.id, View.VISIBLE)
+//        val options = PhoneAuthOptions.newBuilder()
+//            .setPhoneNumber(binding.ccp.fullNumberWithPlus)
+//            .setTimeout(60L, TimeUnit.SECONDS)
+//            .setActivity(this)
+//            .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+//                override fun onCodeSent(otp: String, p1: PhoneAuthProvider.ForceResendingToken) {
+//                    super.onCodeSent(otp, p1)
+//                    verificationId = otp //OTP ID
+//                }
+//
+//                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+//                    signInWithPhoneAuthCredential(credential)
+//                }
+//
+//                override fun onVerificationFailed(e: FirebaseException) {
+//                    Toast.makeText(this@ActivityLogin, e.message, Toast.LENGTH_LONG)
+//                        .show()
+//                }
+//
+//            }).build()
+//        PhoneAuthProvider.verifyPhoneNumber(options)
+//
+//        setVisibility(binding.grpSubmitOtp.id, View.VISIBLE)
     }
 
     fun onSubmitClick(view: View) {
 
-
+        //hide keyboard
+        enableKeyboard(false)
         ///////////
         binding.editTextOtpSubmit.text.toString()?.let {
             if (it.isNotEmpty() && it.length == Constants.OTP_LENGTH) {
                 //Progress Bar Enabled.
-                binding.grpRemaining?.visibility = View.GONE
-                binding.grpGetOtp?.visibility = View.GONE
-                binding.grpSubmitOtp?.visibility = View.GONE
-                binding.otpProgressBar?.visibility = View.VISIBLE
+                binding.grpRemaining.visibility = View.GONE
+                binding.grpGetOtp.visibility = View.GONE
+                binding.grpSubmitOtp.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
                 authCredential = PhoneAuthProvider.getCredential(verificationId, it)
-                signInWithPhoneAuthCredential(authCredential)
+               phoneAuthViewModel?.signInWithPhoneAuthCredential(authCredential)
             }
         }
 
@@ -265,13 +318,13 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     //Progress Bar Disabled.
-                    binding?.otpProgressBar?.visibility = View.GONE
+//                    binding?.otpProgressBar?.visibility = View.GONE
 
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {
                     //Progress Bar Disabled.
-                    binding?.otpProgressBar?.visibility = View.GONE
+//                    binding?.otpProgressBar?.visibility = View.GONE
                     binding?.editTextOtpSubmitInputLayout?.isErrorEnabled = true
                     binding?.editTextOtpSubmitInputLayout?.error =
                         getString(R.string.wrongOtpEntered)

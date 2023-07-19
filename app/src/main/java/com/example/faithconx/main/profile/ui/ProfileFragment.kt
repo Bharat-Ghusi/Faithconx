@@ -24,6 +24,9 @@ import com.example.faithconx.main.profile.viewmodel.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment(), OnMenuItemClickListener{
+    companion object{
+        private  val TAG = ProfileFragment::class.java.simpleName
+    }
     private val userSession = UserSession()
     private val profileViewModel = ProfileViewModel()
     private lateinit var binding: FragmentProfileBinding
@@ -49,20 +52,22 @@ class ProfileFragment : Fragment(), OnMenuItemClickListener{
         activity?.let {activity->
             profileViewModel.getTaskState().observe(activity, Observer {taskState ->
                 if(taskState){
-                    Log.i("TAG","Fetched Profile data successfully.")
+                    Log.i(TAG,"Fetched Profile data successfully.")
                 }
             })
-            profileViewModel.getUser().observe(activity, Observer {
-                setToTv(it)
-                binding.grpAll.visibility =View.VISIBLE
-                binding.progressbar.visibility =View.GONE
+            profileViewModel.getUser().observe(activity, Observer { user ->
+                setToTv(user)
+
             })
 
         }
     }
 
     private fun setToTv(user: User?) {
-        user?.let {user ->
+        user?.let {user
+            binding.grpAll.visibility =View.VISIBLE
+            binding.progressbar.visibility =View.GONE
+            binding.tvEmptyProfile.visibility = View.GONE
             setProfileImage(user.profileUrl)
         binding.tvUserFullName.text = user.firstName + user.lastName
         binding.tvUsername.text = user.email
@@ -87,7 +92,14 @@ class ProfileFragment : Fragment(), OnMenuItemClickListener{
         binding.tvInstagramUsername.text = user.instagramUsername
 
         binding.tvJoinedData.text = user.joinedDate
+        } ?: kotlin.run {
+            Log.i(TAG,"NO CONTENT")
+            binding.grpAll.visibility = View.GONE
+            binding.tvEmptyProfile.visibility = View.VISIBLE
+            binding.progressbar.visibility = View.GONE
         }
+
+
     }
 
     private fun setProfileImage(profileUrl: String?) {

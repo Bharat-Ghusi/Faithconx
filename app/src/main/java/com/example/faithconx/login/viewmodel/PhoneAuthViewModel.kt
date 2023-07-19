@@ -28,6 +28,7 @@ class PhoneAuthViewModel(private val activity: Activity) {
     fun getLoggedInState():LiveData<Boolean> = loggedInState
 
     fun getOtp(number:String){
+
         val options = PhoneAuthOptions.newBuilder()
             .setPhoneNumber(number)
             .setTimeout(60L, TimeUnit.SECONDS)
@@ -43,6 +44,7 @@ class PhoneAuthViewModel(private val activity: Activity) {
                 }
 
                 override fun onVerificationFailed(e: FirebaseException) {
+                    loggedInState.postValue(false)
                     Log.e("TAG","OTP verification failed. ${e.message}")
                 }
 

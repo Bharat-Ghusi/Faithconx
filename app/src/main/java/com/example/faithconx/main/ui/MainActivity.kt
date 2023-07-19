@@ -1,13 +1,16 @@
 package com.example.faithconx.main.ui
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.faithconx.R
 import com.example.faithconx.databinding.ActivityMainBinding
+import com.example.faithconx.login.ui.ActivityLogin
 import com.example.faithconx.main.chat.ChatFragment
 import com.example.faithconx.main.home.ui.HomeFragment
 import com.example.faithconx.main.newpost.NewPostFragment
@@ -16,10 +19,14 @@ import com.example.faithconx.main.search.SearchFragment
 import com.example.faithconx.util.Constants
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
     private var previousSelectedMenuItem: MenuItem? = null
+    companion object{
+        private val TAG = MainActivity::class.java.simpleName
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +35,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setContentView(binding.root)
         //------------//
         binding.btmNavView.setOnItemSelectedListener(this)
-//        setHomeFragment()
     }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setHomeFragment(item: MenuItem): Boolean {
