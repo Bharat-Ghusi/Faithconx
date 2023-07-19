@@ -7,24 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".signup.ui.ActivitySignup"
     android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginStart="@dimen/sixteenDp"
+        android:layout_marginTop="@dimen/sixteenDp"
+        android:layout_marginEnd="@dimen/sixteenDp"
+        android:layout_marginBottom="@dimen/sixteenDp">
         <!-- HORIZONTAL GUIDELINE-->
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineTop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="@dimen/sixteenDp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineBottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_end="@dimen/sixteenDp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRowOne"
@@ -39,71 +31,40 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
-        <!-- VERTICAL GUIDELINE-->
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/sixteenDp" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/sixteenDp" />
         <!--ROW ONE-->
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnClose"
+            android:id="@+id/ivClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_close"
-            app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            app:layout_constraintTop_toTopOf="@id/guidelineTop" />
-        <FrameLayout
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBrandLogo"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-            app:layout_constraintTop_toTopOf="@id/guidelineTop"
+            app:srcCompat="@drawable/ic_brandlogo_img"
+
             app:layout_constraintBottom_toBottomOf="@id/guidelineRowOne"
-            >
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_profile"
-                android:layout_width="@dimen/ninetySixDp"
-                android:layout_height="@dimen/ninetySixDp"
-                app:civ_border_width="@dimen/fiveDp"
-                app:civ_border_color="@color/primary_color_theme"
-                android:src="@drawable/ic_default_img"
-                android:layout_gravity="bottom|center_horizontal" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_editProfileImg"
-                android:layout_width="@dimen/thirtyDp"
-                android:layout_height="@dimen/thirtyDp"
-                android:src="@drawable/ic_camera"
-                android:onClick="onEditProfileImgClick"
-                android:layout_gravity="bottom|right"
-                />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        </FrameLayout>
-
-
-        <!--    OTP-->
+        <!--  GET  OTP-->
         <com.hbb20.CountryCodePicker
             android:id="@+id/ccp"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
             android:hint="@string/first_name"
-            app:startIconDrawable="@drawable/ic_profile"
             android:theme="@style/edtStyle"
             app:layout_constraintBottom_toBottomOf="@+id/editTextPhoneNumberInputLayout"
-            app:layout_constraintTop_toTopOf="@id/editTextPhoneNumberInputLayout"
             app:layout_constraintEnd_toStartOf="@+id/editTextPhoneNumberInputLayout"
-            app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/editTextPhoneNumberInputLayout"
+            app:startIconDrawable="@drawable/ic_profile" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -111,19 +72,18 @@
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
             android:hint="@string/enter_number"
-            app:startIconDrawable="@drawable/ic_smartphone"
-
             app:layout_constraintBottom_toTopOf="@+id/btnGetOtp"
-            app:layout_constraintTop_toTopOf="@id/guidelineRowOne"
-            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ccp"
-            >
+            app:layout_constraintTop_toTopOf="@id/guidelineRowOne"
+            app:startIconDrawable="@drawable/ic_smartphone">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"/>
+                android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -140,33 +100,32 @@
             android:onClick="onGetOtpClick"
             android:padding="@dimen/fifteenDp"
             android:text="@string/get_otp"
-            
+
+            app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
             app:layout_constraintEnd_toEndOf="@id/editTextPhoneNumberInputLayout"
             app:layout_constraintStart_toStartOf="@+id/ccp"
-            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-            app:layout_constraintTop_toBottomOf="@+id/ccp"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/ccp" />
 
-
+        <!--SUBMIT OTP-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editTextOtpSubmitInputLayout"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
-            
-            app:ccp_hintExampleNumber="true"
+
             android:hint="@string/enter_otp"
-        
-            app:layout_constraintStart_toStartOf="@id/ccp"
-            app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
-            app:layout_constraintTop_toTopOf="@+id/btnSubmit"
-            app:layout_constraintBottom_toBottomOf="@+id/btnSubmit">
+            app:ccp_hintExampleNumber="true"
+
+            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guidelineRowOne">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextOtpSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:maxLength="6"
-                />
+                android:maxLength="6" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -187,55 +146,269 @@
             android:textAppearance="@style/btnBaseStyle"
             android:textColor="@color/white"
 
-            app:layout_constraintStart_toEndOf="@+id/editTextOtpSubmitInputLayout"
-            app:layout_constraintEnd_toEndOf="@id/editTextPhoneNumberInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/btnGetOtp"
             app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
-            />
+            app:layout_constraintEnd_toEndOf="@id/editTextOtpSubmitInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/editTextOtpSubmitInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editTextOtpSubmitInputLayout" />
 
-<androidx.constraintlayout.widget.Group
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:visibility="visible"
-    app:constraint_referenced_ids="ccp,editTextPhoneNumberInputLayout,btnGetOtp"
-    />
         <androidx.constraintlayout.widget.Group
+            android:id="@+id/grpGetOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="ccp,editTextPhoneNumberInputLayout,btnGetOtp" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/grpSubmitOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="editTextOtpSubmitInputLayout,btnSubmit" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/grpGmailLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            app:constraint_referenced_ids="editTextOtpSubmitInputLayout,btnSubmit"
-            />
+            app:constraint_referenced_ids="tilEmail,tilPassword,tvForgotPassword,btnLogin" />
 
-        
-        
-        
-        
-        
-        
-        
-        
-        <!--ROW THREE-->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/grpRemaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="leftHorizontalLine,tvOr,rightHorizontalLine,
+btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAccount,tvCreateOne" />
+
+        <!--        PROGRESS BAR-->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fortyDp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <!--  LOG IN     -->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="@dimen/zeroDp"
+            android:hint="@string/email"
+            android:theme="@style/edtStyle"
+            app:layout_constraintBottom_toTopOf="@+id/tilPassword"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guidelineRowOne"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            app:startIconDrawable="@drawable/ic_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="@dimen/zeroDp"
+
+            android:hint="@string/password"
+            android:theme="@style/edtStyle"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+            app:layout_constraintEnd_toEndOf="@id/tilEmail"
+
+            app:layout_constraintStart_toStartOf="@+id/tilEmail"
+            app:layout_constraintTop_toBottomOf="@+id/tilEmail"
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_password"
+            android:textAlignment="center"
+            android:textColor="@color/primary_color_theme"
+            android:textSize="@dimen/thirteenSp"
+            app:layout_constraintEnd_toEndOf="@id/tilEmail"
+            app:layout_constraintTop_toBottomOf="@id/tilPassword" />
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnContinue"
+            android:id="@+id/btnLogin"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="@dimen/zeroDp"
+
+            android:layout_marginTop="@dimen/thirtyDp"
+            android:background="@drawable/btn_round_shape"
+            android:backgroundTint="@color/platinum"
+            android:enabled="false"
+            android:fontFamily="@font/product_sans_bold"
+            android:onClick="onLoginClick"
+            android:padding="@dimen/twentyDp"
+            android:text="@string/logIn"
+            android:textAppearance="@style/btnBaseStyle"
+            android:textColor="@color/white"
+            android:textSize="@dimen/FourteenSp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/guidelineRowTwo"
+            app:layout_constraintEnd_toEndOf="@id/tilEmail"
+            app:layout_constraintStart_toStartOf="@+id/tilEmail"
+            app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+
+
+        <!--        HORIZONTAL LINE-->
+        <View
+            android:id="@+id/leftHorizontalLine"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="@dimen/zeroPointOneDp"
+            android:layout_marginTop="@dimen/twentyDp"
+            android:background="@color/raisinBlack"
+
+            app:layout_constraintEnd_toStartOf="@+id/tvOr"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guidelineRowTwo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tenDp"
+            android:text="@string/or"
+
+            app:layout_constraintEnd_toStartOf="@+id/rightHorizontalLine"
+            app:layout_constraintStart_toEndOf="@id/leftHorizontalLine"
+            app:layout_constraintTop_toTopOf="@id/guidelineRowTwo" />
+
+        <View
+            android:id="@+id/rightHorizontalLine"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="@dimen/zeroPointOneDp"
+            android:layout_marginTop="@dimen/twentyDp"
+            android:background="@color/raisinBlack"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvOr"
+            app:layout_constraintTop_toTopOf="@id/guidelineRowTwo" />
+
+        <!--BUTTON ROW-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoginWithFaceBook"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/platinum"
-            android:fontFamily="@font/product_sans_bold"
-            android:text="@string/btnContinue"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_round_shape"
-            android:layout_marginTop="@dimen/tenDp"
-            android:onClick="onContinueClick"
-            android:padding="@dimen/fifteenDp"
-            android:textAppearance="@style/btnBaseStyle"
-            android:enabled="false"
             android:layout_marginStart="@dimen/fiveDp"
             android:layout_marginEnd="@dimen/fiveDp"
-            app:layout_constraintTop_toTopOf="@id/guidelineRowTwo"
-            app:layout_constraintStart_toStartOf="@id/guidelineStart"
-            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-            app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
-            />
+            android:layout_marginTop="@dimen/fifteenDp"
+            android:background="@drawable/btn_round_shape"
+            android:backgroundTint="@color/chineseBLue"
+            android:drawableLeft="@drawable/ic_facebook"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="@dimen/twentyDp"
+            android:text="@string/login_with_facebook"
+            android:textAppearance="@style/btnBaseStyle"
+            android:textColor="@color/white"
+
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintBottom_toTopOf="@+id/btnLoginWithGoogle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvOr"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoginWithGoogle"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/fiveDp"
+            android:layout_marginEnd="@dimen/fiveDp"
+            android:layout_marginTop="@dimen/tenDp"
+            android:background="@drawable/btn_round_shape"
+            android:backgroundTint="@color/white"
+            android:drawableStart="@drawable/ic_google"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="@dimen/twentyDp"
+            android:text="@string/login_with_google"
+            android:textAppearance="@style/btnBaseStyle"
+            android:textColor="@color/black"
+
+            app:layout_constraintBottom_toTopOf="@+id/btnLoginWithPhoneNumber"
+            app:layout_constraintEnd_toEndOf="@id/btnLoginWithFaceBook"
+            app:layout_constraintStart_toStartOf="@id/btnLoginWithFaceBook"
+            app:layout_constraintTop_toBottomOf="@id/btnLoginWithFaceBook" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoginWithPhoneNumber"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/fiveDp"
+            android:layout_marginTop="@dimen/tenDp"
+            android:layout_marginEnd="@dimen/fiveDp"
+            android:background="@drawable/btn_round_shape"
+            android:backgroundTint="@color/primary_color_theme"
+            android:drawableLeft="@drawable/ic_call"
+            android:fontFamily="@font/poppins_medium"
+            android:onClick="onClickLoginWithPhoneNumber"
+            android:padding="@dimen/twentyDp"
+            android:text="@string/loginWithPhoneNumber"
+            android:textAppearance="@style/btnBaseStyle"
+            android:textColor="@color/white"
+
+            app:layout_constraintBottom_toTopOf="@+id/tvDontHaveAnAccount"
+            app:layout_constraintEnd_toEndOf="@id/btnLoginWithFaceBook"
+            app:layout_constraintStart_toStartOf="@id/btnLoginWithFaceBook"
+            app:layout_constraintTop_toBottomOf="@id/btnLoginWithGoogle" />
+
+
+        <!--    Row Three-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDontHaveAnAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/product_sans_regular"
+            android:text="@string/don_t_have_an_account"
+            android:textColor="@color/coolGrey"
+            android:layout_marginTop="@dimen/fortyDp"
+
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvCreateOne"
+            app:layout_constraintStart_toStartOf="@+id/btnLoginWithPhoneNumber"
+            app:layout_constraintTop_toBottomOf="@+id/btnLoginWithPhoneNumber" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCreateOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/product_sans_bold"
+            android:onClick="onCreateOneClick"
+            android:text="@string/create_one"
+            android:textColor="@color/cinnabar"
+
+            app:layout_constraintBottom_toBottomOf="@id/tvDontHaveAnAccount"
+            app:layout_constraintEnd_toEndOf="@+id/btnLoginWithPhoneNumber"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/tvDontHaveAnAccount"
+            app:layout_constraintTop_toTopOf="@+id/tvDontHaveAnAccount" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

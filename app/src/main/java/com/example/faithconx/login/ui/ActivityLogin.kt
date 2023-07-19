@@ -163,10 +163,12 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
            otpScreenFlag = false
            binding.grpGmailLogin.visibility = View.GONE
            binding.grpGetOtp.visibility = View.VISIBLE
+           binding.btnLoginWithPhoneNumber.text = getString(R.string.login_with_email)
        }else{
            otpScreenFlag = true
            binding.grpGmailLogin.visibility = View.VISIBLE
            binding.grpGetOtp.visibility = View.GONE
+           binding.btnLoginWithPhoneNumber.text = getString(R.string.loginWithPhoneNumber)
        }
 
     }
