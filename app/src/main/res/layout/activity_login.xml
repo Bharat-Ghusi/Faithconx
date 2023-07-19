@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollview"
@@ -31,13 +31,6 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineRowThree"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.89" />
-
         <!--    Row one-->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivClose"
@@ -65,26 +58,28 @@
             android:id="@+id/ccp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextPhoneNumberInputLayout"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextPhoneNumberInputLayout"
             app:layout_constraintTop_toTopOf="@id/editTextPhoneNumberInputLayout"
-            app:layout_constraintVertical_bias="0.4" />
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editTextPhoneNumberInputLayout"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
             android:hint="@string/enter_number"
-            app:layout_constraintBottom_toBottomOf="@+id/ccp"
+            app:startIconDrawable="@drawable/ic_smartphone"
 
+            app:layout_constraintBottom_toBottomOf="@+id/ccp"
             app:layout_constraintBottom_toTopOf="@id/btnGetOtp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ccp"
             app:layout_constraintTop_toTopOf="@id/guidelineRowOne"
             app:layout_constraintVertical_bias="0.4"
-            app:startIconDrawable="@drawable/ic_smartphone">
+            >
 
             <EditText
                 android:id="@+id/editTextPhoneNumber"
@@ -94,17 +89,18 @@
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--    Submit OTP-->
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnGetOtp"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
+
             android:layout_marginStart="@dimen/fiveDp"
             android:layout_marginEnd="@dimen/fiveDp"
             android:background="@drawable/btn_round_shape"
             android:backgroundTint="@color/coolGrey"
-            android:drawableLeft="@drawable/ic_call"
+            android:drawableStart="@drawable/ic_call"
             android:fontFamily="@font/poppins_medium"
             android:onClick="onGetOtpClick"
             android:padding="@dimen/twentyDp"
@@ -118,12 +114,15 @@
             app:layout_constraintStart_toStartOf="@+id/ccp"
             app:layout_constraintTop_toBottomOf="@id/editTextPhoneNumberInputLayout" />
 
+        <!--    Submit OTP-->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editTextOtpSubmitInputLayout"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/twentyFiveDp"
             android:hint="@string/enter_otp"
+
             app:layout_constraintBottom_toBottomOf="@id/btnSubmit"
             app:layout_constraintEnd_toStartOf="@id/btnSubmit"
             app:layout_constraintStart_toStartOf="parent"
@@ -151,9 +150,9 @@
             android:onClick="onSubmitClick"
             android:padding="@dimen/twentyDp"
             android:text="@string/submit"
-
             android:textAppearance="@style/btnBaseStyle"
             android:textColor="@color/white"
+
             app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/editTextOtpSubmitInputLayout"
@@ -328,12 +327,13 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:text="@string/login_with_facebook"
             android:textAppearance="@style/btnBaseStyle"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/btnLoginWithGoogle"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintVertical_bias="0"
+
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvOr"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintBottom_toTopOf="@+id/btnLoginWithGoogle"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLoginWithGoogle"
@@ -348,10 +348,9 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:fontFamily="@font/poppins_medium"
             android:padding="@dimen/twentyDp"
             android:text="@string/login_with_google"
-
             android:textAppearance="@style/btnBaseStyle"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@id/btnLoginWithPhoneNumber"
+
             app:layout_constraintEnd_toEndOf="@id/btnLoginWithFaceBook"
             app:layout_constraintStart_toStartOf="@id/btnLoginWithFaceBook"
             app:layout_constraintTop_toBottomOf="@id/btnLoginWithFaceBook" />
@@ -370,10 +369,9 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:onClick="onClickLoginWithPhoneNumber"
             android:padding="@dimen/twentyDp"
             android:text="@string/loginWithPhoneNumber"
-
             android:textAppearance="@style/btnBaseStyle"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@id/guidelineRowThree"
+
             app:layout_constraintEnd_toEndOf="@id/btnLoginWithFaceBook"
             app:layout_constraintStart_toStartOf="@id/btnLoginWithFaceBook"
             app:layout_constraintTop_toBottomOf="@id/btnLoginWithGoogle" />
@@ -387,13 +385,13 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:fontFamily="@font/product_sans_regular"
             android:text="@string/don_t_have_an_account"
             android:textColor="@color/coolGrey"
+
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvCreateOne"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@+id/btnLoginWithPhoneNumber"
-            app:layout_constraintTop_toTopOf="@id/guidelineRowThree"
-           />
+            app:layout_constraintTop_toBottomOf="@+id/btnLoginWithPhoneNumber" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvCreateOne"
@@ -403,12 +401,12 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:onClick="onCreateOneClick"
             android:text="@string/create_one"
             android:textColor="@color/cinnabar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/btnLoginWithPhoneNumber"
+
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="@id/tvDontHaveAnAccount"
+            app:layout_constraintEnd_toEndOf="@+id/btnLoginWithPhoneNumber"
             app:layout_constraintStart_toEndOf="@id/tvDontHaveAnAccount"
-            app:layout_constraintTop_toTopOf="@id/guidelineRowThree"
-            />
+            app:layout_constraintTop_toTopOf="@+id/tvDontHaveAnAccount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</ScrollView>
 

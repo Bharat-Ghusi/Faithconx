@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signup.ui.ActivitySignup"
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <!-- HORIZONTAL GUIDELINE-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/sixteenDp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/sixteenDp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRowOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRowTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+        <!-- VERTICAL GUIDELINE-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/sixteenDp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/sixteenDp" />
+        <!--ROW ONE-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toTopOf="@id/guidelineTop" />
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintTop_toTopOf="@id/guidelineTop"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineRowOne"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_profile"
+                android:layout_width="@dimen/ninetySixDp"
+                android:layout_height="@dimen/ninetySixDp"
+                app:civ_border_width="@dimen/fiveDp"
+                app:civ_border_color="@color/primary_color_theme"
+                android:src="@drawable/ic_default_img"
+                android:layout_gravity="bottom|center_horizontal" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_editProfileImg"
+                android:layout_width="@dimen/thirtyDp"
+                android:layout_height="@dimen/thirtyDp"
+                android:src="@drawable/ic_camera"
+                android:onClick="onEditProfileImgClick"
+                android:layout_gravity="bottom|right"
+                />
+
+
+        </FrameLayout>
+
+
+        <!--    OTP-->
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="wrap_content"
+            android:hint="@string/first_name"
+            app:startIconDrawable="@drawable/ic_profile"
+            android:theme="@style/edtStyle"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextPhoneNumberInputLayout"
+            app:layout_constraintTop_toTopOf="@id/editTextPhoneNumberInputLayout"
+            app:layout_constraintEnd_toStartOf="@+id/editTextPhoneNumberInputLayout"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextPhoneNumberInputLayout"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_number"
+            app:startIconDrawable="@drawable/ic_smartphone"
+
+            app:layout_constraintBottom_toTopOf="@+id/btnGetOtp"
+            app:layout_constraintTop_toTopOf="@id/guidelineRowOne"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@+id/ccp"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnGetOtp"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/fiveDp"
+            android:layout_marginEnd="@dimen/fiveDp"
+            android:background="@drawable/btn_round_shape"
+            android:backgroundTint="@color/coolGrey"
+            android:drawableStart="@drawable/ic_call"
+            android:fontFamily="@font/poppins_medium"
+            android:onClick="onGetOtpClick"
+            android:padding="@dimen/fifteenDp"
+            android:text="@string/get_otp"
+            
+            app:layout_constraintEnd_toEndOf="@id/editTextPhoneNumberInputLayout"
+            app:layout_constraintStart_toStartOf="@+id/ccp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+            app:layout_constraintTop_toBottomOf="@+id/ccp"
+            />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextOtpSubmitInputLayout"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="wrap_content"
+            
+            app:ccp_hintExampleNumber="true"
+            android:hint="@string/enter_otp"
+        
+            app:layout_constraintStart_toStartOf="@id/ccp"
+            app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
+            app:layout_constraintTop_toTopOf="@+id/btnSubmit"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSubmit">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextOtpSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="6"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/fiveDp"
+            android:layout_marginTop="@dimen/tenDp"
+            android:layout_marginEnd="@dimen/fiveDp"
+            android:background="@drawable/btn_round_shape"
+            android:backgroundTint="@color/coolGrey"
+            android:fontFamily="@font/poppins_medium"
+            android:onClick="onSubmitClick"
+            android:padding="@dimen/fifteenDp"
+            android:text="@string/submit"
+            android:textAppearance="@style/btnBaseStyle"
+            android:textColor="@color/white"
+
+            app:layout_constraintStart_toEndOf="@+id/editTextOtpSubmitInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/editTextPhoneNumberInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/btnGetOtp"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineRowTwo"
+            />
+
+<androidx.constraintlayout.widget.Group
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="visible"
+    app:constraint_referenced_ids="ccp,editTextPhoneNumberInputLayout,btnGetOtp"
+    />
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="editTextOtpSubmitInputLayout,btnSubmit"
+            />
+
+        
+        
+        
+        
+        
+        
+        
+        
+        <!--ROW THREE-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnContinue"
+            android:layout_width="@dimen/zeroDp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/platinum"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="@string/btnContinue"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_round_shape"
+            android:layout_marginTop="@dimen/tenDp"
+            android:onClick="onContinueClick"
+            android:padding="@dimen/fifteenDp"
+            android:textAppearance="@style/btnBaseStyle"
+            android:enabled="false"
+            android:layout_marginStart="@dimen/fiveDp"
+            android:layout_marginEnd="@dimen/fiveDp"
+            app:layout_constraintTop_toTopOf="@id/guidelineRowTwo"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
