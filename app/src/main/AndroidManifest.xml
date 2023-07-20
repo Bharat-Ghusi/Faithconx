@@ -49,19 +49,7 @@
             android:name=".view.ActivityOtpVerification"
             android:exported="false" />
 
-        <activity android:name=".firebasedbpractice.RegisterActivity" />
 
-        <activity
-            android:name=".firebasedbpractice.UploadObjectActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".firebasedbpractice.HomeActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".firebasedbpractice.SigninActivity"
-            android:exported="false" />
 
     </application>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.55" />
 
         <!--ROW ONE-->
         <androidx.appcompat.widget.AppCompatImageView
@@ -45,12 +45,12 @@
             android:id="@+id/ivBrandLogo"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:srcCompat="@drawable/ic_brandlogo_img"
-
             app:layout_constraintBottom_toBottomOf="@id/guidelineRowOne"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_brandlogo_img" />
 
 
         <!--  GET  OTP-->
@@ -187,10 +187,10 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fortyDp"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <!--  LOG IN     -->
@@ -199,10 +199,11 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:id="@+id/tilEmail"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="@dimen/zeroDp"
+
             android:hint="@string/email"
             android:theme="@style/edtStyle"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/tilPassword"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guidelineRowOne"
@@ -223,10 +224,9 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:id="@+id/tilPassword"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="@dimen/zeroDp"
-
             android:hint="@string/password"
             android:theme="@style/edtStyle"
-            app:helperTextTextColor="@color/red"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/btnLogin"
             app:layout_constraintEnd_toEndOf="@id/tilEmail"
 
@@ -259,12 +259,13 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:layout_height="wrap_content"
 
 
+            android:layout_marginTop="@dimen/twentyDp"
             android:background="@drawable/btn_round_shape"
             android:backgroundTint="@color/platinum"
             android:enabled="false"
             android:fontFamily="@font/product_sans_bold"
             android:onClick="onLoginClick"
-            android:padding="@dimen/twentyDp"
+            android:padding="@dimen/fifteenDp"
             android:text="@string/logIn"
             android:textAppearance="@style/btnBaseStyle"
             android:textColor="@color/white"
@@ -272,7 +273,8 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
 
             app:layout_constraintBottom_toBottomOf="@+id/guidelineRowTwo"
             app:layout_constraintEnd_toEndOf="@id/tilEmail"
-            app:layout_constraintStart_toStartOf="@+id/tilEmail" />
+            app:layout_constraintStart_toStartOf="@+id/tilEmail"
+            app:layout_constraintTop_toBottomOf="@id/tilPassword" />
 
 
         <!--        HORIZONTAL LINE-->
@@ -315,37 +317,35 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:id="@+id/btnLoginWithFaceBook"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fifteenDp"
             android:layout_marginStart="@dimen/fiveDp"
             android:layout_marginEnd="@dimen/fiveDp"
-            android:layout_marginTop="@dimen/fifteenDp"
             android:background="@drawable/btn_round_shape"
             android:backgroundTint="@color/chineseBLue"
             android:drawableLeft="@drawable/ic_facebook"
             android:fontFamily="@font/poppins_medium"
-            android:padding="@dimen/twentyDp"
+            android:padding="@dimen/fifteenDp"
             android:text="@string/login_with_facebook"
             android:textAppearance="@style/btnBaseStyle"
             android:textColor="@color/white"
 
-            app:layout_constraintVertical_bias="0"
             app:layout_constraintBottom_toTopOf="@+id/btnLoginWithGoogle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvOr"
+            app:layout_constraintVertical_bias="0"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLoginWithGoogle"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/fiveDp"
-            android:layout_marginEnd="@dimen/fiveDp"
             android:layout_marginTop="@dimen/tenDp"
             android:background="@drawable/btn_round_shape"
             android:backgroundTint="@color/white"
             android:drawableStart="@drawable/ic_google"
             android:fontFamily="@font/poppins_medium"
-            android:padding="@dimen/twentyDp"
+            android:padding="@dimen/fifteenDp"
             android:text="@string/login_with_google"
             android:textAppearance="@style/btnBaseStyle"
             android:textColor="@color/black"
@@ -359,15 +359,13 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:id="@+id/btnLoginWithPhoneNumber"
             android:layout_width="@dimen/zeroDp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/fiveDp"
             android:layout_marginTop="@dimen/tenDp"
-            android:layout_marginEnd="@dimen/fiveDp"
             android:background="@drawable/btn_round_shape"
             android:backgroundTint="@color/primary_color_theme"
             android:drawableLeft="@drawable/ic_call"
             android:fontFamily="@font/poppins_medium"
             android:onClick="onClickLoginWithPhoneNumber"
-            android:padding="@dimen/twentyDp"
+            android:padding="@dimen/fifteenDp"
             android:text="@string/loginWithPhoneNumber"
             android:textAppearance="@style/btnBaseStyle"
             android:textColor="@color/white"
@@ -383,14 +381,14 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
             android:id="@+id/tvDontHaveAnAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fortyDp"
             android:fontFamily="@font/product_sans_regular"
             android:text="@string/don_t_have_an_account"
             android:textColor="@color/coolGrey"
-            android:layout_marginTop="@dimen/fortyDp"
 
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvCreateOne"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@+id/btnLoginWithPhoneNumber"
             app:layout_constraintTop_toBottomOf="@+id/btnLoginWithPhoneNumber" />
 
@@ -411,5 +409,5 @@ btnLoginWithFaceBook,btnLoginWithGoogle,btnLoginWithPhoneNumber,tvDontHaveAnAcco
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
 
