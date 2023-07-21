@@ -1,25 +1,27 @@
 package com.example.faithconx.helper.user
 
+import android.content.Context
 import android.renderscript.ScriptGroup.Input
 import android.text.InputFilter
 import android.util.Log
+import com.example.faithconx.R
 import com.example.faithconx.util.Constants
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.hbb20.CountryCodePicker
 import com.hbb20.CountryCodePicker.OnCountryChangeListener
 
-class UserValidation {
+class UserValidation(val context: Context) {
     fun validateFirstName(editText: TextInputEditText,editTextLayout: TextInputLayout): Boolean {
         val text = editText.text.toString()
         if (text.isEmpty()) {
-            editTextLayout.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
+            editTextLayout.error = context.getString(R.string.field_cannot_be_empty)
             return false
         } else if (text.length < Constants.FIRSTNAME_MIN_LENGTH) {
-            editTextLayout.error = Constants.FIRSTNAME_TOO_SMALL_MSG
+            editTextLayout.error =context.getString(R.string.firstname_too_small)
             return false
         } else if (text.length > Constants.FIRSTNAME_MAX_LENGTH) {
-            editTextLayout.error = Constants.FIRSTNAME_TOO_LARGE_MSG
+            editTextLayout.error = context.getString(R.string.firstname_too_large)
             return false
         }
         /**
@@ -29,10 +31,9 @@ class UserValidation {
         "\z"    ->represents the end of the string OR  It ensures that the entire string matches this pattern from start to end..
          */
         else if (!text.matches(Regex("\\A\\w+\\z"))) {
-            editTextLayout.error = Constants.WHITE_SPACE_ERROR_MSG
+            editTextLayout.error = context.getString(R.string.white_spaces_are_not_allowed)
             return false
-        } else
-            editTextLayout.error = null
+        }
 
         return true
     }
@@ -65,7 +66,7 @@ class UserValidation {
     fun validateEmail(editText: TextInputEditText,editTextLayout: TextInputLayout): Boolean {
         val text = editText.text.toString()
         if (text.isEmpty()) {
-            editTextLayout.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
+            editTextLayout.error = context.getString(R.string.field_cannot_be_empty)
             return false
         }
         /**
@@ -84,7 +85,7 @@ class UserValidation {
         the top-level domain portion of the email address after the dot.
          */
         else if (!text.matches(Regex("[a-z0-9]+@[a-z]+\\.[a-z]{2,3}"))) {
-            editTextLayout.error = Constants.EMAIL_FORMAT_MSG
+            editTextLayout.error = context.getString(R.string.bad_email_format)
             return false
         }
         else
@@ -129,26 +130,45 @@ class UserValidation {
                     ".{4,}" +               //at least 4 characters
                     "$"
         )
-        if (text.isEmpty()) {
-            editTextLayout.error = Constants.FIELD_CANNOT_BE_EMPTY_MSG
+
+        //Check empty
+        if(text.isEmpty()){
+            editTextLayout.error = context.getString(R.string.field_cannot_be_empty)
             return false
         }
+        //isValid
         else if(! text.matches(regex)){
-            editTextLayout.error = Constants.PASSWORD_IS_TOO_WEAK_MSG
+            editTextLayout.error = context.getString(R.string.password_is_too_weak)
             return false
         }
 
-        else
-            editTextLayout.error = null
         return true
     }
     fun validateConfirmPassword(etPassword: TextInputEditText,etConfirmPassword:TextInputEditText,editTextLayout: TextInputLayout): Boolean {
-        if(etPassword.text.toString() != etConfirmPassword.text.toString()){
-            editTextLayout.error = Constants.PASSWORD_NOT_MATCH_MSG
-            return  false
+        val confirmPassword = etConfirmPassword.text.toString()
+        val password = etPassword.text.toString()
+        val regex = Regex(
+            "^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 4 characters
+                    "$"
+        )
+
+        //Check empty
+        if (confirmPassword.isEmpty()){
+            editTextLayout.error = context.getString(R.string.field_cannot_be_empty)
+            return false
         }
-        else
-            editTextLayout.error = null
+        // isValid
+        else if (! confirmPassword.matches(regex)){
+            editTextLayout.error = context.getString(R.string.password_is_too_weak)
+            return false
+        }
         return true
     }
 }

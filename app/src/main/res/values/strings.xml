@@ -45,4 +45,10 @@
     <string name="email_or_password_is_wrong">Email or password is wrong.</string>
     <string name="coming_soon">Coming soon.</string>
     <string name="login_with_email">Login With Email</string>
+    <string name="password_is_too_weak">Password is too weak use combination of[1,A,a,@,$,_,].</string>
+    <string name="bad_email_format">Bad email format.</string>
+    <string name="white_spaces_are_not_allowed">White Spaces are not allowed.</string>
+    <string name="firstname_too_large">Firstname too Large.</string>
+    <string name="firstname_too_small">Firstname too small.</string>
+    <string name="password_doesn_t_match">Password doesn\'t match.</string>
 </resources>

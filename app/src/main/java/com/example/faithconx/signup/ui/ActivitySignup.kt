@@ -24,7 +24,6 @@ import com.example.faithconx.helper.user.UserValidation
 import com.example.faithconx.login.ui.ActivityLogin
 import com.example.faithconx.main.ui.MainActivity
 import com.example.faithconx.signup.helper.MediaPermission
-import com.example.faithconx.signup.helper.UserHelper
 import com.example.faithconx.signup.viewmodel.AuthViewModel
 import com.example.faithconx.signup.viewmodel.DatabaseViewModel
 import com.example.faithconx.signup.viewmodel.ImageStorageViewModel
@@ -54,14 +53,15 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val databaseViewModel = DatabaseViewModel()
     private val authModel = AuthViewModel()
-    private val userValidation = UserValidation()
-    private val userHelper = UserHelper()
+    private lateinit var  userValidation:UserValidation
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userValidation = UserValidation(this)
         setOnClickListener()
         setOnPhoneNumberChanges()
         onTextChangeListener()
@@ -75,55 +75,103 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         binding.etConfirmPassword.addTextChangedListener { onConfirmPasswordTextChange() }
     }
 
-    private fun onEmailTextChange() {
-        if (binding.etEmail.text?.isEmpty() == true) {
-            binding.tilEmail.error = null
-            return
-        }
-        isEmailValid = userValidation.validateEmail(binding.etEmail, binding.tilEmail)
-    }
+
 
     private fun onFirstNameTextChange() {
-        if (binding.etFirstName.text?.isEmpty() == true) {
-            binding.tilFirstName.error = null
-            return
-        }
         isFirstNameValid =
             userValidation.validateFirstName(binding.etFirstName, binding.tilFirstName)
-    }
-
-    private fun onPhoneNumberTextChange() {
-        if (binding.etPhoneNumber.text?.isEmpty() == true) {
-            binding.tilPhoneNumber.error = null
-            return
-        }
-        isPhoneNumberValid = userValidation.validatePhoneNumber(
-            binding.etPhoneNumber, binding.tilPhoneNumber, binding.ccp
-        )
-    }
-
-    private fun onPasswordTextChange() {
-        if (binding.etPassword.text?.isEmpty() == true) {
-            binding.tilPassword.error = null
-            return
-        }
-        isPasswordValid = userValidation.validatePassword(binding.etPassword, binding.tilPassword)
-    }
-
-    private fun onConfirmPasswordTextChange() {
-        if (userValidation.validateConfirmPassword(
-                binding.etPassword, binding.etConfirmPassword, binding.tilConfirmPassword
-            ) && isEmailValid && isFirstNameValid && isPhoneNumberValid && isPasswordValid
-        ) {
+        if(isFirstNameValid &&  isConfirmPasswordValid  && isEmailValid && isPhoneNumberValid && isPasswordValid ){
             binding.btnContinue.backgroundTintList =
                 resources.getColorStateList(R.color.loginbtn_enable_color)
             binding.btnContinue.isEnabled = true
-        } else if (binding.etConfirmPassword.text?.toString()?.isEmpty() == true) {
-            binding.tilConfirmPassword.error = null
-        } else {
+            binding.tilPassword.error = null
+        }  // either password is invalid or confirm password is invalid
+        else{
             binding.btnContinue.backgroundTintList =
                 resources.getColorStateList(R.color.loginbtn_disable_color)
             binding.btnContinue.isEnabled = false
+        }
+
+    }
+
+    private fun onEmailTextChange() {
+
+        isEmailValid = userValidation.validateEmail(binding.etEmail, binding.tilEmail)
+
+        if(isEmailValid &&  isConfirmPasswordValid  && isFirstNameValid && isPhoneNumberValid && isPasswordValid ){
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_enable_color)
+            binding.btnContinue.isEnabled = true
+            binding.tilPassword.error = null
+        }  // either password is invalid or confirm password is invalid
+        else{
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_disable_color)
+            binding.btnContinue.isEnabled = false
+        }
+
+
+    }
+
+    private fun onPhoneNumberTextChange() {
+
+        isPhoneNumberValid = userValidation.validatePhoneNumber(
+            binding.etPhoneNumber, binding.tilPhoneNumber, binding.ccp
+        )
+
+        if(isPhoneNumberValid &&  isConfirmPasswordValid  && isFirstNameValid && isEmailValid && isPasswordValid ){
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_enable_color)
+            binding.btnContinue.isEnabled = true
+            binding.tilPassword.error = null
+        }  // either password is invalid or confirm password is invalid
+        else{
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_disable_color)
+            binding.btnContinue.isEnabled = false
+        }
+
+    }
+
+    private fun onPasswordTextChange() {
+        isPasswordValid = userValidation.validatePassword(binding.etPassword, binding.tilPassword)
+        if(! isPasswordValid && !isConfirmPasswordValid){
+
+        }
+        if( isPasswordValid &&  isConfirmPasswordValid  && isFirstNameValid && isEmailValid && isPhoneNumberValid  ){
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_enable_color)
+            binding.btnContinue.isEnabled = true
+            binding.tilPassword.error = null
+        }
+        // either password is invalid or confirm password is invalid
+        else{
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_disable_color)
+            binding.btnContinue.isEnabled = false
+        }
+    }
+
+    private fun onConfirmPasswordTextChange() {
+        isConfirmPasswordValid = userValidation.validateConfirmPassword(
+            binding.etPassword, binding.etConfirmPassword, binding.tilConfirmPassword
+        )
+        if(! isConfirmPasswordValid &&  binding.etConfirmPassword.text.toString() != binding.etPassword.text.toString()){
+            binding.tilConfirmPassword.error = getString(R.string.password_doesn_t_match)
+        }
+
+        else if(isEmailValid && isFirstNameValid && isPhoneNumberValid && isPasswordValid){
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_enable_color)
+            binding.btnContinue.isEnabled = true
+            binding.tilConfirmPassword.error = null
+        }
+        //Something is wrong
+        else{
+            binding.btnContinue.backgroundTintList =
+                resources.getColorStateList(R.color.loginbtn_disable_color)
+            binding.btnContinue.isEnabled = false
+
         }
     }
 
@@ -149,6 +197,13 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
         binding.btnContinue.setOnClickListener(this@ActivitySignup)
         binding.civEditProfileImg.setOnClickListener(this@ActivitySignup)
         binding.ccp.setOnCountryChangeListener { onCountryChange() }
+
+        //Focus click listener
+        binding.etFirstName.onFocusChangeListener = this@ActivitySignup
+        binding.etEmail.onFocusChangeListener = this@ActivitySignup
+        binding.etPhoneNumber.onFocusChangeListener = this@ActivitySignup
+        binding.etPassword.onFocusChangeListener = this@ActivitySignup
+        binding.etConfirmPassword.onFocusChangeListener = this@ActivitySignup
 
     }
 
@@ -177,22 +232,33 @@ class ActivitySignup : AppCompatActivity(), View.OnClickListener, View.OnFocusCh
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         when (view?.id) {
-            R.id.etFirstName -> userHelper.etFirstNameFocusChange(
-                hasFocus, binding.tilFirstName, binding.etFirstName
-            )
+            R.id.etFirstName -> {
+                if(!hasFocus){
+                    onFirstNameTextChange()
+                }
+            }
 
-            R.id.etEmail -> userHelper.etEmailFocusChange(
-                hasFocus, binding.tilEmail, binding.etEmail
-            )
+
+            R.id.etEmail ->  {
+                if(!hasFocus){
+                    onEmailTextChange()
+                }
+            }
 
             R.id.etPhoneNumber -> onEtPhoneNumberFocusChange()
-            R.id.etPassword -> userHelper.etPasswordFocusChange(
-                hasFocus, binding.tilPassword, binding.etPassword
-            )
 
-            R.id.etConfirmPassword -> userHelper.etConfirmPasswordFocusChange(
-                hasFocus, binding.tilConfirmPassword, binding.etConfirmPassword, binding.etPassword
-            )
+            R.id.etPassword ->  {
+                if(!hasFocus){
+                    onPasswordTextChange()
+                }
+            }
+
+            R.id.etConfirmPassword ->  {
+                if(!hasFocus){
+                    onConfirmPasswordTextChange()
+                }
+            }
+
         }
     }
 

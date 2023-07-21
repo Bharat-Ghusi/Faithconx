@@ -1,12 +1,13 @@
 package com.example.faithconx.signup.helper
 
+import android.content.Context
 import com.example.faithconx.helper.user.UserValidation
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.hbb20.CountryCodePicker
 
-class UserHelper {
-    private val userValidation = UserValidation()
+class UserHelper(val context: Context) {
+    private val userValidation = UserValidation(context)
 
     fun etFirstNameFocusChange(
         hasFocus: Boolean,

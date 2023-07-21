@@ -33,7 +33,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
     private val userSession = UserSession()
     private var isPasswordCorrect = false
     private var isEmailCorrect = false
-    private val userValidation = UserValidation()
+    private lateinit var userValidation :UserValidation
     private lateinit var binding: ActivityLoginBinding
     private val loginAuthViewModel = LoginAuthViewModel()
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -45,6 +45,7 @@ class ActivityLogin : AppCompatActivity(), View.OnClickListener, OnFocusChangeLi
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userValidation = UserValidation(this)
         setOnClickListener()
         setOnFocusListener()
         onTextChangeListener()
